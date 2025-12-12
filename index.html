@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ဆရာနောင်ထိပ်တင် |</title>
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --deep-maroon: #580000;
+            --text-dark: #333;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Padauk', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--deep-maroon);
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .verified-badge { background-color: var(--primary-gold); color: var(--deep-maroon); padding: 5px 10px; border-radius: 20px; font-weight: bold; }
+
+        /* Hero Section - Business Card as Cover */
+        header {
+            text-align: center;
+            padding: 0;
+            background-color: var(--deep-maroon);
+            position: relative;
+        }
+        .business-card-cover {
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* Adjust height as needed */
+            object-fit: cover;
+            display: block;
+        }
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .booking-btn {
+            background: var(--primary-gold);
+            color: var(--deep-maroon);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Modal (Booking Popup) */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; color: var(--deep-maroon);
+        }
+
+        /* Rest of styles remain similar to previous demo */
+        section { padding: 40px 0; }
+        h2 { text-align: center; color: var(--deep-maroon); border-bottom: 2px solid var(--primary-gold); display: inline-block; padding-bottom: 10px; margin-bottom: 30px; margin-left: auto; margin-right: auto; }
+        .social-grid, .shop-grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .social-btn, .buy-btn { display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; }
+        .fb-bg { background-color: #1877F2; }
+        .tt-bg { background-color: #000000; }
+        .vb-bg { background-color: #7360f2; }
+        .submit-btn { width: 100%; padding: 12px; background-color: var(--deep-maroon); color: white; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; }
+        footer { background-color: #222; color: #888; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">ဆရာနောင်ထိပ်တင်</div>
+        <div class="verified-badge"><i class="fa fa-check-circle"></i></div>
+    </nav>
+
+    <header id="home">
+        <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Business Card Cover" class="business-card-cover">
+        <div class="header-overlay">
+            <h1>ဆရာနောင်ထိပ်တင်</h1>
+            <p>ဂမ္ဘီရ</p>
+            <button class="booking-btn" onclick="openModal()">
+                <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> ရက်ချိန်းယူရန် / ဆက်သွယ်ရန်
+            </button>
+        </div>
+    </header>
+
+    <section id="social">
+        <div class="container">
+            <h2>တရားဝင် ဆိုရှယ်မီဒီယာများ</h2>
+            <p style="text-align: center; color: red; margin-bottom: 20px;">(အတုအယောင်များ သတိပြုရန် - အောက်ပါ Link များသာ တရားဝင်ဖြစ်သည်)</p>
+            <div class="social-grid">
+                <a href="https://www.facebook.com/share/19xwFcbWY2/" target="_blank" class="social-btn fb-bg">
+                    <i class="fab fa-facebook-f" style="margin-right:10px;"></i> Facebook Channel
+                </a>
+                <a href="https://www.facebook.com/share/1FK2m5S2VF/" target="_blank" class="social-btn fb-bg">
+                    <i class="fab fa-facebook" style="margin-right:10px;"></i> Facebook Account
+                </a>
+                <a href="https://www.tiktok.com/@naunghtaketin?_r=1&_t=ZS-92AGybZkTd2" target="_blank" class="social-btn tt-bg">
+                    <i class="fab fa-tiktok" style="margin-right:10px;"></i> TikTok Channel
+                </a>
+                <a href="viber://chat?number=+959666664580" class="social-btn vb-bg">
+                    <i class="fab fa-viber" style="margin-right:10px;"></i> Viber (+959 66666 4580)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop">
+        <div class="container">
+            <h2>ဂမ္ဘီရ အဆောင်ပစ္စည်းများ ပြခန်း</h2>
+            <div class="shop-grid">
+                <div class="product-card">
+                    <div style="height: 150px; background: #ddd; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:#666;">ပစ္စည်းပုံစံ</div>
+                    <h4>စီးပွားလာဘ်ရွှင် အဆောင်</h4>
+                    <a href="viber://chat?number=+959666664580&text=စီးပွားလာဘ်ရွှင်အဆောင်မှာယူလိုပါသည်" class="buy-btn vb-bg">မှာယူရန် (Viber)</a>
+                </div>
+                <div class="product-card">
+                    <div style="height: 150px; background: #ddd; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:#666;">ပစ္စည်းပုံစံ</div>
+                    <h4>အန္တရာယ်ကင်း အဆောင်</h4>
+                    <a href="viber://chat?number=+959666664580&text=အန္တရာယ်ကင်းအဆောင်မှာယူလိုပါသည်" class="buy-btn vb-bg">မှာယူရန် (Viber)</a>
+                </div>
+                <div class="product-card">
+                    <div style="height: 150px; background: #ddd; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:#666;">ပစ္စည်းပုံစံ</div>
+                    <h4>အချစ်ရေး အဆောင်</h4>
+                    <a href="viber://chat?number=+959666664580&text=မေတ္တာရေးအဆောင်မှာယူလိုပါသည်" class="buy-btn vb-bg">မှာယူရန် (Viber)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location">
+        <div class="container">
+            <h2>ဓာတ်နန်းတည်နေရာ</h2>
+            <div style="width: 100%; height: 350px; background-color: #eee;">
+                 <iframe src="https://maps.app.goo.gl/7jKMJWZcvcwCC6peA" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+             <p style="text-align: center; margin-top: 10px;">
+                <a href="https://maps.app.goo.gl/7jKMJWZcvcwCC6peA" target="_blank" style="color: var(--deep-maroon); font-weight: bold;">
+                    <i class="fas fa-map-marker-alt"></i> Google Maps တွင် လမ်းညွှန်ကြည့်ရန်
+                </a>
+            </p>
+        </div>
+    </section>
+   
+    <footer>
+        <p>© 2024 ဆရာနောင်ထိပ်တင်. All Rights Reserved.</p>
+    </footer>
+
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3><i class="fas fa-calendar-alt"></i> ရက်ချိန်းယူရန် / ဆက်သွယ်ရန်</h3>
+            <p>လူတွေ့ဆွေးနွေးရန်အတွက်သော်လည်းကောင်း၊ Online မေးမြန်းရန်အတွက်သော်လည်းကောင်း အောက်ပါတို့မှ ရွေးချယ်နိုင်ပါသည်။</p>
+            
+            <div class="booking-form">
+                 <h4>(၁) လူတွေ့ရန် ရက်ချိန်းစာရင်းသွင်းခြင်း</h4>
+                <form id="consultation-form">
+                    <div class="form-group"><input type="text" placeholder="အမည်" required></div>
+                    <div class="form-group"><input type="tel" placeholder="ဖုန်းနံပါတ်" required></div>
+                    <div class="form-group"><input type="date" required></div>
+                    <button type="submit" class="submit-btn">ရက်ချိန်းအတည်ပြုမည်</button>
+                </form>
+                <hr>
+                <h4>(၂) Online မှ ဆက်သွယ်မေးမြန်းခြင်း</h4>
+                <a href="viber://chat?number=+959666664580" class="social-btn vb-bg" style="width: 100%; box-sizing: border-box;">
+                    <i class="fab fa-viber"></i> Viber မှ တိုက်ရိုက်ဆက်သွယ်ရန်
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal JavaScript Logic
+        var modal = document.getElementById("bookingModal");
+        
+        function openModal() {
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Form Submit Simulation (Connect to Google Sheet Script in production)
+        const form = document.getElementById('consultation-form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("ရက်ချိန်းစာရင်းသွင်းခြင်း အောင်မြင်ပါသည်။ ဆရာ့ဘက်မှ မကြာမီ ပြန်လည်ဆက်သွယ်ပါမည်။");
+            form.reset();
+            closeModal();
+        });
+    </script>
+
+</body>
+</html>
