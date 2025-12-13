@@ -3,77 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ဆရာနောင်ထိပ်တင် | ဂမ္ဘီရ၊မှော်စဥ်ပညာရှင် </title>
+    <title>ဆရာနောင်ထိပ်တင် | ဂမ္ဘီရ၊ မှော်စဥ်ပညာရှင်</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&family=Padauk:wght@400;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;700&family=Padauk:wght@400;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* CSS Variables: Clean and Maintainable */
+        /* --- CSS Variables: Theme Configuration --- */
         :root {
-            --gold-light: #FFD700;
-            --gold-dark: #B8860B;
-            --bg-dark: #0f0c29;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 215, 0, 0.3);
-            --text-shadow-3d: 0 1px 0 #ccc, 
-                              0 2px 0 #c9c9c9,
-                              0 3px 0 #bbb,
-                              0 4px 0 #b9b9b9,
-                              0 5px 0 #aaa,
-                              0 6px 1px rgba(0,0,0,.1),
-                              0 0 5px rgba(0,0,0,.1),
-                              0 1px 3px rgba(0,0,0,.3),
-                              0 3px 5px rgba(0,0,0,.2),
-                              0 5px 10px rgba(0,0,0,.25),
-                              0 10px 10px rgba(0,0,0,.2),
-                              0 20px 20px rgba(0,0,0,.15);
+            --gold-primary: #FFD700;
+            --gold-accent: #B8860B;
+            --deep-purple: #0f0c29;
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 215, 0, 0.2);
+            --text-glow: 0 0 10px rgba(255, 215, 0, 0.5);
+            --gradient-royal: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
         }
 
+        * { box-sizing: border-box; outline: none; }
+
         body {
-            /* Noto Sans Myanmar ကို ဦးစားပေးအဖြစ် ထားရှိ */
             font-family: 'Noto Sans Myanmar', 'Padauk', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: var(--gradient-royal);
             color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+            line-height: 1.6;
         }
 
-        /* --- Animated Mystical Background --- */
+        /* --- Background Animation (Optimized) --- */
         .background-animation {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden; pointer-events: none;
         }
         .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: floatOrb 10s infinite alternate;
+            position: absolute; border-radius: 50%;
+            filter: blur(80px); opacity: 0.4;
+            animation: floatOrb 15s infinite ease-in-out alternate;
         }
-        .orb-1 { width: 300px; height: 300px; background: #580000; top: -50px; left: -50px; animation-duration: 15s; }
-        .orb-2 { width: 400px; height: 400px; background: #B8860B; bottom: -100px; right: -100px; animation-duration: 20s; }
+        .orb-1 { width: 300px; height: 300px; background: #580000; top: -50px; left: -50px; }
+        .orb-2 { width: 350px; height: 350px; background: #B8860B; bottom: -50px; right: -50px; animation-duration: 20s; }
         .orb-3 { width: 200px; height: 200px; background: #4B0082; top: 40%; left: 40%; animation-duration: 25s; }
 
-        /* GPU accelerated animation (Good Performance) */
         @keyframes floatOrb {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(40px, 60px); }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        /* --- Navigation --- */
+        /* --- Layout Utilities --- */
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+        section { padding: 50px 0; }
+
+        /* --- Glassmorphism Card Style --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); }
+
+        /* --- Navigation & Header --- */
         nav {
-            background: rgba(20, 20, 20, 0.7);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
             padding: 15px 20px;
             display: flex;
@@ -81,221 +83,158 @@
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            z-index: 1000;
         }
-        .nav-logo { 
-            font-size: 1.5rem; 
-            font-weight: 900; 
-            font-family: 'Cinzel', serif; 
-            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
-        }
-        .verified-badge { 
-            background: linear-gradient(45deg, #D4AF37, #F7E49A); 
-            color: #3B2F2F; 
-            padding: 6px 15px; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 0.8rem;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-        }
-        
-        /* 🚀 HERO SECTION FIX: Background Image Mode */
-        header { 
-            position: relative; 
-            text-align: center; 
-            padding: 0;
-            margin-bottom: 40px;
-            
-            /* Background Image Setup */
-            background-image: url('https://i.ibb.co/BHpj9C6n/Picsart-25-12-13-12-20-09-875.png'); /* ပုံအသစ် */
-            background-size: cover; /* ပုံကို အပြည့်ဖုံးစေမည် */
-            background-position: center; /* ပုံကို အလယ်ထားမည် */
-            height: 60vh; /* မြင်ကွင်းအမြင်အကျယ် ၆၀% ထားမည် (လိုသလို ပြောင်းနိုင်သည်) */
-            display: flex;
-            align-items: flex-end; /* စာသားကို အောက်နားပို့မည် */
-            justify-content: center;
-        }
+        .nav-logo { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold-primary); letter-spacing: 1px; }
+        .verified-badge { color: #00FF7F; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
 
-        /* Hidden image element as requested by new structure */
-        .business-card-cover {
-            display: none; 
-        }
-
-        .hero-text-overlay {
+        /* --- Modern Marquee Replacement --- */
+        .marquee-container {
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid var(--gold-accent);
+            overflow: hidden;
+            white-space: nowrap;
             position: relative;
-            z-index: 2;
-            padding-bottom: 40px; /* button နဲ့ အောက်ခြေ အကွာအဝေး */
-            max-width: 90%;
+            padding: 8px 0;
         }
-        
-        /* H1 Style: စာသားကို ဓာတ်ပုံထဲကအတိုင်း ပုံပေါ်မှာ ပေါ်နေအောင် ပြင်ဆင်သည် */
+        .marquee-content {
+            display: inline-block;
+            animation: scrollText 20s linear infinite;
+            padding-left: 100%;
+            color: var(--gold-primary);
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- Hero Section & Static Image --- */
+        header { text-align: center; padding-top: 30px; position: relative; }
+        .hero-text-overlay { position: relative; z-index: 3; } /* Text stays on top */
+
+        .subtitle { color: #ccc; font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 5px; }
+        .dhamma-citi { 
+            display: block; font-size: 1.1rem; color: var(--gold-primary); 
+            font-weight: bold; margin-bottom: 5px; text-transform: uppercase;
+        }
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            /* 3D Text Effect ကို ဖယ်ရှားပြီး ပုံထဲကလို Bold, White color ပေးသည် */
-            color: white; 
-            text-shadow: 0 0 10px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.5);
-            margin-top: 10px;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--gold-light); /* ရွှေရောင်ပြောင်းလိုက်သည် */
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        /* --- Buttons with 3D Pop --- */
-        .btn-3d {
-            /* ... (Buttons styles same as before) ... */
-            background: linear-gradient(to bottom, #d4af37 0%, #a67c00 100%);
-            color: #222;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #5e4600, 0 15px 20px rgba(0,0,0,0.4);
-            transition: all 0.1s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            top: 0;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-3d:active {
-            top: 6px;
-            box-shadow: 0 0 0 #5e4600, 0 0 5px rgba(0,0,0,0.4);
-        }
-        .btn-3d:disabled {
-             opacity: 0.6;
-             cursor: not-allowed;
-             top: 0;
-             box-shadow: none;
-        }
-
-        /* --- Global Layouts & Glass Cards --- */
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-        section { padding: 40px 0; }
-        
-        h2 { 
-            text-align: center; 
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            background: linear-gradient(to right, #fff, #D4AF37, #fff);
+            font-family: 'Noto Sans Myanmar', serif;
+            font-weight: 900;
+            font-size: 2.8rem;
+            margin: 0 0 20px 0;
+            background: linear-gradient(to bottom, #FFD700, #FDB931, #FFFFFF, #B8860B);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            filter: drop-shadow(0 0 5px rgba(184, 134, 11, 0.5));
         }
-        h2::after {
-            content: '';
+
+        /* --- New Static Hero Image Style --- */
+        .static-hero-image {
+            width: 100%;
+            max-width: 600px; /* Adjust maximum size as needed */
+            height: auto;
+            margin: 0 auto 30px; /* Center the image */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.4); /* Golden Glow Shadow */
+            border: 3px solid var(--gold-accent); /* Golden Border */
             display: block;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-            margin: 10px auto 0;
+            position: relative;
+            z-index: 2; /* Above the background, below the text/buttons */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .static-hero-image:hover {
+            transform: scale(1.02); /* Slight zoom on hover */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.6); /* Intense Glow */
         }
 
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.6);
-            border-color: #fff;
-        }
 
-        /* --- Social Grid --- */
-        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .social-btn {
-            display: flex; align-items: center; justify-content: center;
-            padding: 15px; border-radius: 10px; text-decoration: none;
-            color: white; font-weight: bold; font-size: 1.1rem;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: 0.3s;
-        }
-        .social-btn:hover { background: rgba(255,255,255,0.2); box-shadow: 0 0 15px var(--gold-light); }
-        .fb { border-left: 5px solid #1877F2; }
-        .tk { border-left: 5px solid #000; }
-        .vb { border-left: 5px solid #7360f2; }
-
-        /* --- Modal and Form Styles (Same as before) --- */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0,0,0,0.8); 
-            backdrop-filter: blur(5px); 
-            -webkit-backdrop-filter: blur(5px);
-            justify-content: center; 
-            align-items: center; 
-            opacity: 0; 
-            transition: opacity 0.3s ease-in-out;
-        }
-        .modal.is-active { 
-            display: flex;
-            opacity: 1;
-        }
-        .modal-content { 
-            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
-            border: 2px solid var(--gold-dark);
-            padding: 40px; border-radius: 15px; width: 90%; max-width: 500px; position: relative; 
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-            color: #fff;
-        }
-        .form-group input, .form-group textarea { 
-            width: 100%; padding: 12px; margin-bottom: 15px;
-            background: rgba(255,255,255,0.1); border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box;
-            font-family: 'Noto Sans Myanmar', 'Padauk', sans-serif;
-        }
-        .form-group input:focus { outline: none; border-color: var(--gold-light); }
-        .close-btn { position: absolute; top: 15px; right: 25px; font-size: 35px; cursor: pointer; color: var(--gold-light); transition: color 0.2s; }
-        .close-btn:hover { color: #fff; }
-
-        footer { background: rgba(0,0,0,0.8); border-top: 1px solid #333; padding: 30px; text-align: center; margin-top: 50px; color: #888; }
-
-        /* --- ဓာတ်နန်းတည်နေရာ Section အတွက် ပြင်ဆင်မှု --- */
-        .address-box {
-            min-height: 150px; /* လိပ်စာအတွက် အနည်းဆုံး အမြင့်သတ်မှတ် */
-            display: flex;
+        /* --- Buttons --- */
+        .btn-3d {
+            position: relative; z-index: 3; /* Ensure button is clickable */
+            background: linear-gradient(145deg, #B8860B, #FFD700);
+            border: none;
+            color: #000;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 5px rgba(255,255,255,0.5);
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            text-align: center;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            gap: 10px;
+        }
+        .btn-3d:active { transform: scale(0.95); box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .btn-3d:hover { filter: brightness(1.1); }
+
+        /* --- Social Buttons --- */
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .social-btn {
+            display: flex; align-items: center; justify-content: center;
+            padding: 12px; border-radius: 10px; color: white; text-decoration: none;
+            font-weight: bold; font-size: 0.9rem; transition: 0.3s;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .social-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .fb { background: #1877F2; } .tk { background: #000000; border: 1px solid #333; } .vb { background: #7360f2; }
+
+        /* --- Verify & Input --- */
+        h2 {
+            text-align: center; font-family: 'Cinzel', serif; color: var(--gold-primary);
+            margin-bottom: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            position: relative; padding-bottom: 10px;
+        }
+        h2::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 50px; height: 3px; background: var(--gold-accent);
+        }
+        
+        input[type="text"] {
+            width: 100%; padding: 15px; margin-bottom: 15px;
+            background: rgba(0,0,0,0.3); border: 1px solid #555;
+            color: var(--gold-primary); border-radius: 8px; font-size: 1rem;
+        }
+        input[type="text"]:focus { border-color: var(--gold-primary); }
+
+        /* --- Modal (Popup) Styles --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        .modal.is-active { display: flex; animation: fadeIn 0.3s; }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid var(--gold-accent);
+            padding: 30px; border-radius: 15px;
+            width: 90%; max-width: 400px;
+            position: relative; text-align: center;
+            box-shadow: 0 0 25px rgba(184, 134, 11, 0.4);
+        }
+        .close-modal {
+            position: absolute; top: 10px; right: 15px;
+            color: #aaa; font-size: 24px; cursor: pointer;
+        }
+        .close-modal:hover { color: #fff; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Footer */
+        footer { text-align: center; padding: 30px 0; color: #888; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px;}
+
+        /* Responsive Fixes */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .social-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -311,77 +250,103 @@
         <div class="nav-logo">NAUNG HTAKE TIN</div>
         <div class="verified-badge"><i class="fa fa-check-circle"></i> Verified</div>
     </nav>
-
     
+    <div class="marquee-container">
+        <div class="marquee-content">
+            🙏 ဗေဒင်ပညာရပ်၊ ဂမ္ဘီရ၊ အစီအရင်၊ အဆောင်ပစ္စည်း များ ဆောင်ရွက်လိုပါက ဖော်ပြပါlinkများမှ ဆက်သွယ်စုံစမ်းနိုင်ပါသည် — အတုအယောင်များကို သတိပြုပါရန်။ 🙏     |     🙏 ဆရာနောင်ထိပ်တင် — ဂမ္ဘီရ၊ ဗေဒင်ပညာရှင် 🙏
+        </div>
+    </div>
+
     <header>
         <div class="container">
-            <div style="perspective: 1000px;">
-                <img src="https://i.ibb.co/BHpj9C6n/Picsart-25-12-13-12-20-09-875.png" alt="ဆရာနောင်ထိပ်တင်၏ ပရိုဖိုင်ပုံ" class="business-card-cover">
-            </div>
             <div class="hero-text-overlay">
                 <p class="subtitle">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင် သျှမ်းမှော်အစီအရင် ဆရာကြီး</p>
-                <h1>နောင်ထိပ်တင်</h1> 
-                <button class="btn-3d" onclick="openModal()">
-                    <i class="fas fa-calendar-check"></i> ရက်ချိန်းယူရန် / ဆက်သွယ်ရန်
-                </button>
+                <span class="dhamma-citi">ဓမ္မစေတီ</span>  <h1>နောင်ထိပ်တင်</h1> 
             </div>
+
+            <img src="https://i.ibb.co/BHpj9C6n/Picsart-25-12-13-12-20-09-875.png" alt="ဆရာနောင်ထိပ်တင် ပင်မပုံ" class="static-hero-image">
+            
+            <button class="btn-3d" onclick="openModal()">
+                <i class="fas fa-calendar-check"></i> ရက်ချိန်းယူရန်/ဆက်သွယ်ရန်
+            </button>
         </div>
     </header>
 
-    
     <section id="social">
         <div class="container">
-            <h2>အသိအမှတ်ပြုဆိုရှယ်မီဒီယာများ</h2>
+            <h2>အသိအမှတ်ပြု ဆိုရှယ်မီဒီယာများ</h2>
             <div class="glass-card">
-                <p style="text-align: center; color: #ff6b6b; margin-bottom: 20px; font-weight: bold; text-shadow: 0 0 5px red;">
-                    <i class="fas fa-exclamation-triangle"></i> အတုအယောင်များ   သတိပြုနိုင်ရန် (ယခုဖော်ပြထားသော အကောင့် များသာ အစစ်အမှန်ဖြစ်ပါသည်)
+                <p style="text-align: center; color: #ff6b6b; margin-bottom: 20px; font-weight: bold; border: 1px dashed #ff6b6b; padding: 10px; border-radius: 8px;">
+                    <i class="fas fa-exclamation-triangle"></i> သတိပြုရန် - အတုအယောင်များရှိနိုင်ပါသဖြင့် အောက်ပါ Official အကောင့်များမှသာ ဆက်သွယ်ပါ။
                 </p>
                 <div class="social-grid">
                     <a href="https://www.facebook.com/share/19xwFcbWY2/" target="_blank" class="social-btn fb">
-                        <i class="fab fa-facebook-f" style="margin-right:10px;"></i> Facebook Channel
+                        <i class="fab fa-facebook-f" style="margin-right:10px;"></i> Facebook Page
                     </a>
                     <a href="https://www.facebook.com/share/1FK2m5S2VF/" target="_blank" class="social-btn fb">
-                        <i class="fab fa-facebook" style="margin-right:10px;"></i> Facebook Account
+                        <i class="fab fa-facebook" style="margin-right:10px;"></i> Facebook Acc
                     </a>
                     <a href="https://www.tiktok.com/@naunghtaketin?_r=1&_t=ZS-92AGybZkTd2" target="_blank" class="social-btn tk">
-                        <i class="fab fa-tiktok" style="margin-right:10px;"></i> TikTok Channel
+                        <i class="fab fa-tiktok" style="margin-right:10px;"></i> TikTok
                     </a>
                     <a href="viber://chat?number=+959666664580" class="social-btn vb">
-                        <i class="fab fa-viber" style="margin-right:10px;"></i> Viber Official
+                        <i class="fab fa-viber" style="margin-right:10px;"></i> Viber
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="verify">
+        <div class="container">
+            <h2>အကောင့် အစစ်အမှန် စစ်ဆေးရန်</h2>
+            <div class="glass-card verify-section">
+                <p style="text-align: center; margin-bottom: 20px; color: #ddd;">
+                    သင်တွေ့ရှိထားသော <strong style="color:var(--gold-primary)">Link သို့မဟုတ် ဖုန်းနံပါတ်</strong> ကို ဤနေရာတွင် ထည့်သွင်းစစ်ဆေးပါ။
+                </p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="verifyLink" placeholder="Link (သို့) ဖုန်းနံပါတ် (+959...) ရိုက်ထည့်ပါ" style="flex: 1; margin-bottom: 0;">
+                    <button class="btn-3d" onclick="verifyAccount()" style="margin: 0; min-width: 120px;">
+                        <i class="fas fa-search"></i> စစ်ဆေးမည်
+                    </button>
+                </div>
+                <div id="verifyResult" style="text-align: center; margin-top: 20px; min-height: 20px;"></div>
+            </div>
+        </div>
+    </section>
     
     <section id="shop">
         <div class="container">
             <h2>ဂမ္ဘီရအဆောင်ပစ္စည်းများ</h2>
-            <div class="glass-card shop-container">
-                <i class="fas fa-gem shop-icon"></i>
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">
-                    ပီယဓနလာဘတို့အတွက် စီရင်ထားသော ထူးခြားလေးနက်သည့်<br>
-                    ဂမ္ဘီရ အဆောင်ပစ္စည်းများကို လိုအပ်ပါက မှာယူနိုင်ရန်နှိပ်ပါ။
+            <div class="glass-card" style="text-align: center;">
+                <i class="fas fa-gem" style="font-size: 3rem; color: var(--gold-primary); margin-bottom: 20px; text-shadow: 0 0 15px var(--gold-accent);"></i>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; color: #eee;">
+                    စီးပွားလာဘ်လာဘ၊ မေတ္တာရေး၊ ကျန်းမာရေးအတွက် စီရင်ထားသော <br>
+                    ထူးခြားလေးနက်သည့် ဂမ္ဘီရအဆောင်ပစ္စည်းများ မှာယူလိုပါက
                 </p>
                 <a href="viber://chat?number=+959666664580&text=ဆရာ့အဆောင်ပစ္စည်းများ ဝယ်ယူလိုပါသည်" class="btn-3d">
-                    <i class="fas fa-shopping-cart"></i> ဆက်သွယ်ရန် Viber
+                    <i class="fas fa-shopping-cart"></i> Viber မှ ဆက်သွယ်ရန်
                 </a>
             </div>
         </div>
     </section>
 
-    
     <section id="contact">
         <div class="container">
             <h2>ဓာတ်နန်းတည်နေရာ</h2>
-            <div class="glass-card" style="padding: 10px;">
-                <div class="address-box">
-                    <p>အမှတ် (၇၀/ဂ)၊(၄၆)ရပ်ကွက်၊ရွှေလီ (၁)လမ်း၊ ဗထူးစျေးအနီး၊<br>မြောက်ဒဂုံမြို့နယ်၊ရန်ကုန်မြို့။</p>
+            <div class="glass-card">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--gold-primary); font-size: 1.5rem;"></i>
+                    <p style="margin-top: 10px; font-weight: bold;">အမှတ် (၇၀/ဂ)၊ (၄၆)ရပ်ကွက်၊ ရွှေလီ (၁)လမ်း၊ ဗထူးစျေးအနီး၊<br>မြောက်ဒဂုံမြို့နယ်၊ ရန်ကုန်မြို့။</p>
                 </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://maps.app.goo.gl/7jKMJWZcvcwCC6peA" target="_blank" class="social-btn" style="background: var(--gold-dark); display: inline-flex; width: auto;">
-                        <i class="fas fa-map-marked-alt" style="margin-right: 10px;"></i> Google Maps တွင် ကြည့်ရန်
+                
+                <div style="margin-top: 20px; border-radius: 10px; overflow: hidden; border: 1px solid var(--gold-accent);">
+                     <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Map Card" style="width: 100%; display: block;">
+                </div>
+
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://maps.app.goo.gl/YourMapLinkHere" target="_blank" class="social-btn" style="background: var(--gold-accent); display: inline-flex; width: auto; color: #000;">
+                        <i class="fas fa-location-arrow" style="margin-right: 10px;"></i> Google Maps တွင် ကြည့်ရန်
                     </a>
                 </div>
             </div>
@@ -390,100 +355,113 @@
    
     <footer>
         <p style="font-family: 'Cinzel', serif;">© 2024 NAUNG HTAKE TIN. All Rights Reserved.</p>
+        <p style="font-size: 0.7rem; opacity: 0.6;">AIO babyboss</p>
     </footer>
 
     <div id="bookingModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">×</span>
-            <h3 style="text-align: center; color: var(--gold-light); margin-top: 0;">ရက်ချိန်းယူရန်</h3>
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <h3 style="color: var(--gold-primary); font-family: 'Cinzel', serif; margin-top: 0;">ရက်ချိန်းယူရန်</h3>
+            <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 20px;">ကျေးဇူးပြု၍ Viber မှတစ်ဆင့် ဆက်သွယ်ပေးပါ။</p>
             
-            <form id="consultation-form">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="အမည်" required>
-                </div>
-                <div class="form-group">
-                    <input type="tel" name="phone" placeholder="ဖုန်းနံပါတ်" required>
-                </div>
-                <div class="form-group">
-                    <input type="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="topic" rows="3" placeholder="ဆွေးနွေးလိုသည့် အကြောင်းအရာ"></textarea>
-                </div>
-                <button type="submit" class="btn-3d" style="width: 100%;">
-                    <i class="fas fa-check-circle"></i> ရက်ချိန်းအတည်ပြုမည်
-                </button>
-            </form>
-            <br>
-            <div style="text-align: center;">
-                <p>သို့မဟုတ်</p>
-                <a href="viber://chat?number=+959666664580" style="color: var(--gold-light); text-decoration: none; font-weight: bold;">
-                    <i class="fab fa-viber"></i> Viber မှ တိုက်ရိုက်ဆက်သွယ်ရန်
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="viber://chat?number=+959666664580" class="btn-3d" style="width: 100%; text-decoration: none;">
+                    <i class="fab fa-viber"></i> Viber ဖြင့်ဆက်သွယ်ရန်
+                </a>
+                <a href="tel:+959666664580" class="btn-3d" style="width: 100%; text-decoration: none; background: linear-gradient(145deg, #2c3e50, #4ca1af); color: #fff;">
+                    <i class="fas fa-phone"></i> ဖုန်းခေါ်ဆိုရန်
                 </a>
             </div>
         </div>
     </div>
 
     <script>
-        const modal = document.getElementById("bookingModal");
-        
-        // JS Modal Control (Class-based)
+        // --- 1. Constants (Data) ---
+        const OFFICIAL_LINKS = [
+            "https://www.facebook.com/share/19xwFcbWY2/",
+            "https://www.facebook.com/share/1FK2m5S2VF/",
+            "https://www.tiktok.com/@naunghtaketin?_r=1&_t=ZS-92AGybZkTd2",
+            "https://www.facebook.com/share/17xWtkgBGr/",
+            "https://tinyurl.com/sayarnaunghtaketin", 
+            "https://naunghtaketin.vercel.app/" 
+            "https://www.naunghtaketin.com/" 
+        ];
+        const OFFICIAL_PHONES = [ "+959650000524", "+959666664580", "09650000524", "09666664580" ];
+
+        // --- 2. Carousel Logic REMOVED ---
+        // (No longer needed as we have a static image)
+
+
+        // --- 3. Verify Logic (Cleaned Up) ---
+        function normalizeInput(input) {
+            let clean = input.trim().replace(/^(http|https):\/\//, '').replace(/\/$/, '');
+            // Handle Phone cleaning
+            if (input.replace(/[^0-9]/g, '').length > 6) {
+                clean = clean.replace(/[^0-9]/g, ''); // Keep only numbers
+                if (clean.startsWith('959')) clean = '09' + clean.substring(3); // Normalize 959 to 09
+                if (clean.startsWith('9')) clean = '09' + clean.substring(1);   // Fix lazy typing
+            }
+            return clean;
+        }
+
+        function verifyAccount() {
+            const input = document.getElementById('verifyLink').value.trim();
+            const resultDiv = document.getElementById('verifyResult');
+
+            if (!input) {
+                resultDiv.innerHTML = '<span style="color: #FFD700;"><i class="fas fa-exclamation-circle"></i> ကျေးဇူးပြု၍ Link သို့မဟုတ် ဖုန်းနံပါတ် ထည့်ပါ။</span>';
+                return;
+            }
+
+            const normalizedInput = normalizeInput(input);
+            
+            // Check Phones
+            const isPhoneMatch = OFFICIAL_PHONES.some(p => normalizeInput(p).includes(normalizedInput) || normalizedInput.includes(normalizeInput(p)));
+            
+            // Check Links
+            const isLinkMatch = OFFICIAL_LINKS.some(l => normalizeInput(l) === normalizedInput);
+
+            if (isPhoneMatch || isLinkMatch) {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(0, 255, 127, 0.1); border: 1px solid #00FF7F; padding: 10px; border-radius: 8px;">
+                        <span style="color: #00FF7F; font-weight: bold; font-size: 1.1rem;">
+                            <i class="fas fa-check-circle"></i> အစစ်အမှန်ဖြစ်ပါသည်
+                        </span>
+                        <p style="margin: 5px 0 0; font-size: 0.9rem;">ဤအကောင့်/ဖုန်းနံပါတ်သည် ဆရာ့၏ တရားဝင်စာရင်းတွင် ပါဝင်ပါသည်။</p>
+                    </div>`;
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(255, 99, 71, 0.1); border: 1px solid #ff6347; padding: 10px; border-radius: 8px;">
+                        <span style="color: #ff6347; font-weight: bold; font-size: 1.1rem;">
+                            <i class="fas fa-times-circle"></i> သတိပြုရန်/အတုဖြစ်နိုင်သည်
+                        </span>
+                        <p style="margin: 5px 0 0; font-size: 0.9rem;">စာရင်းတွင်မတွေ့ပါ။ ငွေလွှဲခြင်းမပြုမီ အထက်ပါ Official Link များမှ ပြန်စစ်ပါ။</p>
+                    </div>`;
+            }
+        }
+
+        // --- 4. Modal Logic (Functional) ---
+        const modal = document.getElementById('bookingModal');
+
         function openModal() {
-            modal.classList.add("is-active"); 
+            modal.classList.add("is-active");
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove("is-active");
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close on clicking outside
+        window.onclick = function(event) {
+            if (event.target === modal) closeModal();
         }
         
-        function closeModal() {
-            modal.classList.remove("is-active"); 
-        }
-
-        // Close when clicking outside the modal or pressing ESC
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
+        // Close on Escape key
         document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        });
-
-        // --- GOOGLE SCRIPT INTEGRATION (Optimized) ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5RrCtN000YI7L34T38N33TqsykINKbwcUr5x07qtCLzzFI0Z74ThG-o-LfSEhqCIr/exec'; 
-        const form = document.getElementById('consultation-form');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = form.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            // Disable button and show loading state
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ပေးပို့နေပါသည်...';
-            btn.disabled = true; 
-            
-            const data = new FormData(e.target);
-            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: data })
-            .then(response => response.json())
-            .then(result => {
-                if (result.result === 'success') {
-                    alert("ရက်ချိန်းစာရင်းသွင်းခြင်း အောင်မြင်ပါသည်။ ဆရာကြီးမှ အချိန်မကြာမီ ပြန်လည်ဆက်သွယ်ပါမည်။");
-                    form.reset();
-                    closeModal();
-                } else {
-                    alert("စာရင်းသွင်းရာတွင် အမှားပေါ်ပေါက်ပါသည်။ " + (result.message || "ကျေးဇူးပြု၍ ခဏအကြာတွင် ထပ်မံကြိုးစားပါ။"));
-                }
-            })
-            .catch(error => {
-                console.error('Submission Error:', error);
-                alert("ကွန်ရက်ချိတ်ဆက်မှု ပြဿနာကြောင့် ပေးပို့မရပါ။ ကျေးဇူးပြု၍ Viber မှ တိုက်ရိုက်ဆက်သွယ်ပါ။");
-            })
-            .finally(() => {
-                // Re-enable button
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            });
+            if (event.key === "Escape") closeModal();
         });
     </script>
-
 </body>
 </html>
