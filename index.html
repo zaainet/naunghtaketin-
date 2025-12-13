@@ -3,31 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ဆရာနောင်ထိပ်တင် |</title>
-    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <title>ဆရာနောင်ထိပ်တင် | Master of Astrology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&family=Padauk:wght@400;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-gold: #D4AF37;
-            --deep-maroon: #580000;
-            --text-dark: #333;
-            --white: #ffffff;
+            --gold-light: #FFD700;
+            --gold-dark: #B8860B;
+            --bg-dark: #0f0c29;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 215, 0, 0.3);
+            --text-shadow-3d: 0 1px 0 #ccc, 
+                              0 2px 0 #c9c9c9,
+                              0 3px 0 #bbb,
+                              0 4px 0 #b9b9b9,
+                              0 5px 0 #aaa,
+                              0 6px 1px rgba(0,0,0,.1),
+                              0 0 5px rgba(0,0,0,.1),
+                              0 1px 3px rgba(0,0,0,.3),
+                              0 3px 5px rgba(0,0,0,.2),
+                              0 5px 10px rgba(0,0,0,.25),
+                              0 10px 10px rgba(0,0,0,.2),
+                              0 20px 20px rgba(0,0,0,.15);
         }
+
         body {
-            font-family: 'Padauk', sans-serif;
+            /* Noto Sans Myanmar ကို ပထမဦးစားပေးအဖြစ် ထားရှိ၊ ဖတ်ရလွယ်ကူပြီး ခေတ်မီသည် */
+            font-family: 'Noto Sans Myanmar', 'Padauk', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: var(--text-dark);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Navigation */
+
+        /* --- Animated Mystical Background --- */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: floatOrb 10s infinite alternate;
+        }
+        .orb-1 { width: 300px; height: 300px; background: #580000; top: -50px; left: -50px; animation-duration: 15s; }
+        .orb-2 { width: 400px; height: 400px; background: #B8860B; bottom: -100px; right: -100px; animation-duration: 20s; }
+        .orb-3 { width: 200px; height: 200px; background: #4B0082; top: 40%; left: 40%; animation-duration: 25s; }
+
+        @keyframes floatOrb {
+            /* GPU ကို အားပြုသည့် transform: translate ကိုသာ အသုံးပြုထားသည် */
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 60px); }
+        }
+
+        /* --- Navigation with Glassmorphism --- */
         nav {
-            background-color: var(--deep-maroon);
-            color: var(--white);
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
@@ -35,172 +79,315 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-        .verified-badge { background-color: var(--primary-gold); color: var(--deep-maroon); padding: 5px 10px; border-radius: 20px; font-weight: bold; }
+        .nav-logo { 
+            font-size: 1.5rem; 
+            font-weight: 900; 
+            font-family: 'Cinzel', serif; 
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
+        }
+        .verified-badge { 
+            background: linear-gradient(45deg, #D4AF37, #F7E49A); 
+            color: #3B2F2F; 
+            padding: 6px 15px; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 0.8rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
 
-        /* Hero Section - Business Card as Cover */
-        header {
-            text-align: center;
+        /* --- Hero Section --- */
+        header { 
+            position: relative; 
+            text-align: center; 
             padding: 0;
-            background-color: var(--deep-maroon);
+            margin-bottom: 40px;
+        }
+        .business-card-cover { 
+            width: 100%; 
+            max-width: 800px;
+            height: auto; 
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 2px solid var(--glass-border);
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        .business-card-cover:hover {
+            transform: scale(1.02);
+        }
+        .hero-text-overlay {
+            margin-top: -20px;
             position: relative;
+            z-index: 2;
         }
-        .business-card-cover {
-            width: 100%;
-            height: auto;
-            max-height: 400px; /* Adjust height as needed */
-            object-fit: cover;
-            display: block;
+        
+        /* 💡 အဆင့်မြှင့်တင်မှု - လှုပ်ရှားနေသော Gradient Text (H1) */
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--text-shadow-3d); /* 3D Text Effect */
+            margin-bottom: 10px;
+            
+            /* Animated Gradient Settings */
+            background: linear-gradient(90deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            background-size: 400% 400%; /* Gradient ကို ၄ ဆ ချဲ့ပြီး ရွေ့လျားဖို့ပြင်ဆင် */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: moveGradient 10s ease infinite; /* 10 စက္ကန့်ဖြင့် ဖြည်းညှင်းစွာ ရွေ့လျားစေ */
         }
-        .header-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
+        
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; } /* အစ */
+            50% { background-position: 100% 50%; } /* အလယ် */
+            100% { background-position: 0% 50%; } /* အဆုံးသို့ ပြန်လာ */
         }
-        .booking-btn {
-            background: var(--primary-gold);
-            color: var(--deep-maroon);
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
+        }
+
+        /* --- Buttons with 3D Pop --- */
+        .btn-3d {
+            background: linear-gradient(to bottom, #d4af37 0%, #a67c00 100%);
+            color: #222;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 1.1rem;
-            margin-top: 15px;
             cursor: pointer;
-            border: none;
-        }
-
-        /* Modal (Booking Popup) */
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background-color: #fefefe; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px;
+            box-shadow: 0 6px 0 #5e4600, 0 15px 20px rgba(0,0,0,0.4);
+            transition: all 0.1s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
+            top: 0;
+            text-decoration: none;
+            display: inline-block;
         }
-        .close-btn {
-            position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; color: var(--deep-maroon);
+        .btn-3d:active {
+            top: 6px;
+            box-shadow: 0 0 0 #5e4600, 0 0 5px rgba(0,0,0,0.4);
+        }
+        .btn-3d i { margin-right: 10px; }
+
+        /* --- Sections & Glass Cards --- */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+        section { padding: 40px 0; }
+        
+        h2 { 
+            text-align: center; 
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            background: linear-gradient(to right, #fff, #D4AF37, #fff);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            margin: 10px auto 0;
         }
 
-        /* Rest of styles remain similar to previous demo */
-        section { padding: 40px 0; }
-        h2 { text-align: center; color: var(--deep-maroon); border-bottom: 2px solid var(--primary-gold); display: inline-block; padding-bottom: 10px; margin-bottom: 30px; margin-left: auto; margin-right: auto; }
-        .social-grid, .shop-grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-        .social-btn, .buy-btn { display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; }
-        .fb-bg { background-color: #1877F2; }
-        .tt-bg { background-color: #000000; }
-        .vb-bg { background-color: #7360f2; }
-        .submit-btn { width: 100%; padding: 12px; background-color: var(--deep-maroon); color: white; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; }
-        footer { background-color: #222; color: #888; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; }
+        /* --- 3D Glass Cards --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6);
+            border-color: #fff;
+        }
+
+        /* Social Grid */
+        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .social-btn {
+            display: flex; align-items: center; justify-content: center;
+            padding: 15px; border-radius: 10px; text-decoration: none;
+            color: white; font-weight: bold; font-size: 1.1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+        .social-btn:hover { background: rgba(255,255,255,0.2); box-shadow: 0 0 15px var(--gold-light); }
+        .fb { border-left: 5px solid #1877F2; }
+        .tk { border-left: 5px solid #000; }
+        .vb { border-left: 5px solid #7360f2; }
+
+        /* Shop Section */
+        .shop-container { text-align: center; }
+        .shop-icon { 
+            font-size: 3rem; 
+            color: var(--gold-light); 
+            margin-bottom: 20px; 
+            filter: drop-shadow(0 0 10px var(--gold-dark));
+        }
+
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
+        .modal-content { 
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 2px solid var(--gold-dark);
+            padding: 40px; border-radius: 15px; width: 90%; max-width: 500px; position: relative; 
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            color: #fff;
+        }
+        .close-btn { position: absolute; top: 15px; right: 25px; font-size: 35px; cursor: pointer; color: var(--gold-light); }
+        .form-group input, .form-group textarea { 
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            background: rgba(255,255,255,0.1); border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box;
+            /* မြန်မာဖောင့်ကို ထည့်သွင်းထားသည် */
+            font-family: 'Noto Sans Myanmar', 'Padauk', sans-serif;
+        }
+        .form-group input:focus { outline: none; border-color: var(--gold-light); }
+
+        footer { background: rgba(0,0,0,0.8); border-top: 1px solid #333; padding: 30px; text-align: center; margin-top: 50px; color: #888; }
     </style>
 </head>
 <body>
 
+    <div class="background-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
     <nav>
-        <div class="nav-logo">ဆရာနောင်ထိပ်တင်</div>
-        <div class="verified-badge"><i class="fa fa-check-circle"></i></div>
+        <div class="nav-logo">NAUNG HTAKE TIN</div>
+        <div class="verified-badge"><i class="fa fa-check-circle"></i> Official Verified</div>
     </nav>
 
-    <header id="home">
-        <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Business Card Cover" class="business-card-cover">
-        <div class="header-overlay">
-            <h1>ဆရာနောင်ထိပ်တင်</h1>
-            <p>ဂမ္ဘီရ</p>
-            <button class="booking-btn" onclick="openModal()">
-                <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> ရက်ချိန်းယူရန် / ဆက်သွယ်ရန်
-            </button>
+    
+    <header>
+        <div class="container">
+            <div style="perspective: 1000px;">
+                <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="ဆရာနောင်ထိပ်တင်၏ စီးပွားရေးကဒ်ပုံ" class="business-card-cover">
+            </div>
+            <div class="hero-text-overlay">
+                <h1>ဆရာနောင်ထိပ်တင်</h1> 
+                <p class="subtitle">ဂမ္ဘီရ၊ ဗေဒင်ပညာရှင် နှင့် လမ်းညွှန်ပြသသူ</p>
+                <button class="btn-3d" onclick="openModal()">
+                    <i class="fas fa-calendar-check"></i> ရက်ချိန်းယူရန် / ဆက်သွယ်ရန်
+                </button>
+            </div>
         </div>
     </header>
 
+    
     <section id="social">
         <div class="container">
             <h2>တရားဝင် ဆိုရှယ်မီဒီယာများ</h2>
-            <p style="text-align: center; color: red; margin-bottom: 20px;">(အတုအယောင်များ သတိပြုရန် - အောက်ပါ Link များသာ တရားဝင်ဖြစ်သည်)</p>
-            <div class="social-grid">
-                <a href="https://www.facebook.com/share/19xwFcbWY2/" target="_blank" class="social-btn fb-bg">
-                    <i class="fab fa-facebook-f" style="margin-right:10px;"></i> Facebook Channel
-                </a>
-                <a href="https://www.facebook.com/share/1FK2m5S2VF/" target="_blank" class="social-btn fb-bg">
-                    <i class="fab fa-facebook" style="margin-right:10px;"></i> Facebook Account
-                </a>
-                <a href="https://www.tiktok.com/@naunghtaketin?_r=1&_t=ZS-92AGybZkTd2" target="_blank" class="social-btn tt-bg">
-                    <i class="fab fa-tiktok" style="margin-right:10px;"></i> TikTok Channel
-                </a>
-                <a href="viber://chat?number=+959666664580" class="social-btn vb-bg">
-                    <i class="fab fa-viber" style="margin-right:10px;"></i> Viber (+959 66666 4580)
-                </a>
+            <div class="glass-card">
+                <p style="text-align: center; color: #ff6b6b; margin-bottom: 20px; font-weight: bold; text-shadow: 0 0 5px red;">
+                    <i class="fas fa-exclamation-triangle"></i> အတုအယောင်များ သတိပြုရန် (ဤ Link များသာ အစစ်အမှန်ဖြစ်သည်)
+                </p>
+                <div class="social-grid">
+                    <a href="https://www.facebook.com/share/19xwFcbWY2/" target="_blank" class="social-btn fb">
+                        <i class="fab fa-facebook-f" style="margin-right:10px;"></i> Facebook Channel
+                    </a>
+                    <a href="https://www.facebook.com/share/1FK2m5S2VF/" target="_blank" class="social-btn fb">
+                        <i class="fab fa-facebook" style="margin-right:10px;"></i> Facebook Account
+                    </a>
+                    <a href="https://www.tiktok.com/@naunghtaketin?_r=1&_t=ZS-92AGybZkTd2" target="_blank" class="social-btn tk">
+                        <i class="fab fa-tiktok" style="margin-right:10px;"></i> TikTok Channel
+                    </a>
+                    <a href="viber://chat?number=+959666664580" class="social-btn vb">
+                        <i class="fab fa-viber" style="margin-right:10px;"></i> Viber Official
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
+    
     <section id="shop">
         <div class="container">
-            <h2>ဂမ္ဘီရ အဆောင်ပစ္စည်းများ ပြခန်း</h2>
-            <div class="shop-grid">
-                <div class="product-card">
-                    <div style="height: 150px; background: #ddd; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:#666;">ပစ္စည်းပုံစံ</div>
-                    <h4>စီးပွားလာဘ်ရွှင် အဆောင်</h4>
-                    <a href="viber://chat?number=+959666664580&text=စီးပွားလာဘ်ရွှင်အဆောင်မှာယူလိုပါသည်" class="buy-btn vb-bg">မှာယူရန် (Viber)</a>
-                </div>
-                <div class="product-card">
-                    <div style="height: 150px; background: #ddd; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:#666;">ပစ္စည်းပုံစံ</div>
-                    <h4>အန္တရာယ်ကင်း အဆောင်</h4>
-                    <a href="viber://chat?number=+959666664580&text=အန္တရာယ်ကင်းအဆောင်မှာယူလိုပါသည်" class="buy-btn vb-bg">မှာယူရန် (Viber)</a>
-                </div>
-                <div class="product-card">
-                    <div style="height: 150px; background: #ddd; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:#666;">ပစ္စည်းပုံစံ</div>
-                    <h4>အချစ်ရေး အဆောင်</h4>
-                    <a href="viber://chat?number=+959666664580&text=မေတ္တာရေးအဆောင်မှာယူလိုပါသည်" class="buy-btn vb-bg">မှာယူရန် (Viber)</a>
-                </div>
+            <h2>ဂမ္ဘီရ အဆောင်ပစ္စည်းများ</h2>
+            <div class="glass-card shop-container">
+                <i class="fas fa-gem shop-icon"></i>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">
+                    ဆရာကြီး၏ အစီအရင်ဖြင့် စီရင်ထားသော ထူးခြားလေးနက်သည့်<br>
+                    ဂမ္ဘီရ အဆောင်ပစ္စည်းများကို လိုအပ်ပါက မှာယူနိုင်ပါသည်။
+                </p>
+                <a href="viber://chat?number=+959666664580&text=ဆရာ့အဆောင်ပစ္စည်းများ ဝယ်ယူလိုပါသည်" class="btn-3d">
+                    <i class="fas fa-shopping-cart"></i> အဆောင်ပစ္စည်း ဝယ်ယူရန်
+                </a>
             </div>
         </div>
     </section>
 
-    <section id="location">
+    
+    <section id="contact">
         <div class="container">
             <h2>ဓာတ်နန်းတည်နေရာ</h2>
-            <div style="width: 100%; height: 350px; background-color: #eee;">
-                 <iframe src="https://maps.app.goo.gl/7jKMJWZcvcwCC6peA" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="glass-card" style="padding: 10px;">
+                <div style="width: 100%; height: 400px; border-radius: 10px; overflow: hidden; background-color: #111; display: flex; align-items: center; justify-content: center; font-style: italic;">
+                    <p>Google Maps Embed Area (လုံခြုံရေးအရ placeholder ထားရှိသည်)</p>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://maps.app.goo.gl/7jKMJWZcvcwCC6peA" target="_blank" class="social-btn" style="background: var(--gold-dark); display: inline-flex; width: auto;">
+                        <i class="fas fa-map-marked-alt" style="margin-right: 10px;"></i> Google Maps တွင် ကြည့်ရန်
+                    </a>
+                </div>
             </div>
-             <p style="text-align: center; margin-top: 10px;">
-                <a href="https://maps.app.goo.gl/7jKMJWZcvcwCC6peA" target="_blank" style="color: var(--deep-maroon); font-weight: bold;">
-                    <i class="fas fa-map-marker-alt"></i> Google Maps တွင် လမ်းညွှန်ကြည့်ရန်
-                </a>
-            </p>
         </div>
     </section>
    
     <footer>
-        <p>© 2024 ဆရာနောင်ထိပ်တင်. All Rights Reserved.</p>
+        <p style="font-family: 'Cinzel', serif;">© 2024 NAUNG HTAKE TIN. All Rights Reserved.</p>
     </footer>
 
     <div id="bookingModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3><i class="fas fa-calendar-alt"></i> ရက်ချိန်းယူရန် / ဆက်သွယ်ရန်</h3>
-            <p>လူတွေ့ဆွေးနွေးရန်အတွက်သော်လည်းကောင်း၊ Online မေးမြန်းရန်အတွက်သော်လည်းကောင်း အောက်ပါတို့မှ ရွေးချယ်နိုင်ပါသည်။</p>
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <h3 style="text-align: center; color: var(--gold-light); margin-top: 0;">ရက်ချိန်းယူရန်</h3>
             
-            <div class="booking-form">
-                 <h4>(၁) လူတွေ့ရန် ရက်ချိန်းစာရင်းသွင်းခြင်း</h4>
-                <form id="consultation-form">
-                    <div class="form-group"><input type="text" placeholder="အမည်" required></div>
-                    <div class="form-group"><input type="tel" placeholder="ဖုန်းနံပါတ်" required></div>
-                    <div class="form-group"><input type="date" required></div>
-                    <button type="submit" class="submit-btn">ရက်ချိန်းအတည်ပြုမည်</button>
-                </form>
-                <hr>
-                <h4>(၂) Online မှ ဆက်သွယ်မေးမြန်းခြင်း</h4>
-                <a href="viber://chat?number=+959666664580" class="social-btn vb-bg" style="width: 100%; box-sizing: border-box;">
+            <form id="consultation-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="အမည်" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="ဖုန်းနံပါတ်" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="topic" rows="3" placeholder="ဆွေးနွေးလိုသည့် အကြောင်းအရာ"></textarea>
+                </div>
+                <button type="submit" class="btn-3d" style="width: 100%;">ရက်ချိန်းအတည်ပြုမည်</button>
+            </form>
+            <br>
+            <div style="text-align: center;">
+                <p>သို့မဟုတ်</p>
+                <a href="viber://chat?number=+959666664580" style="color: var(--gold-light); text-decoration: none;">
                     <i class="fab fa-viber"></i> Viber မှ တိုက်ရိုက်ဆက်သွယ်ရန်
                 </a>
             </div>
@@ -208,30 +395,38 @@
     </div>
 
     <script>
-        // Modal JavaScript Logic
         var modal = document.getElementById("bookingModal");
-        
-        function openModal() {
-            modal.style.display = "flex";
-        }
+        function openModal() { modal.style.display = "flex"; }
+        function closeModal() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) closeModal(); }
 
-        function closeModal() {
-            modal.style.display = "none";
-        }
+        // --- GOOGLE SCRIPT INTEGRATION ---
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5RrCtN000YI7L34T38N33TqsykINKbwcUr5x07qtCLzzFI0Z74ThG-o-LfSEhqCIr/exec'; 
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Form Submit Simulation (Connect to Google Sheet Script in production)
         const form = document.getElementById('consultation-form');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("ရက်ချိန်းစာရင်းသွင်းခြင်း အောင်မြင်ပါသည်။ ဆရာ့ဘက်မှ မကြာမီ ပြန်လည်ဆက်သွယ်ပါမည်။");
-            form.reset();
-            closeModal();
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'ပေးပို့နေပါသည်...';
+            
+            const data = new FormData(e.target);
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: data })
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'success') {
+                    alert("ရက်ချိန်းစာရင်းသွင်းခြင်း အောင်မြင်ပါသည်။");
+                    form.reset();
+                    closeModal();
+                } else {
+                    alert("Error: " + result.message);
+                }
+                btn.innerHTML = originalText;
+            })
+            .catch(error => {
+                alert("Connection Error. Please try again.");
+                btn.innerHTML = originalText;
+            });
         });
     </script>
 
