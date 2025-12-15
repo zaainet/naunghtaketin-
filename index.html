@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="my">
 <head>
@@ -14,7 +15,19 @@
     <link rel="apple-touch-icon" href="https://i.ibb.co/Kp7qGbH1/Picsart-25-12-15-20-02-41-664.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root{--gold-light:#fff5c3;--gold-mid:#d4af37;--gold-dark:#aa6c39;--glass-bg:rgba(20,20,20,0.9);--glass-border:rgba(212,175,55,0.4);--deep-bg:#050505;--ruby-red:rgba(139,0,0,0.7);--ruby-red-light:rgba(180,0,0,0.85);--naparty-color:#ffcc00}*{box-sizing:border-box;outline:none;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+        /* Background Design: Animated Gradient Background */
+        body{font-family:'Noto Sans Myanmar',sans-serif;background:#0d0d0d;color:#fff;min-height:100vh;overflow-x:hidden;line-height:1.6;-ms-touch-action:manipulation;touch-action:manipulation;background-attachment:fixed}
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(circle at top left,rgba(212,175,55,0.2) 0%,transparent 25%),radial-gradient(circle at bottom right,rgba(10,10,30,0.7) 0%,transparent 35%);background-size:300% 300%;animation:gradientShift 25s ease infinite}@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        /* End of Background Design */
+        .container{max-width:800px;margin:0 auto;padding:0 20px;position:relative;z-index:1}section{padding:40px 0}nav{background:rgba(10,10,10,0.98);border-bottom:1px solid var(--gold-mid);padding:15px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.5)}.nav-logo{font-family:'Cinzel',serif;font-weight:700;color:var(--gold-mid);font-size:1.1rem;letter-spacing:1px}.verified-badge{color:#00FF7F;font-size:.8rem;display:flex;align-items:center;gap:5px;background:rgba(0,255,127,0.15);padding:4px 10px;border-radius:20px;box-shadow:0 0 10px rgba(0,255,127,0.5);transition:all .3s ease;animation:verifiedGlow 2s infinite alternate}@keyframes verifiedGlow{0%{box-shadow:0 0 5px rgba(0,255,127,0.3),0 0 5px rgba(0,255,127,0.3)}100%{box-shadow:0 0 15px rgba(0,255,127,0.6),0 0 20px rgba(0,255,127,0.1)}}.marquee-container{background:#111;border-bottom:1px solid #333;overflow:hidden;white-space:nowrap;padding:8px 0;background:linear-gradient(90deg,#111,#300,#111);border-bottom:2px solid #D4AF37;box-shadow:0 2px 10px rgba(0,0,0,0.5)}.marquee-content{display:inline-block;animation:scrollText 20s linear infinite;padding-left:100%;color:#fff;font-size:.9rem}.marquee-content span{color:#FF4500;font-weight:bold;animation:textShine 1.5s infinite alternate}@keyframes textShine{0%{text-shadow:0 0 5px rgba(255,69,0,0.5)}100%{text-shadow:0 0 10px rgba(255,69,0,1)}}@keyframes scrollText{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}header{text-align:center;padding-top:10px;padding-bottom:10px;position:relative}.hero-subtitle{font-size:.85rem;color:var(--ruby-red-light);letter-spacing:1px;margin-bottom:25px;text-transform:uppercase;text-shadow:0 0 5px rgba(139,0,0,0.5)}.title-wrapper{display:inline-block;position:relative;margin-bottom:20px;text-align:left}h1.gold-title{font-family:'Noto Sans Myanmar',serif;font-weight:900;font-size:3.2rem;line-height:1.1;margin:0;background:linear-gradient(to bottom,#bf953f 0%,#fcf6ba 25%,#b38728 50%,#fbf5b7 75%,#aa771c 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 10px rgba(191,149,63,0.3));background-size:200% 100%;animation:shimmer 5s infinite linear}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.dhamma-citi-tag{font-family:'Noto Sans Myanmar',sans-serif;font-size:1rem;font-weight:600;color:#e0e0e0;position:absolute;top:-22px;left:5px;text-shadow:1px 1px 2px #000;letter-spacing:.5px}
+        .naparty-title{font-family:'Cinzel',serif;font-weight:900;font-size:1.5rem;color:var(--naparty-color);letter-spacing:5px;margin:0 0 15px;text-shadow:0 0 10px rgba(255,204,0,0.5);display:flex;align-items:center;justify-content:center;gap:10px}
+        .naparty-title .fas{font-size:1.2rem;color:var(--gold-mid);animation:crownAnimate 1s infinite alternate}@keyframes crownAnimate{0%{transform:translateY(0)}100%{transform:translateY(-2px)}}
+        .hero-img{width:100%;max-width:600px;height:auto;border-radius:15px;border:2px solid var(--gold-mid);box-shadow:0 0 30px rgba(0,0,0,0.8);margin:10px auto 10px;display:block;transition:transform .1s ease-out}.btn-gold{background:linear-gradient(180deg,#FFD700 0%,#B8860B 100%);color:#000;border:none;padding:14px 35px;font-size:1rem;font-weight:700;border-radius:50px;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,0.5),inset 0 2px 2px rgba(255,255,255,0.4);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-width:220px;justify-content:center;position:relative;overflow:hidden}.btn-gold:hover{box-shadow:0 8px 20px rgba(255,215,0,0.5),inset 0 2px 5px rgba(255,255,255,0.7)}.btn-gold:active{transform:scale(0.95);box-shadow:0 2px 5px rgba(0,0,0,0.5),inset 0 1px 1px rgba(0,0,0,0.3)}.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:ripple-animation .6s linear;background-color:rgba(255,255,255,0.7)}@keyframes ripple-animation{to{transform:scale(4);opacity:0}}h2{text-align:center;font-family:'Cinzel',serif;color:var(--gold-mid);margin-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.1);display:inline-block;padding-bottom:10px;left:50%;position:relative;transform:translateX(-50%)}.glass-card{background:var(--glass-bg);backdrop-filter:blur(15px);border:1px solid var(--glass-border);padding:25px;border-radius:15px;margin-bottom:25px;box-shadow:0 10px 30px rgba(0,0,0,0.7)}.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.social-btn{display:flex;align-items:center;justify-content:center;padding:12px;border-radius:10px;color:white;text-decoration:none;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);font-size:.95rem;font-weight:500;transition:all .2s ease;position:relative;overflow:hidden}.social-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transition:all .7s ease}.social-btn:hover::before{left:100%}.fb{border-left:4px solid #1877F2}.fb:hover,.fb:focus{box-shadow:0 0 20px rgba(24,119,242,0.8);background:rgba(24,119,242,0.15);transform:translateY(-2px)}.tk{border-left:4px solid #FE2C55}.tk:hover,.tk:focus{box-shadow:0 0 20px rgba(254,44,85,0.8);background:rgba(254,44,85,0.15);transform:translateY(-2px)}.vb{border-left:4px solid #7360f2}.vb:hover,.vb:focus{box-shadow:0 0 20px rgba(115,96,242,0.8);background:rgba(115,96,242,0.15);transform:translateY(-2px)}.maps{border-left:4px solid #34A853}.maps:hover,.maps:focus{box-shadow:0 0 20px rgba(52,168,83,0.8);background:rgba(52,168,83,0.15);transform:translateY(-2px)}.glass-card p[style*="background: rgba(255,0,0,0.1)"]{border:1px solid var(--ruby-red);background:rgba(255,0,0,0.2)!important;box-shadow:0 0 15px var(--ruby-red);animation:pulseRed 2s infinite alternate}@keyframes pulseRed{0%{box-shadow:0 0 5px var(--ruby-red)}100%{box-shadow:0 0 15px var(--ruby-red),0 0 20px rgba(139,0,0,0.5)}}input#verifyLink{width:100%;padding:15px;background:#1a1a1a;border:1px solid #444;color:#fff;border-radius:8px;font-size:1rem;margin-bottom:10px;transition:border-color .2s,box-shadow .2s}input#verifyLink:focus{border-color:var(--gold-mid);box-shadow:0 0 0 2px rgba(212,175,55,0.5)}#verifyResult>div{transition:all .3s ease-out;animation:slideIn .3s ease-out;border-left:5px solid}@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.result-success{color:#00FF7F;font-weight:bold;background:rgba(0,255,127,0.1);padding:10px;border-radius:8px;border-color:#00FF7F!important}.result-warning{color:#ff6b6b;font-weight:bold;background:rgba(255,107,107,0.1);padding:10px;border-radius:8px;border-color:#ff6b6b!important}.map-img-container{width:100%;height:auto;border-radius:10px;overflow:hidden;border:1px solid #444;margin-top:15px}.map-img-container img{width:100%;display:block}footer{text-align:center;padding:30px 0;color:#666;font-size:.8rem;border-top:1px solid #222;background:#080808}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease}.modal.is-active{display:flex;opacity:1}.modal-content{background:#151515;border:1px solid var(--gold-mid);padding:30px;border-radius:15px;width:90%;max-width:350px;text-align:center;position:relative;transform:scale(0.9);transition:transform .3s cubic-bezier(0.175,0.885,0.32,1.275)}.modal.is-active .modal-content{transform:scale(1)}.close-modal{position:absolute;top:10px;right:15px;color:#fff;font-size:24px;cursor:pointer;transition:color .2s}.close-modal:hover{color:#ff6b6b}@media (max-width:480px){h1.gold-title{font-size:2.5rem}.dhamma-citi-tag{font-size:.9rem;top:-18px}.social-grid{grid-template-columns:1fr}.hero-img{max-width:95%;margin:5px auto 5px;}}
+    </style>
+    
     <script type="application/ld+json">
         {"@context":"https://schema.org","@type":"LocalBusiness","name":"ဆရာနောင်ထိပ်တင် | ဂမ္ဘီရ၊လောကီပညာရှင်","image":"https://i.ibb.co/Kp7qGbH1/Picsart-25-12-15-20-02-41-664.png","@id":"https://www.naunghtaketin.com","url":"https://www.naunghtaketin.com","telephone":"+959666664580","address":{"@type":"PostalAddress","streetAddress":"အမှတ် (၇၀/ဂ)၊ (၄၆)ရပ်ကွက်၊ ရွှေလီ (၁)လမ်း၊ ဗထူးစျေးအနီး","addressLocality":"မြောက်ဒဂုံမြို့နယ်","addressRegion":"ရန်ကုန်မြို့"},"priceRange":"$$$","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"20:00"}}
     </script>
@@ -36,10 +49,6 @@
                 <span class="dhamma-citi-tag">ဓမ္မစေတီ</span>
                 <h1 class="gold-title">နောင်ထိပ်တင်</h1>
             </div>
-            
-            <h2 class="naparty-title">
-                <i class="fas fa-crown"></i> NAPARTY <i class="fas fa-crown"></i>
-            </h2>
             
             <img src="https://i.ibb.co/G3xqKmXN/Picsart-25-12-16-04-50-16-846.png" alt="ဆရာနောင်ထိပ်တင်" class="hero-img parallax-img" loading="lazy">
             
@@ -83,7 +92,7 @@
             <div class="glass-card" style="text-align: center;">
                 <i class="fas fa-gem" style="font-size: 3rem; color: var(--gold-mid); margin-bottom: 15px;"></i>
                 <p style="color: #ddd; line-height: 1.6; margin-bottom: 25px;">စီးပွားလာဘ်လာဘ၊ မေတ္တာရေး၊ ကျန်းမာရေးအတွက် စီရင်ထားသော <br>ထူးခြားလေးနက်သည့် ဂမ္ဘီရအဆောင်ပစ္စည်းများ</p>
-                <a href="viber://chat?number=+959666664580" class="btn-gold" style="font-size: 0.9rem;"><i class="fas fa-shopping-cart"></i> ဝယ်ယူလိုပါသည်</a>
+                <a href="viber://chat?number=+959666664580" class="btn-gold" style="font-size: 0.9rem;"><i class="fas fa-shopping-cart"></i> မှာယူပူဇော်ရန်</a>
             </div>
         </div>
     </section>
@@ -118,6 +127,86 @@
             <a href="viber://chat?number=+959666664580" class="btn-gold" style="width: 100%; text-decoration: none;">Viber Chat</a>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // Modal Open/Close Logic
+        const modal = document.getElementById('bookingModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.querySelector('.close-modal');
+
+        openModalBtn.onclick = function() {
+            modal.classList.add('is-active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-active');
+        }
+
+        closeModalBtn.onclick = closeModal;
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Ripple Effect for Button (ရက်ချိန်းယူရန်)
+        const buttons = document.querySelectorAll('.btn-gold');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.offsetLeft;
+                const y = e.clientY - e.target.offsetTop;
+
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                this.appendChild(ripple);
+
+                ripple.addEventListener('animationend', function() {
+                    this.remove();
+                });
+            });
+        });
+
+        // Verification Logic (စစ်ဆေးခြင်း)
+        const officialLinks = [
+            "+959666664580",
+            "https://www.facebook.com/share/19xwFcbWY2/",
+            "https://www.facebook.com/share/1FK2m5S2VF/",
+            "https://www.tiktok.com/@naunghtaketin",
+            "viber://chat?number=+959666664580",
+            "09666664580"
+        ];
+
+        document.getElementById('verifyBtn').addEventListener('click', function() {
+            const input = document.getElementById('verifyLink').value.trim();
+            const resultDiv = document.getElementById('verifyResult');
+            resultDiv.innerHTML = '';
+
+            if (!input) {
+                resultDiv.innerHTML = '<div class="result-warning">စစ်ဆေးရန် Link သို့မဟုတ် ဖုန်းနံပါတ် ထည့်သွင်းပေးပါ။</div>';
+                return;
+            }
+
+            // Normalizing input for checking
+            const normalizedInput = input.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            const isVerified = officialLinks.some(link => {
+                const normalizedOfficial = link.toLowerCase().replace(/[^a-z0-9]/g, '');
+                return normalizedOfficial.includes(normalizedInput);
+            });
+
+            if (isVerified) {
+                resultDiv.innerHTML = '<div class="result-success"><i class="fas fa-check-circle"></i> ဤအကောင့်သည် ဆရာနောင်ထိပ်တင်၏ အစစ်အမှန်အကောင့် ဖြစ်ပါသည်။</div>';
+            } else {
+                resultDiv.innerHTML = '<div class="result-warning"><i class="fas fa-times-circle"></i> ဤအကောင့်သည် တရားဝင်အကောင့်စာရင်းတွင် မပါဝင်ပါ။</div>';
+            }
+        });
+
+        // Disable right click (oncontextmenu="return false;" is also used on body)
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
 </body>
-</html>
+    </html>
