@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ဆရာနောင်ထိပ်တင် | ဂမ္ဘီရ၊ လောကီပညာရှင်</title>
     <meta name="description" content="ဂမ္ဘီရ၊ ဗေဒင်၊ အစီအရင်နှင့် အဆောင်ပစ္စည်းများအတွက် ဆရာနောင်ထိပ်တင်၏ တရားဝင် Website ဖြစ်ပါသည်။">
+    <meta name="keywords" content="ဆရာနောင်ထိပ်တင်, Naung Htake Tin, ဗေဒင်, ယတြာ, ဂမ္ဘီရ, Myanmar Astrologer">
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.naunghtaketin.com">
@@ -21,25 +22,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & SETUP --- */
+        /* --- 1. CSS VARIABLES & SETUP --- */
         :root {
             --gold-light: #fff5c3;
             --gold-main: #d4af37;
             --gold-dark: #aa6c39;
-            /* REFINED STATIC GOLD GRADIENT: Pure Gold and Pale Yellow for Max Luminosity */
-            --gold-gradient: linear-gradient(135deg, #FFFFE0 0%, #FFD700 25%, #d4af37 50%, #FFD700 75%, #FFFFE0 100%);
+            /* Premium Metallic Gradient */
+            --gold-gradient: linear-gradient(
+                to bottom,
+                #bf953f,
+                #fcf6ba,
+                #b38728,
+                #fbf5b7,
+                #aa771c
+            );
             --bg-dark: #050505;
-            --bg-glass: rgba(20, 20, 20, 0.65);
+            --bg-glass-card: rgba(30, 30, 30, 0.6);
             --glass-border: 1px solid rgba(212, 175, 55, 0.25);
-            --ruby-red: rgba(220, 20, 60, 0.9);
             --text-main: #ffffff;
             --text-muted: #cccccc;
+            
             --font-main: 'Noto Sans Myanmar', sans-serif;
             --font-title: 'Cinzel', serif;
+            
             --success: #00FF7F;
             --warning: #ff6b6b;
         }
 
+        /* --- 2. ADVANCED SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #aa6c39, #d4af37);
+            border-radius: 10px;
+            border: 2px solid #050505;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
+
+        /* --- 3. SELECTION COLOR --- */
+        ::selection { background: var(--gold-main); color: #000; }
+        ::-moz-selection { background: var(--gold-main); color: #000; }
+
+        /* --- 4. BASE STYLES --- */
         * {
             box-sizing: border-box;
             outline: none;
@@ -48,6 +72,8 @@
             padding: 0;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: var(--font-main);
             background-color: var(--bg-dark);
@@ -55,30 +81,46 @@
             min-height: 100vh;
             overflow-x: hidden;
             line-height: 1.6;
-            padding-bottom: 40px;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Mysterious Ambient Background */
+        /* Ambient Background Animation */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: -1;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 40%);
-            animation: pulseBg 8s ease-in-out infinite alternate;
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 45%);
+            animation: pulseBg 10s ease-in-out infinite alternate;
         }
-
         @keyframes pulseBg {
-            0% { opacity: 0.6; }
+            0% { opacity: 0.5; }
             100% { opacity: 1; }
         }
 
-        /* --- LAYOUT --- */
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 5. ANIMATIONS (Keyframes) --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes btnShine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* --- 6. UTILITIES --- */
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -86,27 +128,26 @@
             position: relative;
             z-index: 1;
         }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 2rem; }
+        section { padding: 50px 0; }
 
-        section {
-            padding: 40px 0;
-        }
-
-        /* --- NAV BAR --- */
+        /* --- 7. NAV BAR --- */
         nav {
-            background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
-
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         .nav-logo {
             font-family: var(--font-title);
             font-weight: 700;
@@ -114,112 +155,113 @@
             font-size: 1.1rem;
             letter-spacing: 1px;
             text-transform: uppercase;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
         .verified-badge {
             color: var(--success);
             font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(0, 255, 127, 0.1);
+            background: rgba(0, 255, 127, 0.08);
             padding: 6px 12px;
             border-radius: 20px;
             border: 1px solid rgba(0, 255, 127, 0.2);
             font-weight: 600;
-            box-shadow: 0 0 10px rgba(0, 255, 127, 0.1);
         }
 
-        /* --- MARQUEE --- */
+        /* --- 8. MARQUEE --- */
         .marquee-container {
-            background: linear-gradient(90deg, #0a0a0a, #2a0a0a, #0a0a0a);
-            border-bottom: 1px solid var(--gold-main);
+            background: linear-gradient(90deg, #0a0a0a, #1a0505, #0a0a0a);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
             overflow: hidden;
             white-space: nowrap;
             padding: 8px 0;
-            position: relative;
             z-index: 900;
         }
-
         .marquee-content {
             display: inline-block;
-            animation: scrollText 20s linear infinite;
+            animation: scrollText 25s linear infinite;
             padding-left: 100%;
             color: #ddd;
             font-size: 0.85rem;
         }
-
-        .marquee-content span {
-            color: #FFD700;
-            font-weight: bold;
-        }
-
+        .marquee-content span { color: #FFD700; font-weight: bold; }
         @keyframes scrollText {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
 
-        /* --- HERO SECTION --- */
+        /* --- 9. HERO SECTION --- */
         header {
             text-align: center;
-            padding: 30px 0 10px;
+            padding: 40px 0 20px;
         }
 
         .hero-subtitle {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--gold-light);
-            letter-spacing: 1.5px;
-            margin-bottom: 25px; 
+            letter-spacing: 2px;
+            margin-bottom: 20px; 
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0; /* For Animation */
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .title-wrapper {
-            display: inline-block;
-            position: relative;
-            margin-bottom: 25px; 
-            margin-top: 0; 
-        }
-
-        /* --- CORE CHANGE: Static Gold Shine H1 - Increased Luminosity --- */
         h1.gold-title {
             font-family: var(--font-main);
             font-weight: 900;
-            font-size: 3.2rem;
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
             line-height: 1.1;
-            margin: 0;
-            background: var(--gold-gradient);
+            margin: 0 0 30px 0;
+            /* Shimmer Effect Setup */
+            background: linear-gradient(
+                to right,
+                #bf953f 0%,
+                #fcf6ba 20%,
+                #d4af37 40%,
+                #fcf6ba 60%,
+                #bf953f 100%
+            );
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            /* STATIC Gold Glow: Added FFFFD0 (Lightest Yellow) for brighter shine */
-            filter: drop-shadow(0 0 10px rgba(255, 255, 208, 0.9)) /* Brighter Gold Shine */
-                    drop-shadow(0 0 4px rgba(255, 215, 0, 0.5)) /* Secondary shine */
-                    drop-shadow(0 3px 0 #000); /* Keep contrast/depth */
-            /* No Animation */
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+            
+            opacity: 0; /* For Entry Animation */
+            animation: fadeInUp 0.8s ease-out 0.2s forwards, shineText 4s linear infinite;
         }
 
-        /* @keyframes shine { Removed } */
-
+        .hero-img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 35px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
 
         .hero-img {
             width: 100%;
-            max-width: 500px;
             height: auto;
             border-radius: 15px;
-            border: 2px solid var(--gold-main);
-            box-shadow: 0 0 40px rgba(0,0,0,0.7);
-            margin: 10px auto 30px;
+            border: 1px solid var(--gold-main);
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
             display: block;
-            position: relative;
         }
 
-        /* --- BUTTONS --- */
+        /* --- 10. BUTTONS --- */
         .button-group {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
         }
 
         .btn {
@@ -242,14 +284,26 @@
 
         .btn-gold {
             background: linear-gradient(180deg, #FFD700 0%, #B8860B 100%);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
             min-width: 200px;
+            z-index: 1;
+        }
+        
+        /* Button Shimmer */
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: btnShine 3s infinite;
+            z-index: -1;
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             color: var(--gold-light);
             min-width: 180px;
             backdrop-filter: blur(5px);
@@ -260,58 +314,66 @@
             box-shadow: 0 8px 25px rgba(184, 134, 11, 0.5);
         }
 
-        .btn:active { transform: scale(0.97); }
-
         /* Ripple Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
             animation: ripple-anim 0.6s linear;
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
         }
-        @keyframes ripple-anim {
-            to { transform: scale(4); opacity: 0; }
-        }
+        @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
 
-        /* --- SECTIONS & GLASS CARDS --- */
+        /* --- 11. CARDS & TITLES --- */
         h2 {
             text-align: center;
             font-family: var(--font-title);
             color: var(--gold-main);
-            margin-bottom: 25px;
-            font-size: 1.4rem;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
             position: relative;
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
-            padding-bottom: 8px;
+            padding-bottom: 10px;
+            text-transform: uppercase;
         }
-
         h2::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: var(--gold-main);
-            box-shadow: 0 0 10px var(--gold-main);
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
         }
 
         .glass-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-glass-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: var(--glass-border);
-            padding: 25px;
+            padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            /* Hover Glow Effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.15);
         }
 
-        /* --- SOCIAL LINKS --- */
+        /* --- 12. SOCIAL & VERIFY --- */
+        .alert-box {
+            background: rgba(255, 69, 0, 0.1); 
+            border: 1px solid rgba(255,69,0,0.3); 
+            padding: 15px; 
+            border-radius: 10px; 
+            text-align: center; 
+            margin-bottom: 25px;
+        }
+
         .social-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -321,124 +383,72 @@
         .social-btn {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-            border-radius: 10px;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-radius: 12px;
             color: white;
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
-
         .social-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-color: var(--gold-main);
+            transform: translateX(5px);
         }
-
-        .social-btn i.fab {
-            width: 30px;
-            font-size: 1.2rem;
-            text-align: center;
-            margin-right: 10px;
-        }
-
-        /* Brand Colors for borders */
-        .fb { border-left: 3px solid #1877F2; }
-        .tk { border-left: 3px solid #FE2C55; }
-        .vb { border-left: 3px solid #7360f2; }
-        .maps { border-left: 3px solid #34A853; }
+        .social-content { display: flex; align-items: center; gap: 15px; }
+        .social-btn i { font-size: 1.3rem; width: 25px; text-align: center;}
+        
+        /* Social Colors */
+        .fb i { color: #1877F2; } .tk i { color: #FE2C55; } .vb i { color: #7360f2; }
 
         .copy-trigger {
-            margin-left: auto;
-            padding: 5px 10px;
-            border-left: 1px solid rgba(255,255,255,0.1);
-            color: var(--gold-main);
+            padding: 8px;
+            color: var(--text-muted);
             cursor: pointer;
-            transition: color 0.2s;
+            border-radius: 50%;
+            transition: 0.2s;
         }
-        .copy-trigger:hover { color: #fff; }
+        .copy-trigger:hover { color: var(--gold-main); background: rgba(255,255,255,0.1); }
 
-        /* --- VERIFY SECTION --- */
+        /* Verify Input */
         .input-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            display: flex; gap: 10px; margin-top: 20px;
         }
-
         input#verifyLink {
             flex: 1;
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.4);
+            padding: 14px 20px;
+            background: rgba(0,0,0,0.6);
             border: 1px solid #444;
             color: #fff;
-            border-radius: 8px;
+            border-radius: 50px;
             font-size: 1rem;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
         input#verifyLink:focus {
             border-color: var(--gold-main);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
         }
 
-        #verifyResult {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-        #verifyResult.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        #verifyResult { margin-top: 20px; font-size: 0.95rem; opacity: 0; transform: translateY(10px); transition: 0.4s; }
+        #verifyResult.show { opacity: 1; transform: translateY(0); }
+        .result-box { padding: 15px; border-radius: 12px; display: flex; gap: 15px; text-align: left; align-items: center;}
+        .result-success { color: var(--success); background: rgba(0, 255, 127, 0.05); border: 1px solid var(--success); }
+        .result-warning { color: var(--warning); background: rgba(255, 107, 107, 0.05); border: 1px solid var(--warning); }
+        .result-warning a { color: var(--success); text-decoration: underline; font-weight: bold; }
 
-        .result-success {
-            color: var(--success);
-            background: rgba(0, 255, 127, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--success);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .result-warning {
-            color: var(--warning);
-            background: rgba(255, 107, 107, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--warning);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .result-warning a {
-            color: var(--success); /* Link color inside warning box */
-            text-decoration: underline; 
-            font-weight: bold;
-        }
-
-        /* --- MAP & CONTACT --- */
+        /* --- 13. MAP & FOOTER --- */
         .map-wrapper {
             width: 100%;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #333;
-            margin-top: 20px;
-            position: relative;
+            margin-top: 25px;
+            background: #111;
         }
-        .map-wrapper img {
-            width: 100%;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .map-wrapper:hover img { transform: scale(1.02); }
+        .map-wrapper img { width: 100%; display: block; transition: 0.5s; opacity: 0.9; }
+        .map-wrapper:hover img { transform: scale(1.02); opacity: 1; }
 
-        /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -446,74 +456,52 @@
             font-size: 0.8rem;
             border-top: 1px solid #222;
             background: #080808;
-            margin-top: 50px;
+            margin-top: auto;
         }
 
-        /* --- MODAL --- */
+        /* --- 14. MODAL --- */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: none; position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.92); z-index: 2000;
+            align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
         }
-        .modal.is-active {
-            display: flex;
-            opacity: 1;
-        }
+        .modal.is-active { display: flex; opacity: 1; }
         .modal-content {
-            background: #181818;
+            background: #121212;
             border: 1px solid var(--gold-main);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 380px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            padding: 40px 30px;
+            border-radius: 20px;
+            width: 90%; max-width: 400px;
             text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
         .modal.is-active .modal-content { transform: scale(1); }
         .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #fff;
-            font-size: 28px;
-            cursor: pointer;
-            line-height: 1;
-            transition: color 0.2s;
+            position: absolute; top: 15px; right: 20px;
+            color: #888; font-size: 32px; cursor: pointer; line-height: 1;
+            transition: 0.2s;
         }
-        .close-modal:hover { color: var(--warning); }
+        .close-modal:hover { color: var(--text-main); }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 480px) {
-            h1.gold-title { 
-                font-size: 2.5rem; 
-            }
-            .hero-img { max-width: 100%; border-width: 1px; }
-            .button-group { flex-direction: column; width: 100%; }
-            .btn { width: 100%; }
-            .input-group { flex-direction: column; }
-            .input-group button { width: 100%; }
-            .social-grid { grid-template-columns: 1fr; }
+            .button-group, .input-group { flex-direction: column; width: 100%; }
+            .btn, .input-group button { width: 100%; }
+            h1.gold-title { font-size: 2.2rem; }
+            .glass-card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-logo">NAUNG HTAKE TIN</div>
-        <div class="verified-badge">
-            <i class="fas fa-check-circle"></i> Verified
+        <div class="container">
+            <div class="nav-logo">NAUNG HTAKE TIN</div>
+            <div class="verified-badge">
+                <i class="fas fa-check-circle"></i> Verified
+            </div>
         </div>
     </nav>
 
@@ -530,15 +518,15 @@
         <div class="container">
             <p class="hero-subtitle">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင် သျှမ်းမှော်အစီအမံ ဆရာကြီး</p>
             
-            <div class="title-wrapper">
-                <h1 class="gold-title">နောင်ထိပ်တင်</h1>
-            </div>
+            <h1 class="gold-title">နောင်ထိပ်တင်</h1>
             
-            <img src="https://i.ibb.co/bMFkmR8V/Picsart-25-12-16-04-49-59-236.png" alt="ဆရာနောင်ထိပ်တင်" class="hero-img">
+            <div class="hero-img-wrapper">
+                <img src="https://i.ibb.co/bMFkmR8V/Picsart-25-12-16-04-49-59-236.png" alt="ဆရာနောင်ထိပ်တင်" class="hero-img" loading="eager">
+            </div>
             
             <div class="button-group">
                 <button class="btn btn-gold" id="openModalBtn">
-                    <i class="fas fa-calendar-check"></i> ရက်ချိန်းယူရန်နှင့်ဆက်သွယ်ရန်
+                    <i class="fas fa-calendar-check"></i> ရက်ချိန်းယူရန်/ဆက်သွယ်ရန် 
                 </button>
                 <button class="btn btn-secondary" id="verifyScrollBtn">
                     <i class="fas fa-search"></i> အကောင့် စစ်ဆေးရန်
@@ -547,112 +535,122 @@
         </div>
     </header>
     
-    <section id="social">
-        <div class="container">
-            <h2>Official Channels</h2>
-            <div class="glass-card">
-                <div style="background: rgba(255, 69, 0, 0.1); border: 1px solid rgba(255,69,0,0.3); padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 25px;">
-                    <i class="fas fa-exclamation-circle" style="color: #FF4500; margin-right: 5px;"></i>
-                    <span style="font-size: 0.9rem; color: #ffcccb;">အောက်ပါ Link များသည်သာ အစစ်အမှန်ဖြစ်ပါသည်။</span>
-                </div>
+    <main>
+        <section id="social">
+            <div class="container">
+                <h2>Official Channels</h2>
+                <div class="glass-card">
+                    <div class="alert-box">
+                        <i class="fas fa-exclamation-circle" style="color: #FF4500; margin-right: 5px;"></i>
+                        <span style="font-size: 0.9rem; color: #ffcccb;">အောက်ပါ Link များသည်သာ အစစ်အမှန်ဖြစ်ပါသည်။</span>
+                    </div>
 
-                <div class="social-grid">
-                    <a href="https://www.facebook.com/share/19xwFcbWY2/" class="social-btn fb" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                        <span>Facebook Page</span>
-                        <div class="copy-trigger" onclick="copyToClipboard(event, 'https://www.facebook.com/share/19xwFcbWY2/')">
-                            <i class="far fa-copy"></i>
-                        </div>
-                    </a>
+                    <div class="social-grid">
+                        <a href="https://www.facebook.com/share/19xwFcbWY2/" class="social-btn fb" target="_blank">
+                            <div class="social-content">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook Page</span>
+                            </div>
+                            <div class="copy-trigger" data-link="https://www.facebook.com/share/19xwFcbWY2/">
+                                <i class="far fa-copy"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.facebook.com/share/1FK2m5S2VF/" class="social-btn fb" target="_blank">
+                            <div class="social-content">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook Account</span>
+                            </div>
+                            <div class="copy-trigger" data-link="https://www.facebook.com/share/1FK2m5S2VF/">
+                                <i class="far fa-copy"></i>
+                            </div>
+                        </a>
+
+                        <a href="https://www.tiktok.com/@naunghtaketin" class="social-btn tk" target="_blank">
+                            <div class="social-content">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok Channel</span>
+                            </div>
+                            <div class="copy-trigger" data-link="https://www.tiktok.com/@naunghtaketin">
+                                <i class="far fa-copy"></i>
+                            </div>
+                        </a>
+
+                        <a href="viber://chat?number=+959666664580" class="social-btn vb">
+                            <div class="social-content">
+                                <i class="fab fa-viber"></i>
+                                <span>Viber Chat</span>
+                            </div>
+                            <div class="copy-trigger" data-link="viber://chat?number=+959666664580">
+                                <i class="far fa-copy"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="verify">
+            <div class="container">
+                <h2>အကောင့် စစ်ဆေးရန်</h2>
+                <div class="glass-card">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-shield-virus" style="font-size: 2.5rem; color: var(--gold-main); margin-bottom: 15px;"></i>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Link (သို့) ဖုန်းနံပါတ် ထည့်သွင်းစစ်ဆေးပါ
+                        </p>
+                    </div>
                     
-                    <a href="https://www.facebook.com/share/1FK2m5S2VF/" class="social-btn fb" target="_blank">
-                        <i class="fab fa-facebook"></i>
-                        <span>Facebook Account</span>
-                        <div class="copy-trigger" onclick="copyToClipboard(event, 'https://www.facebook.com/share/1FK2m5S2VF/')">
-                            <i class="far fa-copy"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://www.tiktok.com/@naunghtaketin" class="social-btn tk" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                        <span>TikTok Channel</span>
-                        <div class="copy-trigger" onclick="copyToClipboard(event, 'https://www.tiktok.com/@naunghtaketin')">
-                            <i class="far fa-copy"></i>
-                        </div>
-                    </a>
-
-                    <a href="viber://chat?number=+959666664580" class="social-btn vb">
-                        <i class="fab fa-viber"></i>
-                        <span>Viber Chat</span>
-                        <div class="copy-trigger" onclick="copyToClipboard(event, 'viber://chat?number=+959666664580')">
-                            <i class="far fa-copy"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="verify">
-        <div class="container">
-            <h2>အကောင့် စစ်ဆေးရန်</h2>
-            <div class="glass-card">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <i class="fas fa-shield-virus" style="font-size: 2.5rem; color: var(--gold-main); margin-bottom: 15px;"></i>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">
-                        Link (သို့) ဖုန်းနံပါတ် ထည့်သွင်းစစ်ဆေးပါ
-                    </p>
-                </div>
-                
-                <div class="input-group">
-                    <input type="text" id="verifyLink" placeholder="e.g. 09666664580 or Profile Link">
-                    <button class="btn btn-gold" id="verifyBtn" style="min-width: auto; border-radius: 8px;">Check</button>
-                </div>
-                
-                <div id="verifyResult"></div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="shop">
-        <div class="container">
-            <h2>ဂမ္ဘီရအဆောင်များ</h2>
-            <div class="glass-card" style="text-align: center; border: 1px solid rgba(212, 175, 55, 0.4);">
-                <i class="fas fa-gem" style="font-size: 2.5rem; color: var(--gold-main); margin-bottom: 20px; text-shadow: 0 0 20px rgba(212,175,55,0.5);"></i>
-                <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.2rem;">ထူးခြားလေးနက်သော စီရင်ထုံးများ</h3>
-                <p style="color: #ccc; line-height: 1.7; margin-bottom: 30px;">
-                    စီးပွားလာဘ်လာဘ၊ မေတ္တာရေး၊ ကျန်းမာရေးအတွက်<br>
-                    ဆရာကိုယ်တိုင် စီရင်ထားသော အဆောင်ပစ္စည်းများ
-                </p>
-                <a href="viber://chat?number=+959666664580" class="btn btn-gold">
-                    <i class="fas fa-shopping-cart"></i> ဝယ်ယူလိုပါသည်
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <section id="contact">
-        <div class="container">
-            <h2>ဓာတ်နန်းတည်နေရာ</h2>
-            <div class="glass-card">
-                <div style="text-align: center;">
-                    <i class="fas fa-map-marked-alt" style="color: var(--gold-main); font-size: 2rem; margin-bottom: 15px;"></i>
-                    <p style="margin-bottom: 20px; font-weight: 500; color: #eee; line-height: 1.8;">
-                        အမှတ် (၇၀/ဂ)၊ (၄၆)ရပ်ကွက်၊ ရွှေလီ (၁)လမ်း၊<br>
-                        ဗထူးစျေးအနီး၊ မြောက်ဒဂုံမြို့နယ်၊ ရန်ကုန်မြို့။
-                    </p>
+                    <div class="input-group">
+                        <input type="text" id="verifyLink" placeholder="e.g. 09666664580 or Profile Link">
+                        <button class="btn btn-gold" id="verifyBtn" style="min-width: auto; border-radius: 50px;">Check</button>
+                    </div>
                     
-                    <a href="https://maps.google.com/?q=North+Dagon+Yangon" class="social-btn maps" target="_blank" style="display: inline-flex; width: auto; background: #34A853; border: none; margin-bottom: 20px;">
-                        <i class="fas fa-location-arrow"></i> Google Maps ဖွင့်ရန်
-                    </a>
-                </div>
-                
-                <div class="map-wrapper">
-                    <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Map Location" loading="lazy">
+                    <div id="verifyResult"></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        
+        <section id="shop">
+            <div class="container">
+                <h2>ဂမ္ဘီရအဆောင်များ</h2>
+                <div class="glass-card text-center" style="border-color: rgba(212, 175, 55, 0.4);">
+                    <i class="fas fa-gem" style="font-size: 2.5rem; color: var(--gold-main); margin-bottom: 20px; text-shadow: 0 0 20px rgba(212,175,55,0.5);"></i>
+                    <h3 class="mb-2" style="color: #fff; font-size: 1.2rem; margin-top: 0;">ထူးခြားလေးနက်သော အစီအရင်များ</h3>
+                    <p class="mb-4" style="color: #ccc;">
+                        စီးပွားလာဘ်လာဘ၊ မေတ္တာရေး၊ ကျန်းမာရေးအတွက်<br>
+                        ဆရာကိုယ်တိုင် စီရင်ထားသော အဆောင်ပစ္စည်းများ
+                    </p>
+                    <a href="viber://chat?number=+959666664580" class="btn btn-gold">
+                        <i class="fas fa-shopping-cart"></i> ဝယ်ယူလိုပါသည်
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="container">
+                <h2>ဓာတ်နန်းတည်နေရာ</h2>
+                <div class="glass-card">
+                    <div class="text-center">
+                        <i class="fas fa-map-marked-alt" style="color: var(--gold-main); font-size: 2rem; margin-bottom: 15px;"></i>
+                        <address style="margin-bottom: 20px; font-weight: 500; color: #eee; line-height: 1.8; font-style: normal;">
+                            အမှတ် (၇၀/ဂ)၊ (၄၆)ရပ်ကွက်၊ ရွှေလီ (၁)လမ်း၊<br>
+                            ဗထူးစျေးအနီး၊ မြောက်ဒဂုံမြို့နယ်၊ ရန်ကုန်မြို့။
+                        </address>
+                        
+                        <a href="https://maps.google.com/?q=North+Dagon+Yangon" class="btn btn-secondary" target="_blank" style="background: #34A853; border: none; color: white;">
+                            <i class="fas fa-location-arrow"></i> Google Maps ဖွင့်ရန်
+                        </a>
+                    </div>
+                    
+                    <div class="map-wrapper">
+                        <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Map Location" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     
     <footer>
         <div class="container">
@@ -663,9 +661,9 @@
     
     <div id="bookingModal" class="modal" role="dialog" aria-modal="true">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">×</span>
-            <h3 style="color: var(--gold-main); margin-top: 0; font-family: var(--font-title);">ဆက်သွယ်ရန်</h3>
-            <p style="color: #bbb; margin-bottom: 25px; font-size: 0.9rem; line-height: 1.6;">
+            <span class="close-modal">×</span>
+            <h3 style="color: var(--gold-main); margin-top: 0; font-family: var(--font-title); margin-bottom: 15px;">ဆက်သွယ်ရန်</h3>
+            <p style="color: #bbb; margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6;">
                 ဗေဒင်မေးမြန်းခြင်းနှင့် အစီအရင်များအတွက်<br>
                 Viber မှ တိုက်ရိုက်ဆက်သွယ်၍ ရက်ချိန်းယူပေးပါ။
             </p>
@@ -676,144 +674,100 @@
     </div>
 
     <script>
-        // --- 1. Modal Logic ---
-        const modal = document.getElementById('bookingModal');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const verifyScrollBtn = document.getElementById('verifyScrollBtn');
-        const verifySection = document.getElementById('verify');
-        const closeModalBtn = document.querySelector('.close-modal');
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. DATA & CONSTANTS ---
+            const officialData = [
+                "09666664580", "+959666664580", "viber://chat?number=+959666664580",
+                "https://www.facebook.com/share/19xwFcbWY2/", "https://www.facebook.com/share/1FK2m5S2VF/",
+                "facebook.com/share/19xwfcbwy2", "facebook.com/share/1fk2m5s2vf",
+                "https://www.tiktok.com/@naunghtaketin", "naunghtaketin"
+            ];
+            const adminViberLink = "viber://chat?number=+959666664580";
 
-        openModalBtn.addEventListener('click', () => modal.classList.add('is-active'));
-        
-        verifyScrollBtn.addEventListener('click', () => {
-            verifySection.scrollIntoView({ behavior: 'smooth' });
-        });
+            // --- 2. MODAL LOGIC ---
+            const modal = document.getElementById('bookingModal');
+            const openModalBtn = document.getElementById('openModalBtn');
+            const closeModalBtn = document.querySelector('.close-modal');
 
-        function closeModal() {
-            modal.classList.remove('is-active');
-        }
+            const toggleModal = (show) => {
+                modal.classList.toggle('is-active', show);
+                document.body.style.overflow = show ? 'hidden' : ''; 
+            };
 
-        closeModalBtn.addEventListener('click', closeModal);
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
+            if(openModalBtn) openModalBtn.addEventListener('click', () => toggleModal(true));
+            if(closeModalBtn) closeModalBtn.addEventListener('click', () => toggleModal(false));
+            window.addEventListener('click', (e) => { if (e.target === modal) toggleModal(false); });
 
-        // --- 2. Ripple Effect Logic ---
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                this.appendChild(ripple);
-
-                setTimeout(() => ripple.remove(), 600);
+            // --- 3. SMOOTH SCROLL ---
+            document.getElementById('verifyScrollBtn')?.addEventListener('click', () => {
+                document.getElementById('verify').scrollIntoView({ behavior: 'smooth' });
             });
-        });
 
-        // --- 3. Copy to Clipboard Logic ---
-        function copyToClipboard(event, text) {
-            event.preventDefault();
-            event.stopPropagation();
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.currentTarget;
-                const originalIcon = btn.innerHTML;
-                
-                // Show Check Icon
-                btn.innerHTML = '<i class="fas fa-check" style="color: #00FF7F;"></i>';
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalIcon;
-                }, 2000);
-            }).catch(err => console.error('Copy failed:', err));
-        }
+            // --- 4. RIPPLE EFFECT ---
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = `${e.clientX - rect.left}px`;
+                    ripple.style.top = `${e.clientY - rect.top}px`;
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
 
-        // --- 4. Verify Account Logic - FINALIZED ---
-        const officialData = [
-            "09666664580",
-            "+959666664580",
-            "viber://chat?number=+959666664580", // Viber link
-            
-            "https://www.facebook.com/share/19xwFcbWY2/", // FB Page Full Link
-            "https://www.facebook.com/share/1FK2m5S2VF/", // FB Account Full Link
-            "facebook.com/share/19xwfcbwy2", // FB Page Short
-            "facebook.com/share/1fk2m5s2vf", // FB Account Short
-            
-            "https://www.tiktok.com/@naunghtaketin", // TikTok Full Link
-            "tiktok.com/@naunghtaketin", // TikTok Short
-            "naunghtaketin" // Username check
-        ];
-        
-        const adminViberLink = "viber://chat?number=+959666664580";
+            // --- 5. CLIPBOARD COPY ---
+            document.querySelectorAll('.copy-trigger').forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault(); e.stopPropagation();
+                    const text = this.getAttribute('data-link');
+                    
+                    navigator.clipboard.writeText(text).then(() => {
+                        const icon = this.querySelector('i');
+                        const originalClass = icon.className;
+                        icon.className = 'fas fa-check';
+                        icon.style.color = '#00FF7F';
+                        setTimeout(() => { icon.className = originalClass; icon.style.color = ''; }, 2000);
+                    }).catch(err => console.error('Copy failed:', err));
+                });
+            });
 
-        document.getElementById('verifyBtn').addEventListener('click', function() {
-            const inputField = document.getElementById('verifyLink');
-            const resultDiv = document.getElementById('verifyResult');
-            const rawInput = inputField.value.trim();
+            // --- 6. VERIFY LOGIC ---
+            document.getElementById('verifyBtn')?.addEventListener('click', function() {
+                const inputField = document.getElementById('verifyLink');
+                const resultDiv = document.getElementById('verifyResult');
+                const rawInput = inputField.value.trim().toLowerCase();
 
-            resultDiv.className = ''; 
-            resultDiv.innerHTML = '';
+                resultDiv.innerHTML = ''; resultDiv.className = '';
 
-            if (!rawInput) {
-                resultDiv.innerHTML = '<div class="result-warning"><i class="fas fa-exclamation-circle" style="font-size: 1.2rem;"></i> စစ်ဆေးရန် အချက်အလက် ဖြည့်သွင်းပါ။</div>';
-                resultDiv.classList.add('show');
-                return;
-            }
-
-            // Normalize input
-            let cleanInput = rawInput.toLowerCase().replace(/\s+/g, '');
-            if (cleanInput.endsWith('/')) {
-                cleanInput = cleanInput.slice(0, -1);
-            }
-            if ((cleanInput.includes('facebook.com') || cleanInput.includes('tiktok.com')) && !cleanInput.startsWith('http')) {
-                cleanInput = 'https://' + cleanInput;
-            }
-            if (cleanInput.startsWith('+959') && !cleanInput.startsWith('viber://')) {
-                cleanInput = 'viber://chat?number=' + cleanInput;
-            }
-
-
-            // Check if input exists in officialData
-            const isMatch = officialData.some(data => {
-                let cleanData = data.toLowerCase().trim();
-                if (cleanData.endsWith('/')) {
-                    cleanData = cleanData.slice(0, -1);
+                if (!rawInput) {
+                    showVerifyResult(resultDiv, 'warning', 'စစ်ဆေးရန် အချက်အလက် ဖြည့်သွင်းပါ။');
+                    return;
                 }
-                return cleanInput === cleanData || cleanData.includes(cleanInput);
+
+                let cleanInput = rawInput.replace(/\s+/g, '').replace(/\/+$/, '');
+                const isMatch = officialData.some(data => {
+                    const cleanData = data.toLowerCase().replace(/\/+$/, '');
+                    return cleanInput.includes(cleanData) || cleanData.includes(cleanInput);
+                });
+
+                if (isMatch && cleanInput.length > 5) {
+                    showVerifyResult(resultDiv, 'success', 
+                        '<strong>အတည်ပြုပြီး (Verified)</strong><br><span style="font-size:0.85rem">ဤအကောင့်သည် ဆရာနောင်ထိပ်တင်၏ တရားဝင်အကောင့် ဖြစ်ပါသည်။</span>');
+                } else {
+                    showVerifyResult(resultDiv, 'warning', 
+                        `<strong>သတိပြုရန် (Warning)</strong><br><span style="font-size:0.85rem">ဤအချက်အလက်ကို တရားဝင်စာရင်းတွင် **မတွေ့ရှိပါ**။<br>**ထပ်မံအတည်ပြုလိုပါက** Admin ထံသို့ <a href="${adminViberLink}">Viber မှ ဆက်သွယ်ပါ</a>။</span>`);
+                }
             });
 
-            if (isMatch && cleanInput.length > 5) {
-                resultDiv.innerHTML = `
-                    <div class="result-success">
-                        <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i>
-                        <div>
-                            <strong>အတည်ပြုပြီး (Verified)</strong><br>
-                            <span style="font-size:0.85rem">ဤအကောင့်သည် ဆရာနောင်ထိပ်တင်၏ တရားဝင်အကောင့် ဖြစ်ပါသည်။</span>
-                        </div>
-                    </div>`;
-            } else {
-                resultDiv.innerHTML = `
-                    <div class="result-warning">
-                        <i class="fas fa-times-circle" style="font-size: 1.2rem;"></i>
-                        <div>
-                            <strong>သတိပြုရန် (Warning)</strong><br>
-                            <span style="font-size:0.85rem">
-                                ဤအချက်အလက်ကို တရားဝင်စာရင်းတွင် **မတွေ့ရှိပါ**။
-                                <br>
-                                **ထပ်မံအတည်ပြုလိုပါက** Admin ထံသို့ 
-                                <a href="${adminViberLink}">Viber မှ ဆက်သွယ်ပါ</a>။
-                            </span>
-                        </div>
-                    </div>`;
+            function showVerifyResult(element, type, html) {
+                const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle';
+                element.innerHTML = `<div class="result-box result-${type}"><i class="fas ${icon}" style="font-size: 1.5rem; flex-shrink: 0;"></i><div>${html}</div></div>`;
+                element.classList.add('show');
             }
-            
-            resultDiv.classList.add('show');
         });
     </script>
 </body>
-    </html>
+</html>
+
