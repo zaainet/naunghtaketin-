@@ -2,316 +2,404 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>မဟာဗေဒင် နောင်ထိပ်တင်</title>
-    <meta name="description" content="ဂမ္ဘီရ၊ ဗေဒင်၊ အစီအရင်နှင့် အဆောင်ပစ္စည်းများအတွက် မဟာဗေဒင် နောင်ထိပ်တင်၏ တရားဝင် Website ဖြစ်ပါသည်။">
-    <meta name="keywords" content="မဟာဗေဒင် နောင်ထိပ်တင်, Naung Htake Tin, ဗေဒင်, ယတြာ, ဂမ္ဘီရ, Myanmar Astrologer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>နောင်ထိပ်တင် - မဟာဗေဒင် (Official)</title>
     
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.naunghtaketin.com">
-    <meta property="og:title" content="မဟာဗေဒင် နောင်ထိပ်တင် | ဂမ္ဘီရ၊ လောကီပညာရှင်">
-    <meta property="og:description" content="ဂမ္ဘီရ၊ ဗေဒင်၊ အစီအရင်နှင့် အဆောင်ပစ္စည်းများအတွက် မဟာဗေဒင် နောင်ထိပ်တင်၏ တရားဝင် Website ဖြစ်ပါသည်။">
-    <meta property="og:image" content="https://i.ibb.co/sv7J4LV5/Picsart-26-04-01-03-22-36-354.png">
-
-    <meta name="theme-color" content="#050505">
-    <link rel="icon" type="image/png" href="https://i.ibb.co/sv7J4LV5/Picsart-26-04-01-03-22-36-354.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Pyidaungsu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         :root {
-            --gold-light: #fff5c3;
-            --gold-main: #d4af37;
-            --gold-dark: #aa6c39;
-            --gold-gradient: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-dark: #050505;
-            --bg-glass-card: rgba(30, 30, 30, 0.6);
-            --glass-border: 1px solid rgba(212, 175, 55, 0.25);
-            --text-main: #ffffff;
-            --text-muted: #cccccc;
-            --font-main: 'Noto Sans Myanmar', sans-serif;
-            --font-title: 'Cinzel', serif;
-            --success: #00FF7F;
-            --warning: #ff6b6b;
+            --gold: #ffcf40;
+            --deep-gold: #b8860b;
+            --dark-bg: #0a0a0a;
+            --glass-card: rgba(255, 255, 255, 0.03);
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #aa6c39, #d4af37); border-radius: 10px; border: 2px solid #050505; }
+        body {
+            font-family: 'Pyidaungsu', serif;
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(at top, #2b0202 0%, #0a0a0a 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-main); background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; overflow-x: hidden; line-height: 1.6; display: flex; flex-direction: column; }
-
-        body::before { content: ''; position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 45%), radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 45%); animation: pulseBg 10s ease-in-out infinite alternate; }
-
-        a { text-decoration: none; color: inherit; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes shineText { to { background-position: 200% center; } }
-        @keyframes btnShine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-        .text-center { text-align: center; }
-        section { padding: 50px 0; }
-
-        nav { background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .verified-badge { color: var(--success); font-size: 0.75rem; display: flex; align-items: center; gap: 6px; background: rgba(0, 255, 127, 0.08); padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(0, 255, 127, 0.2); font-weight: 600; }
-
-        .marquee-container { background: linear-gradient(90deg, #0a0a0a, #1a0505, #0a0a0a); border-bottom: 1px solid rgba(212, 175, 55, 0.5); overflow: hidden; white-space: nowrap; padding: 8px 0; }
-        .marquee-content { display: inline-block; animation: scrollText 25s linear infinite; padding-left: 100%; color: #ddd; font-size: 0.85rem; }
-        .marquee-content span { color: #FFD700; font-weight: bold; }
-        @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-
-        header { text-align: center; padding: 40px 0 20px; }
-        .hero-subtitle { font-size: 0.85rem; color: var(--gold-light); letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; animation: fadeInUp 0.8s ease-out forwards; }
-
-        /* ခေါင်းစီးပုံစံအသစ် */
-        .title-container {
+        /* High Visibility Menu Button */
+        .menu-trigger {
+            background: var(--gold);
+            color: #000;
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(255, 207, 64, 0.5);
+            border: 2px solid #fff;
+            position: relative;
         }
 
-        .prefix-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: -10px;
-            background: var(--gold-gradient);
-            background-size: 200% auto;
+        /* Sidebar Style */
+        #sidebar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #0f0101;
+            z-index: 1000;
+            border-right: 1px solid rgba(255, 207, 64, 0.2);
+        }
+
+        .header-glow {
+            background: linear-gradient(180deg, #fff 10%, var(--gold) 100%);
             -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shineText 4s linear infinite;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 207, 64, 0.3);
         }
 
-        .main-name {
-            font-family: var(--font-main);
+        .form-input {
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 14px;
+            padding: 16px;
+            width: 100%;
+            color: var(--gold);
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 207, 64, 0.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--gold), var(--deep-gold));
+            color: #000;
             font-weight: 900;
-            font-size: clamp(2.5rem, 10vw, 3.8rem);
-            line-height: 1.1;
-            background: var(--gold-gradient);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
-            animation: shineText 4s linear infinite;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 12px 24px rgba(184, 134, 11, 0.4);
+            cursor: pointer;
         }
 
-        .hero-img-wrapper { position: relative; width: 100%; max-width: 500px; margin: 0 auto 35px; animation: fadeInUp 0.8s ease-out 0.4s forwards; }
-        .hero-img { width: 100%; height: auto; border-radius: 15px; border: 1px solid var(--gold-main); box-shadow: 0 0 50px rgba(0,0,0,0.8); display: block; }
+        .btn-submit:active { transform: scale(0.96); }
 
-        .button-group { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; animation: fadeInUp 0.8s ease-out 0.6s forwards; }
-        .btn { border: none; padding: 14px 25px; font-size: 0.9rem; font-weight: 700; border-radius: 50px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; position: relative; overflow: hidden; }
-        .btn-gold { background: linear-gradient(180deg, #FFD700 0%, #B8860B 100%); color: #1a1a1a; min-width: 160px; }
-        .btn-gold::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: btnShine 3s infinite; }
-        .btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--gold-light); min-width: 160px; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(184, 134, 11, 0.4); }
+        .nav-item {
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-weight: bold;
+        }
 
-        h2 { text-align: center; font-family: var(--font-title); color: var(--gold-main); margin-bottom: 30px; font-size: 1.5rem; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); padding-bottom: 10px; text-transform: uppercase; }
-        h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold-main), transparent); }
+        /* Verification Section Styling */
+        .verify-section {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            margin: 20px 15px;
+            padding: 20px;
+        }
 
-        .glass-card { background: var(--bg-glass-card); backdrop-filter: blur(16px); border: var(--glass-border); padding: 30px; border-radius: 16px; transition: 0.3s; }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255, 215, 0, 0.5); }
+        .verify-input-group {
+            position: relative;
+            margin-top: 15px;
+        }
 
-        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-        .social-btn { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-radius: 12px; color: white; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.3s; }
-        .social-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--gold-main); transform: translateX(5px); }
-        .social-content { display: flex; align-items: center; gap: 15px; }
-        .social-btn i { font-size: 1.3rem; width: 25px; text-align: center;}
-        
-        .fb i { color: #1877F2; } .tk i { color: #FE2C55; } .vb i { color: #7360f2; } .tg i { color: #24A1DE; }
+        .verify-input {
+            width: 100%;
+            background: #000;
+            border: 1.5px solid #333;
+            border-radius: 12px;
+            padding: 12px 45px 12px 15px;
+            color: #ffcf40;
+            font-size: 0.85rem;
+        }
 
-        .copy-trigger { padding: 8px; color: var(--text-muted); cursor: pointer; transition: 0.2s; }
-        .copy-trigger:hover { color: var(--gold-main); }
+        .verify-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffcf40;
+            background: rgba(255, 207, 64, 0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
 
-        .input-group { display: flex; gap: 10px; margin-top: 20px; }
-        input#verifyLink { flex: 1; padding: 14px 20px; background: rgba(0,0,0,0.6); border: 1px solid #444; color: #fff; border-radius: 50px; }
-        input#verifyLink:focus { border-color: var(--gold-main); }
+        .verify-btn:hover { background: #ffcf40; color: #000; }
 
-        #verifyResult { margin-top: 20px; transition: 0.4s; }
-        .result-box { padding: 15px; border-radius: 12px; display: flex; gap: 15px; align-items: center;}
-        .result-success { color: var(--success); background: rgba(0, 255, 127, 0.05); border: 1px solid var(--success); }
-        .result-warning { color: var(--warning); background: rgba(255, 107, 107, 0.05); border: 1px solid var(--warning); }
+        .result-box {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            display: flex;
+            gap: 10px;
+            align-items: start;
+            animation: fadeIn 0.4s ease;
+        }
 
-        .map-wrapper { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #333; margin-top: 25px; }
-        .map-wrapper img { width: 100%; display: block; transition: 0.5s; }
+        .result-success { background: rgba(34, 197, 94, 0.15); border: 1px solid #22c55e; color: #4ade80; }
+        .result-warning { background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #f87171; }
 
-        footer { text-align: center; padding: 40px 0; color: #666; font-size: 0.8rem; border-top: 1px solid #222; background: #080808; margin-top: auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92); z-index: 2000; align-items: center; justify-content: center; }
-        .modal.is-active { display: flex; }
-        .modal-content { background: #121212; border: 1px solid var(--gold-main); padding: 40px 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 20px; color: #888; font-size: 32px; cursor: pointer; }
-
-        @media (max-width: 480px) {
-            .button-group { flex-direction: column; width: 100%; }
-            .btn { width: 100%; }
+        .copy-link-item {
+            font-size: 0.75rem;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="container">
-            <div class="nav-logo">NAUNG HTAKE TIN</div>
-            <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Official</div>
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-72 transform -translate-x-full overflow-y-auto">
+        <div class="p-6 border-b border-white/5 flex justify-between items-center">
+            <span class="text-gold font-black tracking-widest uppercase">Official Menu</span>
+            <button onclick="toggleMenu()" class="text-white/50"><i class="fa-solid fa-xmark text-2xl"></i></button>
         </div>
-    </nav>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <i class="fas fa-exclamation-triangle"></i> <span>အတုအယောင်များကို သတိပြုပါရန်</span> — မဟာဗေဒင် နောင်ထိပ်တင် ထံ တိုက်ရိုက်ဆက်သွယ်စုံစမ်းနိုင်ပါသည် — <i class="fas fa-shield-alt"></i> <span>Official Website Only</span>
+        <nav class="p-2">
+            <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="nav-item text-white"><i class="fa-brands fa-tiktok text-xl"></i> TikTok Official</a>
+            <a href="https://t.me/NaungHtakeTin777" target="_blank" class="nav-item text-blue-400"><i class="fa-brands fa-telegram text-xl"></i> Telegram</a>
+            <a href="viber://chat?number=%2B959666664580" class="nav-item text-purple-400"><i class="fa-brands fa-viber text-xl"></i> Viber</a>
+            <a href="tel:+959666664580" class="nav-item text-green-400"><i class="fa-solid fa-phone text-xl"></i> Hotline</a>
+        </nav>
+
+        <div class="verify-section">
+            <h4 class="text-gold text-[10px] font-black uppercase tracking-[2px]">Account Verification</h4>
+            <p class="text-[10px] text-white/40 mt-1">အကောင့်အတု/အစစ် စစ်ဆေးရန်</p>
+            
+            <div class="verify-input-group">
+                <input type="text" id="verifyLink" class="verify-input" placeholder="Link သို့မဟုတ် ဖုန်းထည့်ပါ">
+                <button id="verifyBtn" class="verify-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div id="verifyResult"></div>
+
+            <div class="mt-6 pt-4 border-t border-white/5">
+                <p class="text-[9px] text-gold/40 font-bold mb-2 uppercase">Official Data List</p>
+                <div class="copy-link-item">
+                    <span>Viber: 09666664580</span>
+                    <button class="copy-trigger text-gold" data-link="09666664580"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="copy-link-item">
+                    <span>Telegram: Koenht</span>
+                    <button class="copy-trigger text-gold" data-link="Koenht"><i class="far fa-copy"></i></button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <header>
-        <div class="container">
-            <p class="hero-subtitle">လျှို့ဝှက်ဂမ္ဘီရ မှော်အစီအရင်ဆရာကြီး</p>
-            
-            <div class="title-container">
-                <span class="prefix-title">မဟာဗေဒင်</span>
-                <h1 class="main-name">နောင်ထိပ်တင်</h1>
-            </div>
-
-            <div class="hero-img-wrapper">
-                <img src="https://i.ibb.co/sv7J4LV5/Picsart-26-04-01-03-22-36-354.png" alt="မဟာဗေဒင် နောင်ထိပ်တင်" class="hero-img">
-            </div>
-            <div class="button-group">
-                <a href="https://t.me/naunghtaketin_helpbot/moneypay" class="btn btn-gold" target="_blank">
-                    <i class="fas fa-hand-holding-usd"></i> ငွေလွှဲရန်
-                </a>
-                <button class="btn btn-secondary" id="openModalBtn">
-                    <i class="fas fa-calendar-check"></i> ဆက်သွယ်ရန် 
-                </button>
-                <button class="btn btn-secondary" id="verifyScrollBtn">
-                    <i class="fas fa-search"></i> အကောင့်စစ်ဆေးရန်
-                </button>
-            </div>
-        </div>
-    </header>
-    
-    <main>
-        <section id="social">
-            <div class="container">
-                <h2>Official Channels</h2>
-                <div class="glass-card">
-                    <div class="social-grid">
-                        <a href="https://www.facebook.com/share/19xwFcbWY2/" class="social-btn fb" target="_blank">
-                            <div class="social-content"><i class="fab fa-facebook-f"></i> <span>Facebook Page</span></div>
-                            <div class="copy-trigger" data-link="https://www.facebook.com/share/19xwFcbWY2/"><i class="far fa-copy"></i></div>
-                        </a>
-                        <a href="https://www.tiktok.com/@naunghtaketin" class="social-btn tk" target="_blank">
-                            <div class="social-content"><i class="fab fa-tiktok"></i> <span>TikTok Channel</span></div>
-                            <div class="copy-trigger" data-link="https://www.tiktok.com/@naunghtaketin"><i class="far fa-copy"></i></div>
-                        </a>
-                        <a href="https://t.me/NaungHtakeTin777" class="social-btn tg" target="_blank">
-                            <div class="social-content"><i class="fab fa-telegram-plane"></i> <span>Telegram Channel</span></div>
-                            <div class="copy-trigger" data-link="https://t.me/NaungHtakeTin777"><i class="far fa-copy"></i></div>
-                        </a>
-                        <a href="viber://chat?number=+959666664580" class="social-btn vb">
-                            <div class="social-content"><i class="fab fa-viber"></i> <span>Viber Chat</span></div>
-                            <div class="copy-trigger" data-link="viber://chat?number=+959666664580"><i class="far fa-copy"></i></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="max-w-md mx-auto p-6">
         
-        <section id="verify">
-            <div class="container">
-                <h2>အကောင့် စစ်ဆေးရန်</h2>
-                <div class="glass-card">
-                    <div class="input-group">
-                        <input type="text" id="verifyLink" placeholder="ဖုန်းနံပါတ် (သို့) Link ထည့်ပါ">
-                        <button class="btn btn-gold" id="verifyBtn" style="min-width: 80px;">Check</button>
-                    </div>
-                    <div id="verifyResult"></div>
+        <div class="flex justify-between items-center py-4 mb-8">
+            <button onclick="toggleMenu()" class="menu-trigger">
+                <i class="fa-solid fa-bars-staggered text-2xl"></i>
+            </button>
+            <div class="flex flex-col items-end">
+                <span class="text-[10px] text-gold/60 tracking-[3px] uppercase font-bold">Expert Astrology</span>
+                <span class="bg-green-500 text-[8px] text-black px-2 py-0.5 rounded-full font-black mt-1">OFFICIAL</span>
+            </div>
+        </div>
+
+        <header class="text-center mb-10">
+            <p class="text-gold tracking-[6px] text-xs font-bold mb-3 uppercase opacity-80">မဟာဗေဒင်</p>
+            <h1 class="text-5xl md:text-6xl font-black header-glow mb-4">နောင်ထိပ်တင်</h1>
+            <p class="text-[11px] text-white/40 italic tracking-wider">“ စိတ်သည် လောကကို ဆောင်တတ်၏။ကိုယ်သာအရှင်ကိုယ်သာသခင် ”</p>
+        </header>
+
+        <section class="bg-white/5 rounded-[2.5rem] p-8 border border-white/10 shadow-2xl mb-12">
+            <form id="enrollmentForm" class="space-y-6">
+                <div>
+                    <label class="block text-[10px] font-bold text-gold/50 uppercase mb-2 ml-1 tracking-widest">အမည်</label>
+                    <input type="text" id="name" placeholder="အမည်ရိုက်ပါ" class="form-input" required>
                 </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gold/50 uppercase mb-2 ml-1 tracking-widest">နေ့နံ</label>
+                        <select id="day_name" class="form-input" required>
+                            <option value="">ရွေးချယ်ပါ</option>
+                            <option value="တနင်္ဂနွေ">တနင်္ဂနွေ</option>
+                            <option value="တနင်္လာ">တနင်္လာ</option>
+                            <option value="အင်္ဂါ">အင်္ဂါ</option>
+                            <option value="ဗုဒ္ဓဟူး">ဗုဒ္ဓဟူး</option>
+                            <option value="ရာဟု">ရာဟု</option>
+                            <option value="ကြာသပတေး">ကြာသပတေး</option>
+                            <option value="သောကြာ">သောကြာ</option>
+                            <option value="စနေ">စနေ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gold/50 uppercase mb-2 ml-1 tracking-widest">ဖုန်းနံပါတ်</label>
+                        <input type="tel" id="phone" placeholder="၀၉..." class="form-input" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-gold/50 uppercase mb-2 ml-1 tracking-widest">မွေးသက္ကရာဇ် <span class="lowercase text-white/20">(မထည့်လည်းရပါတယ်)</span></label>
+                    <input type="text" id="dob" placeholder="ဥပမာ - ၁၅.၁၂.၁၉၉၀" class="form-input">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-gold/50 uppercase mb-2 ml-1 tracking-widest">သိလိုသော ကဏ္ဍ</label>
+                    <select id="topic" class="form-input" required>
+                        <option value="အထွေထွေ">အထွေထွေ</option>
+                        <option value="အချစ်ရေး">အချစ်ရေး / အိမ်ထောင်ရေး</option>
+                        <option value="စီးပွားရေး">စီးပွားရေး / လာဘ်လာဘ</option>
+                        <option value="ပညာရေး">ပညာရေး / ရာထူး</option>
+                        <option value="ကျန်းမာရေး">ကျန်းမာရေး / ဘေးဥပဒ်</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full btn-submit flex items-center justify-center gap-3">
+                    <span>စာရင်းသွင်းမည်</span>
+                    <i class="fa-solid fa-dharmachakra fa-spin-slow"></i>
+                </button>
+            </form>
+        </section>
+
+        <section id="location" class="mb-12">
+            <h2 class="text-gold/60 font-bold text-center text-[10px] mb-6 tracking-[5px] uppercase">ဓာတ်နန်းတည်နေရာ</h2>
+            <div class="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+                <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Official Map Location" class="w-full h-auto">
             </div>
         </section>
 
-        <section id="contact">
-            <div class="container">
-                <h2>ဓာတ်နန်းတည်နေရာ</h2>
-                <div class="glass-card text-center">
-                    <address style="margin-bottom: 20px; color: #eee; font-style: normal;">
-                        အမှတ် (၇၀/ဂ)၊ (၄၆)ရပ်ကွက်၊ ရွှေလီ (၁)လမ်း၊<br>
-                        ဗထူးစျေးအနီး၊ မြောက်ဒဂုံမြို့နယ်၊ ရန်ကုန်မြို့။
-                    </address>
-                    <a href="https://maps.app.goo.gl/YourLinkHere" class="btn btn-secondary" style="background: #34A853; border: none; color: white;">
-                        <i class="fas fa-location-arrow"></i> Google Maps ဖွင့်ရန်
-                    </a>
-                    <div class="map-wrapper">
-                        <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Map Location">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <p>© 2026 MAHA BAYDIN NAUNG HTAKE TIN. All Rights Reserved.</p>
-            <p style="font-size: 0.7rem; color: #444; margin-top: 5px;">DEVELOP BY AIO BABYBOSS</p>
-        </div>
-    </footer>
-    
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">×</span>
-            <h3 style="color: var(--gold-main); margin-bottom: 15px;">ဆက်သွယ်ရန်</h3>
-            <p style="color: #bbb; margin-bottom: 30px;">Viber မှ တိုက်ရိုက်ဆက်သွယ်၍ ရက်ချိန်းယူပေးပါ။</p>
-            <a href="viber://chat?number=+959666664580" class="btn btn-gold" style="width: 100%;">
-                <i class="fab fa-viber"></i> Viber Chat
-            </a>
-        </div>
+        <footer class="py-12 text-center opacity-20">
+            <p class="text-[9px] tracking-[4px] uppercase font-bold">Devepoper by AIO</p>
+            <p class="text-[8px] mt-2">© 2026 Naung Htake Tin. All Rights Reserved.</p>
+        </footer>
     </div>
 
     <script>
+        // Sidebar Control
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const isClosed = sidebar.style.transform === 'translateX(-100%)' || sidebar.style.transform === '';
+            sidebar.style.transform = isClosed ? 'translateX(0)' : 'translateX(-100%)';
+        }
+
+        // Random ID Generation
+        function generateID() {
+            return Math.floor(100000 + Math.random() * 900000);
+        }
+
+        // SheetDB API URL
+        const SHEETDB_URL = "https://sheetdb.io/api/v1/hgitfd6aa9ymz";
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Official Data for Verification
             const officialData = [
                 "09666664580", "+959666664580", "viber://chat?number=+959666664580",
                 "facebook.com/share/19xwFcbWY2", "facebook.com/share/1FK2m5S2VF",
-                "tiktok.com/@naunghtaketin", "t.me/NaungHtakeTin777", "naunghtaketin", "naunghtaketin777"
+                "tiktok.com/@naunghtaketin", "t.me/NaungHtakeTin777", "Koenht"
             ];
 
-            const modal = document.getElementById('bookingModal');
-            const openModalBtn = document.getElementById('openModalBtn');
-            const closeModalBtn = document.querySelector('.close-modal');
+            // Enrollment Form Submit
+            document.getElementById('enrollmentForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                const uniqueID = generateID();
+                
+                const payload = {
+                    "data": [{
+                        "ID": uniqueID,
+                        "အမည်": document.getElementById('name').value,
+                        "ဖုန်း": document.getElementById('phone').value,
+                        "နေ့နံ": document.getElementById('day_name').value,
+                        "မွေးရက်": document.getElementById('dob').value || "မဖော်ပြထားပါ",
+                        "သိလိုသည်": document.getElementById('topic').value,
+                        "အချိန်": new Date().toLocaleString('en-GB')
+                    }]
+                };
 
-            openModalBtn.onclick = () => modal.style.display = "flex";
-            closeModalBtn.onclick = () => modal.style.display = "none";
-            window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin"></i> ပေးပို့နေသည်...`;
 
-            document.getElementById('verifyScrollBtn').onclick = () => document.getElementById('verify').scrollIntoView({ behavior: 'smooth' });
-
-            document.querySelectorAll('.copy-trigger').forEach(trigger => {
-                trigger.onclick = function() {
-                    navigator.clipboard.writeText(this.getAttribute('data-link'));
-                    const icon = this.querySelector('i');
-                    icon.className = 'fas fa-check';
-                    setTimeout(() => icon.className = 'far fa-copy', 2000);
+                try {
+                    const res = await fetch(SHEETDB_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if(res.ok) {
+                        Swal.fire({ 
+                            title: 'အောင်မြင်ပါသည်', 
+                            html: `<div class="p-2"><p class="text-lg">စာရင်းသွင်းမှု အောင်မြင်ပါသည်။</p><p class="mt-4 text-xs opacity-50 uppercase tracking-widest">သင်၏ တိုကင်နံပါတ်</p><h2 class="text-4xl font-black text-gold mt-2">#${uniqueID}</h2></div>`,
+                            icon: 'success', 
+                            background: '#0a0a0a', 
+                            color: '#fff', 
+                            confirmButtonColor: '#b8860b' 
+                        });
+                        document.getElementById('enrollmentForm').reset();
+                    }
+                } catch (err) {
+                    Swal.fire('Error', 'စနစ်ချို့ယွင်းနေပါသည်။', 'error');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra"></i>`;
                 }
             });
 
+            // Copy Function
+            document.querySelectorAll('.copy-trigger').forEach(trigger => {
+                trigger.onclick = function() {
+                    const link = this.getAttribute('data-link');
+                    navigator.clipboard.writeText(link);
+                    const icon = this.querySelector('i');
+                    icon.className = 'fas fa-check text-green-500';
+                    setTimeout(() => icon.className = 'far fa-copy text-gold', 2000);
+                }
+            });
+
+            // Verification Logic
             document.getElementById('verifyBtn').onclick = function() {
                 const input = document.getElementById('verifyLink').value.trim().toLowerCase();
                 const resultDiv = document.getElementById('verifyResult');
-                if(!input) return;
+                
+                if(!input) {
+                    resultDiv.innerHTML = "";
+                    return;
+                }
 
                 const isMatch = officialData.some(d => input.includes(d.toLowerCase()));
+
                 if(isMatch) {
-                    resultDiv.innerHTML = `<div class="result-box result-success"><i class="fas fa-check-circle"></i><div><strong>အတည်ပြုပြီး</strong><br>ဤအကောင့်သည် မဟာဗေဒင် နောင်ထိပ်တင်၏ အစစ်အမှန်ဖြစ်ပါသည်။</div></div>`;
+                    resultDiv.innerHTML = `
+                        <div class="result-box result-success">
+                            <i class="fas fa-check-circle text-lg"></i>
+                            <div>
+                                <strong class="block">အတည်ပြုပြီး</strong>
+                                ဤအချက်အလက်သည် မဟာဗေဒင် နောင်ထိပ်တင်၏ အစစ်အမှန်ဖြစ်ပါသည်။
+                            </div>
+                        </div>`;
                 } else {
-                    resultDiv.innerHTML = `<div class="result-box result-warning"><i class="fas fa-exclamation-triangle"></i><div><strong>သတိပြုရန်</strong><br>ဤအချက်အလက်ကို စာရင်းတွင် မတွေ့ပါ။ Admin ထံ အတည်ပြုပါ။</div></div>`;
+                    resultDiv.innerHTML = `
+                        <div class="result-box result-warning">
+                            <i class="fas fa-exclamation-triangle text-lg"></i>
+                            <div>
+                                <strong class="block">သတိပြုရန်</strong>
+                                ဤအချက်အလက်ကို စာရင်းတွင်မတွေ့ပါ။ အတုဖြစ်နိုင်သည်။viberမှမေးပါ။
+                            </div>
+                        </div>`;
                 }
             }
         });
