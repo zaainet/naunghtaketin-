@@ -1,0 +1,21 @@
+{
+  "short_name": "နောင်ထိပ်တင်",
+  "name": "နောင်ထိပ်တင်(Official)",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0a0a0a",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#ffcf40"
+}
