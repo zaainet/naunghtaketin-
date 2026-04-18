@@ -11,29 +11,131 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        :root { --gold: #ffcf40; --deep-gold: #b8860b; --dark-bg: #0a0a0a; }
+        :root { --gold: #ffcf40; --deep-gold: #b8860b; --dark-bg: #050505; }
         body {
             font-family: 'Pyidaungsu', serif;
             background-color: var(--dark-bg);
-            background-image: radial-gradient(at top, #2b0202 0%, #0a0a0a 100%);
-            color: #fff;
+            background-image: 
+                radial-gradient(at top right, #3d0202 0%, transparent 40%),
+                radial-gradient(at bottom left, #1a1101 0%, transparent 40%),
+                linear-gradient(to bottom, #050505, #000);
+            color: #eee;
             min-height: 100vh;
         }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 207, 64, 0.1); border-radius: 28px; }
-        .header-glow { background: linear-gradient(135deg, #FFFFE0, #d4af37, #FFFFE0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(255, 207, 64, 0.4); }
-        .form-input { background: rgba(21, 21, 21, 0.8); border: 1px solid #333; border-radius: 14px; padding: 14px; width: 100%; color: var(--gold); }
-        .btn-submit { background: linear-gradient(135deg, var(--gold), var(--deep-gold)); color: #000; font-weight: 900; padding: 18px; border-radius: 20px; box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3); }
-        .marquee-container { background: rgba(0,0,0,0.4); border-bottom: 1px solid rgba(255, 207, 64, 0.1); overflow: hidden; white-space: nowrap; padding: 8px 0; }
-        .marquee-content { display: inline-block; animation: scrollText 25s linear infinite; color: var(--gold); font-size: 0.8rem; font-weight: bold; }
+
+        .marquee-container { 
+            background: rgba(0,0,0,0.85); 
+            border-bottom: 1px solid rgba(255, 207, 64, 0.3); 
+            backdrop-filter: blur(15px); 
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+        }
+        .marquee-content { 
+            color: var(--gold); 
+            font-size: 0.8rem; 
+            letter-spacing: 1px;
+            white-space: nowrap;
+            animation: scrollText 20s linear infinite;
+        }
         @keyframes scrollText { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
-        .result-box { padding: 12px; border-radius: 12px; font-size: 0.75rem; display: flex; gap: 10px; margin-top: 10px; }
-        .result-success { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; }
-        .result-warning { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f87171; }
-        .social-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; padding: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 11px; font-weight: bold; }
-        .fa-spin-slow { animation: fa-spin 4s linear infinite; }
+
+        .header-glow { 
+            background: linear-gradient(to bottom, #fff 20%, var(--gold) 50%, var(--deep-gold) 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 0 15px rgba(255, 207, 64, 0.4));
+            line-height: 1.3;
+        }
+
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.04); 
+            backdrop-filter: blur(25px); 
+            border: 1px solid rgba(255, 207, 64, 0.2); 
+            border-radius: 28px;
+        }
+
+        .form-input { 
+            background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 16px; 
+            padding: 18px; 
+            width: 100%; 
+            color: #fff;
+        }
+
+        .btn-primary { 
+            background: linear-gradient(135deg, #ffdf80, var(--gold), var(--deep-gold)); 
+            color: #1a1101; 
+            font-weight: 900; 
+            padding: 18px; 
+            border-radius: 18px; 
+            box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-action {
+            background: rgba(255, 207, 64, 0.05);
+            border: 1px solid rgba(255, 207, 64, 0.3);
+            color: var(--gold);
+            padding: 16px;
+            border-radius: 18px;
+            text-align: center;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .social-card { 
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 18px; 
+            padding: 15px; 
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        /* Sidebar Transition */
+        #sidebar { transition: transform 0.3s ease-in-out; }
+        .nav-link { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 15px; 
+            color: #ddd; 
+            border-radius: 12px; 
+            margin-bottom: 8px; 
+        }
+        .nav-link:hover { background: rgba(255, 207, 64, 0.1); color: var(--gold); }
     </style>
 </head>
 <body>
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-[#1a0202] border-r border-amber-900/50 p-6 z-[1001] transform -translate-x-full">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-amber-500 font-bold tracking-widest">MENU</h2>
+            <button onclick="toggleMenu()" class="text-amber-500"><i class="fa-solid fa-xmark text-2xl"></i></button>
+        </div>
+        <nav>
+            <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="nav-link"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+            <a href="https://t.me/NaungHtakeTin777" target="_blank" class="nav-link"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="viber://chat?number=%2B959666664580" class="nav-link"><i class="fa-brands fa-viber text-purple-400"></i> Viber</a>
+            <a href="tel:+959666664580" class="nav-link"><i class="fa-solid fa-phone text-green-400"></i> ဖုန်းဆက်ရန်</a>
+            <a href="http://t.me/naunghtaketin_helpbot/moneypay" target="_blank" class="nav-link"><i class="fa-solid fa-wallet text-gold"></i> Wave/Kpay</a>
+        </nav>
+    </div>
 
     <div class="marquee-container">
         <div class="marquee-content">
@@ -41,98 +143,94 @@
         </div>
     </div>
 
-    <div class="max-w-md mx-auto p-5">
-        <div class="flex justify-between items-center py-4 mb-6">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center text-black shadow-lg shadow-gold/20">
-                    <i class="fa-solid fa-moon text-xl"></i>
-                </div>
-                <span class="text-[10px] font-bold text-gold/80 tracking-widest uppercase">Naung Htake Tin</span>
-            </div>
-            <div class="text-right">
-                <span class="bg-green-500 text-[8px] text-black px-2 py-0.5 rounded-full font-black">OFFICIAL VERIFIED</span>
-            </div>
-        </div>
+    <div class="max-w-md mx-auto p-6">
+        <button onclick="toggleMenu()" class="text-gold mb-4"><i class="fa-solid fa-bars-staggered text-2xl"></i></button>
 
-        <header class="text-center mb-8">
-            <p class="text-gold/60 tracking-[5px] text-[10px] font-bold mb-2 uppercase">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင်</p>
-            <h1 class="text-6xl font-black header-glow mb-4">နောင်ထိပ်တင်</h1>
-            <p class="text-[11px] text-white/40 italic px-6 leading-relaxed mb-8">“ စိတ်သည် လောကကို ဆောင်တတ်၏။ <br>ကိုယ်သာအရှင်ကိုယ်သာသခင် ”</p>
+        <header class="text-center mb-10">
+            <p class="text-gold/60 tracking-[5px] text-[10px] font-black mb-2 uppercase">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင်</p>
+            <h1 class="text-6xl font-black header-glow">နောင်ထိပ်တင်</h1>
+            <p class="text-[12px] text-white/40 italic px-8 mt-4 leading-relaxed">“ စိတ်သည် လောကကို ဆောင်တတ်၏။ <br>ကိုယ်သာအရှင်ကိုယ်သာသခင် ”</p>
             
-            <div class="glass-card p-6 text-center shadow-2xl">
-                <div id="engClock" class="text-3xl font-black text-gold tracking-tighter">00:00:00 AM</div>
-                <div id="engDate" class="text-[9px] uppercase tracking-[3px] text-white/30 font-bold mb-4">WEDNESDAY, APRIL 15, 2026</div>
-                <div class="w-full h-[1px] bg-white/5 mb-4"></div>
-                <div id="mmFullDate" class="text-lg font-black text-gold">ဗုဒ္ဓဟူး၊ တန်ခူးလဆန်း ၁၅ ရက်</div>
-                <div id="mmYear" class="text-[10px] text-white/40 tracking-widest">မြန်မာသက္ကရာဇ် ၁၃၈၈ ခုနှစ်</div>
+            <div class="glass-card p-8 mt-8 text-center">
+                <div id="engClock" class="text-4xl font-black text-gold mb-1">00:00:00 AM</div>
+                <div id="engDate" class="text-[10px] uppercase tracking-[3px] text-white/40 font-bold">SATURDAY, APRIL 18, 2026</div>
             </div>
         </header>
 
-        <div id="status-checker" class="text-center py-6 opacity-30 italic text-sm">စနစ်ကို စစ်ဆေးနေသည်...</div>
+        <div class="grid grid-cols-1 gap-4 mb-8">
+            <a href="http://t.me/naunghtaketin_helpbot/moneypay" target="_blank" class="btn-action">
+                <i class="fa-solid fa-wallet"></i>
+                <span>WAVE / KPAY ပို့ရန်</span>
+            </a>
+            <a href="viber://chat?number=%2B959666664580" class="btn-action">
+                <i class="fa-solid fa-gem"></i>
+                <span>အဆောင်လက်ဖွဲ့မှာယူရန်</span>
+            </a>
+        </div>
 
-        <main id="main-content" class="hidden">
-            <section id="enrollment-section" class="glass-card p-8 mb-8">
-                <h2 class="text-center text-gold text-[10px] font-black uppercase tracking-[4px] mb-8">စာရင်းပေးသွင်းရန်</h2>
+        <div id="status-checker" class="text-center py-6 opacity-40 text-[10px] animate-pulse">SYSTEM SYNCING...</div>
+
+        <main id="main-content" class="hidden space-y-8">
+            <section id="enrollment-section" class="glass-card p-8">
+                <h2 class="text-center text-gold text-[11px] font-black uppercase tracking-[5px] mb-8">စာရင်းပေးသွင်းရန်</h2>
                 <form id="mainForm" class="space-y-5">
                     <input type="text" id="name" class="form-input" placeholder="အမည်ရိုက်ပါ" required>
                     <div class="grid grid-cols-2 gap-4">
                         <select id="day_name" class="form-input" required>
-                            <option value="">နေ့နံရွေးချယ်ပါ</option>
+                            <option value="">နေ့နံရွေးပါ</option>
                             <option>တနင်္ဂနွေ</option><option>တနင်္လာ</option><option>အင်္ဂါ</option>
                             <option>ဗုဒ္ဓဟူး</option><option>ရာဟု</option><option>ကြာသပတေး</option>
                             <option>သောကြာ</option><option>စနေ</option>
                         </select>
-                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ် (၀၉...)" required>
+                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ်" required>
                     </div>
-                    <input type="text" id="dob" class="form-input" placeholder="မွေးသက္ကရာဇ် (ရက်.လ.ခုနှစ်)">
+                    <input type="text" id="dob" class="form-input" placeholder="မွေးသက္ကရာဇ်">
                     <select id="topic" class="form-input" required>
                         <option value="အထွေထွေ">အထွေထွေ</option>
-                        <option value="အချစ်ရေး">အချစ်ရေး / အိမ်ထောင်ရေး</option>
-                        <option value="စီးပွားရေး">စီးပွားရေး / လာဘ်လာဘ</option>
-                        <option value="ပညာရေး">ပညာရေး / ရာထူး</option>
-                        <option value="ကျန်းမာရေး">ကျန်းမာရေး / ဘေးဥပဒ်</option>
+                        <option value="အချစ်ရေး">အချစ်ရေး/အိမ်ထောင်ရေး</option>
+                        <option value="စီးပွားရေး">စီးပွားရေး/ငွေကြေး</option>
                     </select>
-                    <button type="submit" id="submit-btn" class="w-full btn-submit flex items-center justify-center gap-3">
+                    <button type="submit" id="submit-btn" class="w-full btn-primary">
                         <span>စာရင်းသွင်းမည်</span>
-                        <i class="fa-solid fa-dharmachakra fa-spin-slow text-xl"></i>
+                        <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>
                     </button>
                 </form>
             </section>
 
-            <section class="glass-card p-6 mb-8">
-                <h2 class="text-gold text-[10px] font-black uppercase tracking-[3px] mb-4 text-center">အကောင့်အတု/အစစ် စစ်ဆေးရန်</h2>
-                <p class="text-[10px] text-white/40 mb-4 text-center">လိမ်လည်မှုများမခံရစေရန် ဆရာ့အကောင့်အစစ် ဟုတ်/မဟုတ် ဤနေရာတွင် စစ်ဆေးနိုင်ပါသည်။</p>
+            <section class="glass-card p-6">
+                <h2 class="text-gold text-[10px] font-black text-center mb-4 uppercase tracking-[3px]"> အကောင့်အတုအစစ် စစ်ဆေးရန်</h2>
                 <div class="relative">
-                    <input type="text" id="verifyInput" class="form-input pr-12 text-sm" placeholder="ဖုန်းနံပါတ် သို့မဟုတ် Link ထည့်ပါ">
-                    <button onclick="verifyAccount()" class="absolute right-2 top-1/2 -translate-y-1/2 text-gold p-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" id="verifyInput" class="form-input pr-12 text-sm" placeholder="Link သို့မဟုတ် ဖုန်းနံပါတ်">
+                    <button onclick="verifyAccount()" class="absolute right-4 top-1/2 -translate-y-1/2 text-gold"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <div id="verifyResult"></div>
             </section>
         </main>
 
-        <div class="grid grid-cols-2 gap-3 mb-10">
-            <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="social-card"><i class="fa-brands fa-tiktok text-white text-lg"></i> TIKTOK</a>
-            <a href="https://t.me/NaungHtakeTin777" target="_blank" class="social-card"><i class="fa-brands fa-telegram text-blue-400 text-lg"></i> TELEGRAM</a>
-            <a href="viber://chat?number=%2B959666664580" class="social-card"><i class="fa-brands fa-viber text-purple-400 text-lg"></i> VIBER</a>
-            <a href="tel:+959666664580" class="social-card"><i class="fa-solid fa-phone text-green-400 text-lg"></i> HOTLINE</a>
+        <div class="grid grid-cols-2 gap-4 my-8">
+            <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="social-card flex flex-col items-center gap-2"><i class="fa-brands fa-tiktok text-xl"></i> TIKTOK</a>
+            <a href="viber://chat?number=%2B959666664580" class="social-card flex flex-col items-center gap-2"><i class="fa-brands fa-viber text-xl text-purple-400"></i> VIBER</a>
+            <a href="https://t.me/NaungHtakeTin777" target="_blank" class="social-card flex flex-col items-center gap-2"><i class="fa-brands fa-telegram text-xl text-blue-400"></i> TELEGRAM</a>
+            <a href="tel:+959666664580" class="social-card flex flex-col items-center gap-2"><i class="fa-solid fa-phone text-xl text-green-400"></i> CALL</a>
         </div>
 
-        <footer class="text-center opacity-30 pb-12">
-            <p class="text-[9px] tracking-[4px] uppercase font-bold">Developed by Boss Baby Tech</p>
-            <p class="text-[8px] mt-2">© 2026 NAUNG HTAKE TIN. All Rights Reserved.</p>
+        <footer class="text-center opacity-30 pb-10">
+            <p class="text-[9px] tracking-[4px] font-black uppercase">Developed By Boss Baby</p>
+            <p class="text-[8px] mt-2">© 2026 NAUNG HTAKE TIN</p>
         </footer>
     </div>
 
     <script>
         const API_URL = "https://sheetdb.io/api/v1/hgitfd6aa9ymz";
 
+        function toggleMenu() {
+            const sb = document.getElementById('sidebar');
+            sb.style.transform = sb.style.transform === 'translateX(0px)' ? 'translateX(-100%)' : 'translateX(0px)';
+        }
+
         function updateClock() {
             const now = new Date();
-            const toMM = (n) => n.toString().split('').map(d => ['၀','၁','၂','၃','၄','၅','၆','၇','၈','၉'][d]).join('');
             document.getElementById('engClock').innerText = now.toLocaleTimeString('en-US', { hour12: true });
-            document.getElementById('engDate').innerText = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
-            document.getElementById('mmFullDate').innerText = `ဗုဒ္ဓဟူး၊ တန်ခူးလဆန်း ${toMM(now.getDate())} ရက်`;
-            document.getElementById('mmYear').innerText = `မြန်မာသက္ကရာဇ် ${toMM(now.getFullYear() - 638)} ခုနှစ်`;
         }
 
         async function checkStatus() {
@@ -142,7 +240,7 @@
                 document.getElementById('status-checker').classList.add('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
                 if (!(config && config[0].Switch === "Open")) {
-                    document.getElementById('enrollment-section').innerHTML = `<div class="text-center py-10"><i class="fa-solid fa-circle-exclamation text-4xl text-red-500 mb-4 opacity-50"></i><h3 class="text-lg font-bold text-red-400">စာရင်းပိတ်ထားပါသည်</h3></div>`;
+                    document.getElementById('enrollment-section').innerHTML = `<div class="text-center py-10"><i class="fa-solid fa-shield-halved text-4xl text-red-500 mb-4 opacity-30"></i><h3 class="text-lg font-black text-red-500/80 uppercase">စာရင်းလက်ခံမှု ခေတ္တပိတ်ထားပါသည်</h3></div>`;
                 }
             } catch (e) {
                 document.getElementById('status-checker').classList.add('hidden');
@@ -151,42 +249,42 @@
         }
 
         function verifyAccount() {
-            const input = document.getElementById('verifyInput').value.trim().toLowerCase();
+            const input = document.getElementById('verifyInput').value.trim();
             const resDiv = document.getElementById('verifyResult');
-            const official = ["09666664580", "koenht", "naunghtaketin", "777", "facebook.com/share/19xwFcbWY2"];
-            const isMatch = official.some(o => input.includes(o));
-            resDiv.innerHTML = isMatch 
-                ? `<div class="result-box result-success"><i class="fa-solid fa-circle-check"></i><div><strong>အတည်ပြုပြီး</strong><br>ဤအချက်အလက်သည် ဆရာနောင်ထိပ်တင်၏ အစစ်အမှန်ဖြစ်ပါသည်။</div></div>`
-                : `<div class="result-box result-warning"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>သတိပြုရန်</strong><br>ဤအချက်အလက်ကို စစ်ဆေး၍မရပါ။ အတုဖြစ်နိုင်ပါသည်။</div></div>`;
+            // အမှန်နံပါတ် 09666664580 ပါရင် အစစ်လို့ပြအောင် ညှိထားပေးတယ်
+            if(input.includes("09666664580") || input.includes("naunghtaketin")) {
+                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-[10px] text-green-400 text-center font-bold">တရားဝင် အကောင့်ဖြစ်ပါသည်</div>`;
+            } else {
+                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] text-red-400 text-center font-bold">စစ်ဆေး၍မရပါ (သို့မဟုတ်) အတုဖြစ်နိုင်သည်</div>`;
+            }
         }
 
         document.getElementById('mainForm').onsubmit = async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submit-btn');
-            const tid = Math.floor(100000 + Math.random() * 900000);
             btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ပေးပို့နေသည်...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ပေးပို့နေပါသည်...`;
 
             try {
                 const res = await fetch(API_URL, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"data": [{
-                        "ID": tid,
+                        "ID": Math.floor(Date.now()/1000),
                         "အမည်": document.getElementById('name').value,
                         "ဖုန်း": document.getElementById('phone').value,
                         "နေ့နံ": document.getElementById('day_name').value,
-                        "မွေးရက်": document.getElementById('dob').value || "မဖော်ပြထားပါ",
+                        "မွေးရက်": document.getElementById('dob').value,
                         "သိလိုသည်": document.getElementById('topic').value,
-                        "အချိန်": new Date().toLocaleString('en-GB')
+                        "အချိန်": new Date().toLocaleString()
                     }]})
                 });
                 if(res.ok) {
-                    Swal.fire({ title: 'အောင်မြင်ပါသည်', html: `စာရင်းသွင်းပြီးပါပြီ။ တိုကင်နံပါတ် <br><b class="text-3xl text-gold">#${tid}</b>`, icon: 'success', background: '#0a0a0a', color: '#fff' });
+                    Swal.fire({ title: 'အောင်မြင်ပါသည်', text: 'စာရင်းပေးသွင်းမှု လက်ခံရရှိပါပြီ။', icon: 'success', background: '#0a0a0a', color: '#fff' });
                     document.getElementById('mainForm').reset();
                 }
-            } catch (err) { Swal.fire('Error', 'မအောင်မြင်ပါ', 'error'); }
-            finally { btn.disabled = false; btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin-slow text-xl"></i>`; }
+            } catch (err) { Swal.fire('မအောင်မြင်ပါ', 'အင်တာနက်ပြန်စစ်ပေးပါ။', 'error'); }
+            finally { btn.disabled = false; btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; }
         };
 
         setInterval(updateClock, 1000);
@@ -194,4 +292,4 @@
         checkStatus();
     </script>
 </body>
-</html>
+                            </html>
