@@ -165,13 +165,13 @@
                 <form id="mainForm" class="space-y-5">
                     <input type="text" id="name" class="form-input" placeholder="အမည်ရိုက်ပါ" required>
                     <div class="grid grid-cols-2 gap-4">
-                        <select id="day_name" class="form-input" required>
-                            <option value="">နေ့နံရွေးပါ</option>
+                        <select id="day_name" class="form-input">
+                            <option value="">နေ့နံ (မဖြစ်မနေမဟုတ်ပါ)</option>
                             <option>တနင်္ဂနွေ</option><option>တနင်္လာ</option><option>အင်္ဂါ</option>
                             <option>ဗုဒ္ဓဟူး</option><option>ရာဟု</option><option>ကြာသပတေး</option>
                             <option>သောကြာ</option><option>စနေ</option>
                         </select>
-                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ်" required>
+                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ် (မရှိလျှင်မထည့်ပါနှင့်)">
                     </div>
                     <select id="topic" class="form-input" required>
                         <option value="">အကြောင်းအရာ ရွေးချယ်ပါ</option>
@@ -220,22 +220,13 @@
             sb.style.transform = (sb.style.transform === 'translateX(0px)' || sb.style.transform === 'translateX(0%)') ? 'translateX(-100%)' : 'translateX(0px)';
         }
 
-        // Real-time Clock and Date Update
         function updateDateTime() {
             const now = new Date();
-            
-            // Time format: 12:00:00 AM
             const timeString = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit', 
-                hour12: true 
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
             });
-            
-            // Date format: SATURDAY, APRIL 18, 2026
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const dateString = now.toLocaleDateString('en-US', dateOptions).toUpperCase();
-
             document.getElementById('engClock').innerText = timeString;
             document.getElementById('engDate').innerText = dateString;
         }
@@ -271,6 +262,10 @@
             btn.disabled = true;
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ပေးပို့နေပါသည်...`;
 
+            // တန်ဖိုးမရှိခဲ့လျှင် "မဖော်ပြထားပါ" ဟု ပို့ရန်
+            const phoneVal = document.getElementById('phone').value.trim() || "မဖော်ပြထားပါ";
+            const dayVal = document.getElementById('day_name').value || "မဖော်ပြထားပါ";
+
             try {
                 const res = await fetch(API_URL, {
                     method: 'POST',
@@ -278,9 +273,9 @@
                     body: JSON.stringify({"data": [{
                         "ID": Math.floor(Date.now()/1000),
                         "အမည်": document.getElementById('name').value,
-                        "ဖုန်း": document.getElementById('phone').value,
-                        "နေ့နံ": document.getElementById('day_name').value,
-                        "သိလိုသည်": document.getElementById('topic').value, // Updated Topic
+                        "ဖုန်း": phoneVal,
+                        "နေ့နံ": dayVal,
+                        "သိလိုသည်": document.getElementById('topic').value,
                         "အချိန်": new Date().toLocaleString()
                     }]})
                 });
@@ -288,11 +283,14 @@
                     Swal.fire({ title: 'အောင်မြင်ပါသည်', text: 'စာရင်းပေးသွင်းမှု လက်ခံရရှိပါပြီ။', icon: 'success', background: '#0a0a0a', color: '#fff' });
                     document.getElementById('mainForm').reset();
                 }
-            } catch (err) { Swal.fire('မအောင်မြင်ပါ', 'အင်တာနက်ပြန်စစ်ပေးပါ။', 'error'); }
-            finally { btn.disabled = false; btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; }
+            } catch (err) { 
+                Swal.fire('မအောင်မြင်ပါ', 'အင်တာနက်ပြန်စစ်ပေးပါ။', 'error'); 
+            } finally { 
+                btn.disabled = false; 
+                btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; 
+            }
         };
 
-        // Update time every second
         setInterval(updateDateTime, 1000);
         updateDateTime();
         checkStatus();
