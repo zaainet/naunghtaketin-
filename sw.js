@@ -1,14 +1,73 @@
-const CACHE_NAME = 'naunghtaketin-v1';
-const urlsToCache = ['/'];
+const CACHE_NAME = 'naunghtaketin-v2';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  'https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Cinzel:wght@700&display=swap',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+  'https://cdn.tailwindcss.com',
+  'https://cdn.jsdelivr.net/npm/sweetalert2@11'
+];
 
+// Install - cache essential files
 self.addEventListener('install', event => {
+  self.skipWaiting(); // activate immediately
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(async cache => {
+      try {
+        await cache.addAll(urlsToCache);
+      } catch (e) {
+        console.log('Cache addAll error:', e);
+      }
+    })
   );
 });
 
+// Activate - clean old caches
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.map(key => {
+        if (key !== CACHE_NAME) return caches.delete(key);
+      })
+    )).then(() => self.clients.claim())
+  );
+});
+
+// Fetch - Network First strategy for API, Cache First for static
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  
+  // Handle API requests (SheetDB) - Network First
+  if (url.href.includes('sheetdb.io')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Handle static assets - Cache First, Network Fallback
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+      return fetch(event.request).then(response => {
+        if (!response || response.status !== 200) return response;
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return response;
+      });
+    }).catch(() => {
+      // Offline fallback for HTML
+      if (event.request.headers.get('accept').includes('text/html')) {
+        return caches.match('/');
+      }
+      return new Response('Offline - နောင်ထိပ်တင် ဗေဒင်', { status: 404 });
+    })
   );
 });
