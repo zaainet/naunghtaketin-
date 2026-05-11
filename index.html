@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>နောင်ထိပ်တင် - မဟာဗေဒင် (Official)</title>
     
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ffcf40">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="နောင်ထိပ်တင်">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="နောင်ထိပ်တင် - မြန်မာ့ရိုးရာမဟာဗေဒင်၊ မဟာပီယမှော်၊ အဆောင်လက်ဖွဲ့ နှင့် မှော်ပညာဆိုင်ရာ တိုင်ပင်ဆွေးနွေးမှုများ">
+    <meta name="keywords" content="နောင်ထိပ်တင်, ဗေဒင်, မဟာဗေဒင်, ပီယမှော်, အဆောင်လက်ဖွဲ့, မြန်မာဗေဒင်">
+    <meta name="author" content="Naung Htake Tin">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="နောင်ထိပ်တင် - မဟာဗေဒင် (Official)">
+    <meta property="og:description" content="မြန်မာ့ရိုးရာမဟာဗေဒင်၊ ပယောဂ၊ အဆောင်လက်ဖွဲ့ နှင့် မှော်ပညာဆိုင်ရာ တိုင်ပင်ဆွေးနွေးမှုများ">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="နောင်ထိပ်တင်">
+    
     <link href="https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,6 +35,10 @@
             --deep-gold: #b8860b; 
             --dark-bg: #0a0a0a;
             --card-bg: rgba(20, 20, 20, 0.8);
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -87,8 +110,14 @@
             padding: 16px; 
             border-radius: 14px; 
             box-shadow: 0 5px 20px rgba(184, 134, 11, 0.4);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            transition: transform 0.2s, opacity 0.2s;
         }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         .btn-action {
             background: rgba(255, 207, 64, 0.05);
@@ -98,18 +127,74 @@
             border-radius: 16px;
             text-align: center;
             font-weight: 600;
+            transition: all 0.2s;
         }
+        .btn-action:active { transform: scale(0.97); background: rgba(255, 207, 64, 0.1); }
 
         .social-card { 
             background: rgba(255,255,255,0.03); 
             border: 1px solid rgba(255,255,255,0.08); 
             border-radius: 18px; 
+            padding: 15px;
+            transition: all 0.2s;
+        }
+        .social-card:active { transform: scale(0.96); background: rgba(255,255,255,0.06); }
+
+        #sidebar { 
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); 
+            background: #1a0202;
+            backdrop-filter: blur(10px);
+        }
+        .nav-link { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
             padding: 15px; 
+            color: #ddd; 
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .nav-link:hover, .nav-link:active { background: rgba(255, 207, 64, 0.1); color: var(--gold); }
+
+        @media (max-width: 480px) {
+            .glass-card { padding: 1rem; }
+            .header-glow { font-size: 2.8rem; }
         }
 
-        #sidebar { transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); background: #1a0202; }
-        .nav-link { display: flex; align-items: center; gap: 15px; padding: 15px; color: #ddd; border-radius: 12px; }
-        .nav-link:hover { background: rgba(255, 207, 64, 0.1); color: var(--gold); }
+        /* Loading spinner */
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            animation: rotation 0.8s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Offline banner */
+        .offline-banner {
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        .offline-banner.show {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -134,7 +219,7 @@
         </div>
     </div>
 
-    <div class="max-w-md mx-auto p-6">
+    <div class="max-w-md mx-auto p-6 pb-20">
         <button onclick="toggleMenu()" class="text-gold mb-4"><i class="fa-solid fa-bars-staggered text-2xl"></i></button>
 
         <header class="text-center mb-10">
@@ -157,21 +242,29 @@
             </a>
         </div>
 
-        <div id="status-checker" class="text-center py-6 opacity-40 text-[10px] animate-pulse">SYSTEM SYNCING...</div>
+        <div id="status-checker" class="text-center py-6">
+            <div class="loader mx-auto mb-2"></div>
+            <p class="text-[10px] text-white/40">SYSTEM SYNCING...</p>
+        </div>
 
         <main id="main-content" class="hidden space-y-8">
             <section id="enrollment-section" class="glass-card p-8">
                 <h2 class="text-center text-gold text-[11px] font-black uppercase tracking-[5px] mb-8">စာရင်းပေးသွင်းရန်</h2>
                 <form id="mainForm" class="space-y-5">
-                    <input type="text" id="name" class="form-input" placeholder="အမည်ရိုက်ပါ" required>
+                    <input type="text" id="name" class="form-input" placeholder="အမည်ရိုက်ပါ" required autocomplete="name">
                     <div class="grid grid-cols-2 gap-4">
                         <select id="day_name" class="form-input">
                             <option value="">နေ့နံ (မဖြစ်မနေမဟုတ်ပါ)</option>
-                            <option>တနင်္ဂနွေ</option><option>တနင်္လာ</option><option>အင်္ဂါ</option>
-                            <option>ဗုဒ္ဓဟူး</option><option>ရာဟု</option><option>ကြာသပတေး</option>
-                            <option>သောကြာ</option><option>စနေ</option>
+                            <option value="တနင်္ဂနွေ">တနင်္ဂနွေ</option>
+                            <option value="တနင်္လာ">တနင်္လာ</option>
+                            <option value="အင်္ဂါ">အင်္ဂါ</option>
+                            <option value="ဗုဒ္ဓဟူး">ဗုဒ္ဓဟူး</option>
+                            <option value="ရာဟု">ရာဟု</option>
+                            <option value="ကြာသပတေး">ကြာသပတေး</option>
+                            <option value="သောကြာ">သောကြာ</option>
+                            <option value="စနေ">စနေ</option>
                         </select>
-                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ် (မရှိလျှင်မထည့်ပါနှင့်)">
+                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ် (မရှိလျှင်မထည့်ပါနှင့်)" autocomplete="tel">
                     </div>
                     <select id="topic" class="form-input" required>
                         <option value="">အကြောင်းအရာ ရွေးချယ်ပါ</option>
@@ -212,14 +305,34 @@
         </footer>
     </div>
 
+    <div id="offlineBanner" class="offline-banner">
+        <i class="fa-solid fa-wifi mr-2"></i> အင်တာနက်ချိတ်ဆက်မှု ပြတ်တောက်နေပါသည်
+    </div>
+
     <script>
         const API_URL = "https://sheetdb.io/api/v1/hgitfd6aa9ymz";
 
+        // Toggle Menu
         function toggleMenu() {
             const sb = document.getElementById('sidebar');
-            sb.style.transform = (sb.style.transform === 'translateX(0px)' || sb.style.transform === 'translateX(0%)') ? 'translateX(-100%)' : 'translateX(0px)';
+            const currentTransform = sb.style.transform;
+            if (currentTransform === 'translateX(0px)' || currentTransform === 'translateX(0%)') {
+                sb.style.transform = 'translateX(-100%)';
+            } else {
+                sb.style.transform = 'translateX(0px)';
+            }
         }
 
+        // Close menu when clicking outside (optional improvement)
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = e.target.closest('[onclick="toggleMenu()"]');
+            if (sidebar.style.transform === 'translateX(0px)' && !sidebar.contains(e.target) && !menuBtn) {
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        // Update Date & Time
         function updateDateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US', { 
@@ -231,38 +344,87 @@
             document.getElementById('engDate').innerText = dateString;
         }
 
+        // Check System Status from SheetDB
         async function checkStatus() {
+            const statusChecker = document.getElementById('status-checker');
+            const mainContent = document.getElementById('main-content');
+            
             try {
                 const res = await fetch(`${API_URL}?sheet=Sheet2`);
+                if (!res.ok) throw new Error('Network error');
                 const config = await res.json();
-                document.getElementById('status-checker').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                if (!(config && config[0].Switch === "Open")) {
-                    document.getElementById('enrollment-section').innerHTML = `<div class="text-center py-10"><i class="fa-solid fa-shield-halved text-4xl text-red-500 mb-4 opacity-30"></i><h3 class="text-lg font-black text-red-500/80 uppercase">စာရင်းလက်ခံမှု ခေတ္တပိတ်ထားပါသည်</h3></div>`;
+                statusChecker.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                
+                if (config && config[0] && config[0].Switch !== "Open") {
+                    document.getElementById('enrollment-section').innerHTML = `
+                        <div class="text-center py-10">
+                            <i class="fa-solid fa-shield-halved text-4xl text-red-500 mb-4 opacity-30"></i>
+                            <h3 class="text-lg font-black text-red-500/80 uppercase">စာရင်းလက်ခံမှု ခေတ္တပိတ်ထားပါသည်</h3>
+                            <p class="text-white/40 text-xs mt-2">ကျေးဇူးပြု၍ နောက်မှပြန်လာပါ</p>
+                        </div>`;
                 }
             } catch (e) {
-                document.getElementById('status-checker').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
+                console.log('Status check failed:', e);
+                statusChecker.classList.add('hidden');
+                mainContent.classList.remove('hidden');
             }
         }
 
+        // Verify Account (Fake or Real)
         function verifyAccount() {
             const input = document.getElementById('verifyInput').value.trim();
             const resDiv = document.getElementById('verifyResult');
-            if(input.includes("09666664580") || input.includes("naunghtaketin")) {
-                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-[10px] text-green-400 text-center font-bold">တရားဝင် အကောင့်ဖြစ်ပါသည်</div>`;
+            
+            if (!input) {
+                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-[10px] text-yellow-400 text-center font-bold">ကျေးဇူးပြု၍ ဖုန်းနံပါတ် သို့မဟုတ် Link ထည့်ပါ</div>`;
+                return;
+            }
+            
+            if(input.includes("09666664580") || input.includes("959666664580") || input.toLowerCase().includes("naunghtaketin")) {
+                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-[10px] text-green-400 text-center font-bold">
+                    <i class="fa-solid fa-circle-check mr-1"></i> တရားဝင် အကောင့်ဖြစ်ပါသည်
+                </div>`;
             } else {
-                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] text-red-400 text-center font-bold">စစ်ဆေး၍မရပါ (သို့မဟုတ်) အတုဖြစ်နိုင်သည်</div>`;
+                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] text-red-400 text-center font-bold">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> စစ်ဆေး၍မရပါ (သို့မဟုတ်) အတုဖြစ်နိုင်သည်
+                </div>`;
             }
         }
 
+        // Form Submission
         document.getElementById('mainForm').onsubmit = async (e) => {
             e.preventDefault();
+            
+            // Form Validation
+            const name = document.getElementById('name').value.trim();
+            if (name.length < 2) {
+                Swal.fire({
+                    title: 'သတိပေးချက်',
+                    text: 'ကျေးဇူးပြု၍ သင့်အမည်အား အနည်းဆုံး ၂ လုံးထည့်ပါ',
+                    icon: 'warning',
+                    background: '#0a0a0a',
+                    color: '#fff'
+                });
+                return;
+            }
+            
+            const topic = document.getElementById('topic').value;
+            if (!topic) {
+                Swal.fire({
+                    title: 'သတိပေးချက်',
+                    text: 'ကျေးဇူးပြု၍ အကြောင်းအရာတစ်ခုခုကို ရွေးချယ်ပါ',
+                    icon: 'warning',
+                    background: '#0a0a0a',
+                    color: '#fff'
+                });
+                return;
+            }
+            
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ပေးပို့နေပါသည်...`;
+            btn.innerHTML = `<div class="loader" style="border-color: #1a1101; border-bottom-color: transparent;"></div> ပေးပို့နေပါသည်...`;
 
-            // တန်ဖိုးမရှိခဲ့လျှင် "မဖော်ပြထားပါ" ဟု ပို့ရန်
             const phoneVal = document.getElementById('phone').value.trim() || "မဖော်ပြထားပါ";
             const dayVal = document.getElementById('day_name').value || "မဖော်ပြထားပါ";
 
@@ -272,25 +434,65 @@
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"data": [{
                         "ID": Math.floor(Date.now()/1000),
-                        "အမည်": document.getElementById('name').value,
+                        "အမည်": name,
                         "ဖုန်း": phoneVal,
                         "နေ့နံ": dayVal,
-                        "သိလိုသည်": document.getElementById('topic').value,
-                        "အချိန်": new Date().toLocaleString()
+                        "သိလိုသည်": topic,
+                        "အချိန်": new Date().toLocaleString('my-MM', { timeZone: 'Asia/Yangon' })
                     }]})
                 });
+                
                 if(res.ok) {
-                    Swal.fire({ title: 'အောင်မြင်ပါသည်', text: 'စာရင်းပေးသွင်းမှု လက်ခံရရှိပါပြီ။', icon: 'success', background: '#0a0a0a', color: '#fff' });
+                    Swal.fire({ 
+                        title: 'အောင်မြင်ပါသည်', 
+                        text: 'စာရင်းပေးသွင်းမှု လက်ခံရရှိပါပြီ။ ဆရာနောင်ထိပ်တင်မှ ပြန်လည်အကြောင်းကြားပါမည်။', 
+                        icon: 'success', 
+                        background: '#0a0a0a', 
+                        color: '#fff',
+                        confirmButtonColor: '#ffcf40'
+                    });
                     document.getElementById('mainForm').reset();
+                } else {
+                    throw new Error('Server error');
                 }
             } catch (err) { 
-                Swal.fire('မအောင်မြင်ပါ', 'အင်တာနက်ပြန်စစ်ပေးပါ။', 'error'); 
+                Swal.fire({
+                    title: 'မအောင်မြင်ပါ', 
+                    text: 'အင်တာနက်အခြေအနေ စစ်ဆေးပြီး နောက်မှထပ်ကြိုးစားပါ။', 
+                    icon: 'error',
+                    background: '#0a0a0a',
+                    color: '#fff'
+                }); 
             } finally { 
                 btn.disabled = false; 
                 btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; 
             }
         };
 
+        // Offline Detection
+        function updateOnlineStatus() {
+            const banner = document.getElementById('offlineBanner');
+            if (!navigator.onLine) {
+                banner.classList.add('show');
+            } else {
+                banner.classList.remove('show');
+            }
+        }
+        
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus();
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered:', reg.scope))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        // Initialize
         setInterval(updateDateTime, 1000);
         updateDateTime();
         checkStatus();
