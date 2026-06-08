@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>နောင်ထိပ်တင် - မဟာဗေဒင် (Official)</title>
     
-    <!-- PWA Meta Tags -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#ffcf40">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="နောင်ထိပ်တင်">
     
-    <!-- SEO Meta Tags -->
     <meta name="description" content="နောင်ထိပ်တင် - မြန်မာ့ရိုးရာမဟာဗေဒင်၊ မဟာပီယမှော်၊ အဆောင်လက်ဖွဲ့ နှင့် မှော်ပညာဆိုင်ရာ တိုင်ပင်ဆွေးနွေးမှုများ">
     <meta name="keywords" content="နောင်ထိပ်တင်, ဗေဒင်, မဟာဗေဒင်, ပီယမှော်, အဆောင်လက်ဖွဲ့, မြန်မာဗေဒင်">
     <meta name="author" content="Naung Htake Tin">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="နောင်ထိပ်တင် - မဟာဗေဒင် (Official)">
     <meta property="og:description" content="မြန်မာ့ရိုးရာမဟာဗေဒင်၊ ပယောဂ၊ အဆောင်လက်ဖွဲ့ နှင့် မှော်ပညာဆိုင်ရာ တိုင်ပင်ဆွေးနွေးမှုများ">
     <meta property="og:type" content="website">
@@ -37,9 +34,7 @@
             --card-bg: rgba(20, 20, 20, 0.8);
         }
 
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Pyidaungsu', serif;
@@ -161,7 +156,6 @@
             .header-glow { font-size: 2.8rem; }
         }
 
-        /* Loading spinner */
         .loader {
             width: 20px;
             height: 20px;
@@ -176,7 +170,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Offline banner */
         .offline-banner {
             background: #dc2626;
             color: white;
@@ -192,9 +185,7 @@
             transform: translateY(100%);
             transition: transform 0.3s;
         }
-        .offline-banner.show {
-            transform: translateY(0);
-        }
+        .offline-banner.show { transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -202,7 +193,7 @@
     <div id="sidebar" class="fixed top-0 left-0 h-full w-64 p-6 z-[1001] transform -translate-x-full border-r border-amber-900/50">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-amber-500 font-bold tracking-widest">MENU</h2>
-            <button onclick="toggleMenu()" class="text-amber-500"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <button id="closeMenuBtn" class="text-amber-500"><i class="fa-solid fa-xmark text-2xl"></i></button>
         </div>
         <nav class="space-y-2">
             <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="nav-link"><i class="fa-brands fa-tiktok"></i> TikTok</a>
@@ -220,7 +211,7 @@
     </div>
 
     <div class="max-w-md mx-auto p-6 pb-20">
-        <button onclick="toggleMenu()" class="text-gold mb-4"><i class="fa-solid fa-bars-staggered text-2xl"></i></button>
+        <button id="openMenuBtn" class="text-gold mb-4"><i class="fa-solid fa-bars-staggered text-2xl"></i></button>
 
         <header class="text-center mb-10">
             <p class="text-gold/60 tracking-[5px] text-[10px] font-black mb-2 uppercase">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင်</p>
@@ -286,7 +277,7 @@
                 <h2 class="text-gold text-[10px] font-black text-center mb-4 uppercase tracking-[3px]">အကောင့်အတုအစစ် စစ်ဆေးရန်</h2>
                 <div class="relative">
                     <input type="text" id="verifyInput" class="form-input pr-12 text-sm" placeholder="Link သို့မဟုတ် ဖုန်းနံပါတ်">
-                    <button onclick="verifyAccount()" class="absolute right-4 top-1/2 -translate-y-1/2 text-gold"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button id="verifyBtn" class="absolute right-4 top-1/2 -translate-y-1/2 text-gold"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <div id="verifyResult"></div>
             </section>
@@ -311,24 +302,19 @@
 
     <script>
         const API_URL = "https://sheetdb.io/api/v1/8uavh20v8x09z";
+        const sidebar = document.getElementById('sidebar');
 
-        // Toggle Menu
-        function toggleMenu() {
-            const sb = document.getElementById('sidebar');
-            const currentTransform = sb.style.transform;
-            if (currentTransform === 'translateX(0px)' || currentTransform === 'translateX(0%)') {
-                sb.style.transform = 'translateX(-100%)';
-            } else {
-                sb.style.transform = 'translateX(0px)';
-            }
-        }
+        // Better Sidebar Toggle Using Classes
+        function openMenu() { sidebar.classList.remove('-translate-x-full'); }
+        function closeMenu() { sidebar.classList.add('-translate-x-full'); }
 
-        // Close menu when clicking outside (optional improvement)
+        document.getElementById('openMenuBtn').addEventListener('click', openMenu);
+        document.getElementById('closeMenuBtn').addEventListener('click', closeMenu);
+
         document.addEventListener('click', function(e) {
-            const sidebar = document.getElementById('sidebar');
-            const menuBtn = e.target.closest('[onclick="toggleMenu()"]');
-            if (sidebar.style.transform === 'translateX(0px)' && !sidebar.contains(e.target) && !menuBtn) {
-                sidebar.style.transform = 'translateX(-100%)';
+            const openBtn = document.getElementById('openMenuBtn');
+            if (!sidebar.classList.contains('-translate-x-full') && !sidebar.contains(e.target) && !openBtn.contains(e.target)) {
+                closeMenu();
             }
         });
 
@@ -344,7 +330,7 @@
             document.getElementById('engDate').innerText = dateString;
         }
 
-        // Check System Status from SheetDB
+        // Check System Status
         async function checkStatus() {
             const statusChecker = document.getElementById('status-checker');
             const mainContent = document.getElementById('main-content');
@@ -371,7 +357,7 @@
             }
         }
 
-        // Verify Account (Fake or Real)
+        // Verify Account
         function verifyAccount() {
             const input = document.getElementById('verifyInput').value.trim();
             const resDiv = document.getElementById('verifyResult');
@@ -391,12 +377,12 @@
                 </div>`;
             }
         }
+        document.getElementById('verifyBtn').addEventListener('click', verifyAccount);
 
-        // Form Submission
-        document.getElementById('mainForm').onsubmit = async (e) => {
+        // Modern Form Submission Event Listener
+        document.getElementById('mainForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Form Validation
             const name = document.getElementById('name').value.trim();
             if (name.length < 2) {
                 Swal.fire({
@@ -438,7 +424,7 @@
                         "ဖုန်း": phoneVal,
                         "နေ့နံ": dayVal,
                         "သိလိုသည်": topic,
-                        "အချိန်": new Date().toLocaleString('my-MM', { timeZone: 'Asia/Yangon' })
+                        "အချိန်": new Date().toLocaleString('en-US', { timeZone: 'Asia/Yangon' }) // Fix to standard numeric output
                     }]})
                 });
                 
@@ -467,7 +453,7 @@
                 btn.disabled = false; 
                 btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; 
             }
-        };
+        });
 
         // Offline Detection
         function updateOnlineStatus() {
@@ -483,7 +469,7 @@
         window.addEventListener('offline', updateOnlineStatus);
         updateOnlineStatus();
 
-        // Register Service Worker for PWA
+        // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
