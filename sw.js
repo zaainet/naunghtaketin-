@@ -26,44 +26,34 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch - API အတွက် Network Only / တခြား assets များအတွက် Cache First
+ // Fetch - API requests များကို ကျော်ပြီး Static များကို Cache ပေးရန်
 self.addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
-  
-  // SheetDB API Requests များကို Cache မလုပ်ဘဲ Network ကနေပဲ တိုက်ရိုက်သွားစေရန် (POST ရော GET ရော စိတ်ချရအောင်)
-  if (url.href.includes('sheetdb.io')) {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        // လိုင်းလုံးဝမရှိလျှင် Loading screen မှာပဲ ရပ်မနေစေဘဲ အဟောင်းရှိက ပြရန် သို့မဟုတ် error ကျော်ရန်
-        return caches.match(event.request);
-      })
-    );
+  // API URL ၂ ခုလုံး ပါဝင်နေလျှင် Cache မလုပ်ဘဲ တိုက်ရိုက် Network ကသွားစေရန် တားဆီးခြင်း
+  if (event.request.url.includes('sheetdb.io')) {
     return;
   }
 
-  // Static Assets (HTML, CDN CSS, JS, Fonts) - Cache First, Network Fallback
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached; // Cache ထဲရှိလျှင် တိုက်ရိုက်ထုတ်ပေးမည်
-      
-      return fetch(event.request).then(response => {
-        // Response မမှန်ကန်လျှင် Cache ထဲမသိမ်းပဲ ပြန်ပေးမည်
-        if (!response || response.status !== 200 || response.type === 'error') {
-          return response;
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(event.request).then(networkResponse => {
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
         }
-        
-        // Font သို့မဟုတ် CDN script များကို ပထမအကြိမ်ပွင့်ပြီးကတည်းက နောက်ပိုင်းအတွက် Cache ထဲ သိမ်းထားမည်
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        return response;
+
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, responseToCache);
+        });
+
+        return networkResponse;
+      }).catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match('/');
+        }
       });
-    }).catch(() => {
-      // Offline fallback စစ်ဆေးမှု (Error မတက်အောင် ? အမှန်ခြစ် စစ်ထားပါသည်)
-      const acceptHeader = event.request.headers.get('accept');
-      if (acceptHeader && acceptHeader.includes('text/html')) {
-        return caches.match('/');
-      }
-      return new Response('နောင်ထိပ်တင် ဗေဒင် (Offline)', { status: 404 });
     })
   );
 });
+
