@@ -34,7 +34,9 @@
             --card-bg: rgba(20, 20, 20, 0.8);
         }
 
-        * { -webkit-tap-highlight-color: transparent; }
+        * { 
+            -webkit-tap-highlight-color: transparent; 
+        }
 
         body {
             font-family: 'Pyidaungsu', serif;
@@ -45,6 +47,11 @@
             background-attachment: fixed;
             color: #f0f0f0;
             min-height: 100vh;
+            
+            /* စာသားများကို Drag ဆွဲပြီး Copy ကူးမရအောင် ကာကွယ်ခြင်း */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .marquee-container { 
@@ -186,6 +193,10 @@
             transition: transform 0.3s;
         }
         .offline-banner.show { transform: translateY(0); }
+
+        #wishBoard::-webkit-scrollbar { width: 4px; }
+        #wishBoard::-webkit-scrollbar-track { background: rgba(255,255,255,0.01); }
+        #wishBoard::-webkit-scrollbar-thumb { background: rgba(255, 207, 64, 0.2); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -239,8 +250,42 @@
         </div>
 
         <main id="main-content" class="hidden space-y-8">
+            
+            <section class="glass-card p-8 border-amber-500/40 relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+
+                <div class="text-center mb-6">
+                    <i class="fa-solid fa-cake-candles text-3xl text-gold mb-2 animate-bounce"></i>
+                    <h2 class="text-gold text-sm font-black uppercase tracking-[2px]">ဆရာနောင်ထိပ်တင် မွေးနေ့ဆုတောင်းလွှာ</h2>
+                    <p class="text-[10px] text-white/50 mt-1">ဇွန်လ (၂၂) ရက်နေ့တွင် ကျရောက်မည့် ဆရာ့မွေးနေ့အတွက် ဆုတောင်းစကားများ ပေးပို့နိုင်ပါသည်</p>
+                </div>
+
+                <form id="wishForm" class="space-y-4">
+                    <input type="text" id="wishName" class="form-input text-sm" placeholder="သင့်အမည် (သို့မဟုတ်) ကလောင်အမည်" required autocomplete="off">
+                    <textarea id="wishMessage" class="form-input text-sm h-24 resize-none" placeholder="ဆရာ့အတွက် မွေးနေ့ဆုတောင်းစကား ရိုက်ထည့်ပါ..." required></textarea>
+                    
+                    <button type="submit" id="wish-submit-btn" class="w-full btn-primary !py-3.5 text-xs">
+                        <span>ဆုတောင်းလွှာ ပေးပို့မည်</span>
+                        <i class="fa-solid fa-heart text-red-600 animate-pulse"></i>
+                    </button>
+                </form>
+
+                <div class="mt-8 border-t border-white/10 pt-5">
+                    <h3 class="text-center text-white/60 text-[10px] font-bold uppercase tracking-[2px] mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles text-gold mr-1"></i> တပည့်များ၏ ဆုတောင်းစကားများ
+                    </h3>
+                    
+                    <div id="wishBoard" class="grid grid-cols-1 gap-3 max-h-[300px] overflow-y-auto pr-1">
+                        <div class="text-center py-4 text-white/30 text-[11px]" id="wish-loader">
+                            <div class="loader !w-4 !h-4 border-amber-500 mb-2"></div>
+                            <p>ဆုတောင်းလွှာများ ရယူနေပါသည်...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section id="enrollment-section" class="glass-card p-8">
-                <h2 class="text-center text-gold text-[11px] font-black uppercase tracking-[5px] mb-8">စာရင်းပေးသွင်းရန်</h2>
+                <h2 class="text-center text-gold text-[11px] font-black uppercase tracking-[5px] mb-8">လူတွေ့စာရင်းပေးသွင်းရန်</h2>
                 <form id="mainForm" class="space-y-5">
                     <input type="text" id="name" class="form-input" placeholder="အမည်ရိုက်ပါ" required autocomplete="name">
                     <div class="grid grid-cols-2 gap-4">
@@ -301,10 +346,23 @@
     </div>
 
     <script>
-        const API_URL = "https://sheetdb.io/api/v1/8uavh20v8x09z";
+        // API Links များကို သီးသန့်စီ သတ်မှတ်ခြင်း
+        const ENROLL_API_URL = "https://sheetdb.io/api/v1/8uavh20v8x09z"; // စာရင်းသွင်းရန် API
+        const WISH_API_URL = "https://sheetdb.io/api/v1/j3rrnhec9lppf";   // မွေးနေ့ဆုတောင်းရန် API
+        
         const sidebar = document.getElementById('sidebar');
 
-        // Better Sidebar Toggle Using Classes
+        // Right-Click နှင့် Shortcut keys များ တားဆီးပိတ်ဆို့ခြင်း စနစ်
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', event => {
+            if (event.keyCode === 123) { event.preventDefault(); return false; }
+            if (event.ctrlKey && event.shiftKey && event.keyCode === 73) { event.preventDefault(); return false; }
+            if (event.ctrlKey && event.shiftKey && event.keyCode === 74) { event.preventDefault(); return false; }
+            if (event.ctrlKey && event.keyCode === 85) { event.preventDefault(); return false; }
+        });
+        document.addEventListener('dragstart', event => { if (event.target.nodeName === 'IMG') event.preventDefault(); });
+
+        // Sidebar Navigation
         function openMenu() { sidebar.classList.remove('-translate-x-full'); }
         function closeMenu() { sidebar.classList.add('-translate-x-full'); }
 
@@ -330,13 +388,13 @@
             document.getElementById('engDate').innerText = dateString;
         }
 
-        // Check System Status
+        // Check System Status (Sheet2 က စာရင်းသွင်းတဲ့ API အောက်မှာရှိနေဆဲဖြစ်လို့ ENROLL_API_URL သုံးထားပါတယ်)
         async function checkStatus() {
             const statusChecker = document.getElementById('status-checker');
             const mainContent = document.getElementById('main-content');
             
             try {
-                const res = await fetch(`${API_URL}?sheet=Sheet2`);
+                const res = await fetch(`${ENROLL_API_URL}?sheet=Sheet2`);
                 if (!res.ok) throw new Error('Network error');
                 const config = await res.json();
                 statusChecker.classList.add('hidden');
@@ -356,6 +414,81 @@
                 mainContent.classList.remove('hidden');
             }
         }
+
+        // မွေးနေ့ဆုတောင်းစာများ ရယူပြီး Dynamic ဘုတ်ပေါ်တင်ပေးခြင်း
+        async function loadWishes() {
+            const wishBoard = document.getElementById('wishBoard');
+            try {
+                const res = await fetch(WISH_API_URL); // Wish API URL သီးသန့်မှ တိုက်ရိုက်ဆွဲခြင်း
+                if (!res.ok) throw new Error('Fetch failed');
+                const data = await res.json();
+                wishBoard.innerHTML = '';
+
+                if (!data || data.length === 0) {
+                    wishBoard.innerHTML = `<p class="text-center text-white/30 text-[11px] py-4">ပထမဆုံး ဆုတောင်းပေးသူ ဖြစ်လာပါဦး...</p>`;
+                    return;
+                }
+
+                data.reverse().forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = "p-3.5 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 shadow-md flex flex-col gap-1 transition-all duration-300 hover:border-amber-500/20";
+                    card.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <span class="text-gold text-[11px] font-bold"><i class="fa-solid fa-user-pen mr-1 opacity-50"></i> ${escapeHTML(item.Name || item.အမည် || "အမည်မသိ")}</span>
+                            <span class="text-[9px] text-white/20"><i class="fa-solid fa-star text-[7px]"></i></span>
+                        </div>
+                        <p class="text-xs text-white/80 leading-relaxed mt-1 italic font-light">" ${escapeHTML(item.Wish || item.ဆုတောင်း || "")} "</p>
+                    `;
+                    wishBoard.appendChild(card);
+                });
+            } catch (err) {
+                console.log('Error loading wishes:', err);
+                wishBoard.innerHTML = `<p class="text-center text-red-400/60 text-[11px] py-4">ဆုတောင်းလွှာများ တက်မလာနိုင်ပါသဖြင့် ခဏနေမှ ပြန်ကြည့်ပေးပါ။</p>`;
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+
+        // ဆုတောင်းစာအသစ် ပို့လွှတ်ခြင်း ပုံစံ
+        document.getElementById('wishForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('wishName').value.trim();
+            const wishInput = document.getElementById('wishMessage').value.trim();
+            const submitBtn = document.getElementById('wish-submit-btn');
+
+            if (!nameInput || !wishInput) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<div class="loader" style="border-color: #1a1101; border-bottom-color: transparent;"></div> ပေးပို့နေပါသည်...`;
+
+            try {
+                const res = await fetch(WISH_API_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({"data": [{"Name": nameInput, "Wish": wishInput}]})
+                });
+
+                if (res.ok) {
+                    Swal.fire({
+                        title: 'ကျေးဇူးတင်ပါသည်',
+                        text: 'ဆရာနောင်ထိပ်တင်အတွက် မွေးနေ့ဆုတောင်းလွှာ ပေးပို့မှု အောင်မြင်ပါသည်ခင်ဗျာ။',
+                        icon: 'success',
+                        background: '#0a0a0a',
+                        color: '#fff',
+                        confirmButtonColor: '#ffcf40'
+                    });
+                    document.getElementById('wishForm').reset();
+                    loadWishes();
+                } else { throw new Error('Server error'); }
+            } catch (err) {
+                Swal.fire({ title: 'မအောင်မြင်ပါ', text: 'လိုင်းမကောင်းသဖြင့် နောက်မှ ပြန်ကြိုးစားကြည့်ပါ။', icon: 'error', background: '#0a0a0a', color: '#fff' });
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>ဆုတောင်းလွှာ ပေးပို့မည်</span> <i class="fa-solid fa-heart text-red-600 animate-pulse"></i>`;
+            }
+        });
 
         // Verify Account
         function verifyAccount() {
@@ -379,31 +512,19 @@
         }
         document.getElementById('verifyBtn').addEventListener('click', verifyAccount);
 
-        // Modern Form Submission Event Listener
+        // စာရင်းပေးသွင်းခြင်း ပုံစံ
         document.getElementById('mainForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const name = document.getElementById('name').value.trim();
             if (name.length < 2) {
-                Swal.fire({
-                    title: 'သတိပေးချက်',
-                    text: 'ကျေးဇူးပြု၍ သင့်အမည်အား အနည်းဆုံး ၂ လုံးထည့်ပါ',
-                    icon: 'warning',
-                    background: '#0a0a0a',
-                    color: '#fff'
-                });
+                Swal.fire({ title: 'သတိပေးချက်', text: 'ကျေးဇူးပြု၍ သင့်အမည်အား အနည်းဆုံး ၂ လုံးထည့်ပါ', icon: 'warning', background: '#0a0a0a', color: '#fff' });
                 return;
             }
             
             const topic = document.getElementById('topic').value;
             if (!topic) {
-                Swal.fire({
-                    title: 'သတိပေးချက်',
-                    text: 'ကျေးဇူးပြု၍ အကြောင်းအရာတစ်ခုခုကို ရွေးချယ်ပါ',
-                    icon: 'warning',
-                    background: '#0a0a0a',
-                    color: '#fff'
-                });
+                Swal.fire({ title: 'သတိပေးချက်', text: 'ကျေးဇူးပြု၍ အကြောင်းအရာတစ်ခုခုကို ရွေးချယ်ပါ', icon: 'warning', background: '#0a0a0a', color: '#fff' });
                 return;
             }
             
@@ -415,7 +536,7 @@
             const dayVal = document.getElementById('day_name').value || "မဖော်ပြထားပါ";
 
             try {
-                const res = await fetch(API_URL, {
+                const res = await fetch(ENROLL_API_URL, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"data": [{
@@ -424,7 +545,7 @@
                         "ဖုန်း": phoneVal,
                         "နေ့နံ": dayVal,
                         "သိလိုသည်": topic,
-                        "အချိန်": new Date().toLocaleString('en-US', { timeZone: 'Asia/Yangon' }) // Fix to standard numeric output
+                        "အချိန်": new Date().toLocaleString('en-US', { timeZone: 'Asia/Yangon' })
                     }]})
                 });
                 
@@ -438,17 +559,9 @@
                         confirmButtonColor: '#ffcf40'
                     });
                     document.getElementById('mainForm').reset();
-                } else {
-                    throw new Error('Server error');
-                }
+                } else { throw new Error('Server error'); }
             } catch (err) { 
-                Swal.fire({
-                    title: 'မအောင်မြင်ပါ', 
-                    text: 'အင်တာနက်အခြေအနေ စစ်ဆေးပြီး နောက်မှထပ်ကြိုးစားပါ။', 
-                    icon: 'error',
-                    background: '#0a0a0a',
-                    color: '#fff'
-                }); 
+                Swal.fire({ title: 'မအောင်မြင်ပါ', text: 'အင်တာနက်အခြေအနေ စစ်ဆေးပြီး နောက်မှထပ်ကြိုးစားပါ။', icon: 'error', background: '#0a0a0a', color: '#fff' }); 
             } finally { 
                 btn.disabled = false; 
                 btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; 
@@ -458,11 +571,8 @@
         // Offline Detection
         function updateOnlineStatus() {
             const banner = document.getElementById('offlineBanner');
-            if (!navigator.onLine) {
-                banner.classList.add('show');
-            } else {
-                banner.classList.remove('show');
-            }
+            if (!navigator.onLine) { banner.classList.add('show'); } 
+            else { banner.classList.remove('show'); }
         }
         
         window.addEventListener('online', updateOnlineStatus);
@@ -482,6 +592,7 @@
         setInterval(updateDateTime, 1000);
         updateDateTime();
         checkStatus();
+        loadWishes();
     </script>
 </body>
 </html>
