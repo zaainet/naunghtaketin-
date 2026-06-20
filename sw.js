@@ -2,28 +2,20 @@ const CACHE_NAME = 'naunghtaketin-v2';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Cinzel:wght@700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-  'https://cdn.tailwindcss.com',
-  'https://cdn.jsdelivr.net/npm/sweetalert2@11'
+  '/manifest.json'
 ];
 
-// Install - cache essential files
+// Install - Essential ဖိုင်များကို Cache လုပ်ခြင်း
 self.addEventListener('install', event => {
-  self.skipWaiting(); // activate immediately
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(async cache => {
-      try {
-        await cache.addAll(urlsToCache);
-      } catch (e) {
-        console.log('Cache addAll error:', e);
-      }
-    })
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    }).catch(err => console.log('Cache install error:', err))
   );
 });
 
-// Activate - clean old caches
+// Activate - Cache အဟောင်းများကို ရှင်းလင်းခြင်း
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
@@ -34,40 +26,44 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch - Network First strategy for API, Cache First for static
+// Fetch - API အတွက် Network Only / တခြား assets များအတွက် Cache First
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // Handle API requests (SheetDB) - Network First
+  // SheetDB API Requests များကို Cache မလုပ်ဘဲ Network ကနေပဲ တိုက်ရိုက်သွားစေရန် (POST ရော GET ရော စိတ်ချရအောင်)
   if (url.href.includes('sheetdb.io')) {
     event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
-        })
-        .catch(() => caches.match(event.request))
+      fetch(event.request).catch(() => {
+        // လိုင်းလုံးဝမရှိလျှင် Loading screen မှာပဲ ရပ်မနေစေဘဲ အဟောင်းရှိက ပြရန် သို့မဟုတ် error ကျော်ရန်
+        return caches.match(event.request);
+      })
     );
     return;
   }
 
-  // Handle static assets - Cache First, Network Fallback
+  // Static Assets (HTML, CDN CSS, JS, Fonts) - Cache First, Network Fallback
   event.respondWith(
     caches.match(event.request).then(cached => {
-      if (cached) return cached;
+      if (cached) return cached; // Cache ထဲရှိလျှင် တိုက်ရိုက်ထုတ်ပေးမည်
+      
       return fetch(event.request).then(response => {
-        if (!response || response.status !== 200) return response;
+        // Response မမှန်ကန်လျှင် Cache ထဲမသိမ်းပဲ ပြန်ပေးမည်
+        if (!response || response.status !== 200 || response.type === 'error') {
+          return response;
+        }
+        
+        // Font သို့မဟုတ် CDN script များကို ပထမအကြိမ်ပွင့်ပြီးကတည်းက နောက်ပိုင်းအတွက် Cache ထဲ သိမ်းထားမည်
         const clone = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
       });
     }).catch(() => {
-      // Offline fallback for HTML
-      if (event.request.headers.get('accept').includes('text/html')) {
+      // Offline fallback စစ်ဆေးမှု (Error မတက်အောင် ? အမှန်ခြစ် စစ်ထားပါသည်)
+      const acceptHeader = event.request.headers.get('accept');
+      if (acceptHeader && acceptHeader.includes('text/html')) {
         return caches.match('/');
       }
-      return new Response('Offline - နောင်ထိပ်တင် ဗေဒင်', { status: 404 });
+      return new Response('နောင်ထိပ်တင် ဗေဒင် (Offline)', { status: 404 });
     })
   );
 });
