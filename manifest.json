@@ -1,77 +1,22 @@
-const CACHE_NAME = 'naunghtaketin-v2';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Cinzel:wght@700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-  'https://cdn.tailwindcss.com',
-  'https://cdn.jsdelivr.net/npm/sweetalert2@11'
-];
-
-// Install - Essential ဖိုင်များကို Cache လုပ်ခြင်း
-self.addEventListener('install', event => {
-  self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(async cache => {
-      console.log('Opened cache and adding resources');
-      // တစ်ခုချင်းစီကို စိတ်ချရအောင် အောက်ပါအတိုင်း request ဖန်တီးပြီး Cache သွင်းနိုင်ပါတယ်
-      const cachePromises = urlsToCache.map(url => {
-        return fetch(new Request(url, { mode: 'no-cors' }))
-          .then(response => cache.put(url, response))
-          .catch(err => console.log('Failed to cache:', url, err));
-      });
-      return Promise.all(cachePromises);
-    })
-  );
-});
-
-// Activate - Cache အဟောင်းများကို ရှင်းလင်းခြင်း
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.map(key => {
-        if (key !== CACHE_NAME) {
-          console.log('Deleting old cache:', key);
-          return caches.delete(key);
-        }
-      })
-    )).then(() => self.clients.claim())
-  );
-});
-
-// Fetch - Offline ဖြစ်နေချိန် Cache ထဲမှ ဖိုင်များကို ပြန်ထုတ်ပေးခြင်း (ထပ်ဖြည့်ထားသော အပိုင်း)
-self.addEventListener('fetch', event => {
-  // API requests (SheetDB) တွေကို Cache မလုပ်ဘဲ ကျော်သွားစေရန်
-  if (event.request.url.includes('sheetdb.io')) {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      // Cache ထဲမှာ ရှိရင် ၎င်းကို သုံးမည်၊ မရှိရင် Network မှ ဆွဲမည်
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request).then(networkResponse => {
-        // အကယ်၍ အသစ်ဝင်လာသော dynamic ရင်းမြစ်များရှိပါကလည်း Cache ထဲသို့ အလိုအလျောက် ထည့်နိုင်သည်
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
-        }
-
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseToCache);
-        });
-
-        return networkResponse;
-      }).catch(() => {
-        // လိုင်း လုံးဝမရှိဘဲ index.html ကို ခေါ်နေလျှင်
-        if (event.request.mode === 'navigate') {
-          return caches.match('/');
-        }
-      });
-    })
-  );
-});
+{
+  "name": "နောင်ထိပ်တင် ဗေဒင်",
+  "short_name": "နောင်ထိပ်တင်",
+  "description": "နောင်ထိပ်တင် ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
