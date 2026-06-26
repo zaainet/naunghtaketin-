@@ -1,598 +1,817 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>နောင်ထိပ်တင် - မဟာဗေဒင် (Official)</title>
-    
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="နောင်ထိပ်တင်">
-    
-    <meta name="description" content="နောင်ထိပ်တင် - မြန်မာ့ရိုးရာမဟာဗေဒင်၊ မဟာပီယမှော်၊ အဆောင်လက်ဖွဲ့ နှင့် မှော်ပညာဆိုင်ရာ တိုင်ပင်ဆွေးနွေးမှုများ">
-    <meta name="keywords" content="နောင်ထိပ်တင်, ဗေဒင်, မဟာဗေဒင်, ပီယမှော်, အဆောင်လက်ဖွဲ့, မြန်မာဗေဒင်">
-    <meta name="author" content="Naung Htake Tin">
-    <meta name="robots" content="index, follow">
-    
-    <meta property="og:title" content="နောင်ထိပ်တင် - မဟာဗေဒင် (Official)">
-    <meta property="og:description" content="မြန်မာ့ရိုးရာမဟာဗေဒင်၊ ပယောဂ၊ အဆောင်လက်ဖွဲ့ နှင့် မှော်ပညာဆိုင်ရာ တိုင်ပင်ဆွေးနွေးမှုများ">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="နောင်ထိပ်တင်">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>မဟာဗေဒင်နောင်ထိပ်တင် (Official)</title>
+<meta name="description" content="ဂမ္ဘီရ၊ ဗေဒင်၊ အစီအရင်နှင့် အဆောင်ပစ္စည်းများအတွက် ဆရာနောင်ထိပ်တင်၏ တရားဝင် Website ဖြစ်ပါသည်။" />
+<meta name="keywords" content="ဆရာနောင်ထိပ်တင်, Naung Htake Tin, ဗေဒင်, ယတြာ, ဂမ္ဘီရ, Myanmar Astrologer" />
 
-    <style>
-        :root { 
-            --gold: #ffcf40; 
-            --deep-gold: #b8860b; 
-            --dark-bg: #0a0a0a;
-            --card-bg: rgba(20, 20, 20, 0.8);
-        }
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#050505" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="နောင်ထိပ်တင်">
+<link rel="icon" type="image/png" href="https://i.ibb.co/gLBwYDtR/Picsart-26-06-27-04-30-24-619.png" />
 
-        * { 
-            -webkit-tap-highlight-color: transparent; 
-        }
+<!-- Google Fonts, Font Awesome, & SweetAlert2 -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        body {
-            font-family: 'Pyidaungsu', serif;
-            background-color: var(--dark-bg);
-            background-image: 
-                radial-gradient(circle at 50% -20%, #4d3300 0%, transparent 50%),
-                linear-gradient(to bottom, #050505, #000);
-            background-attachment: fixed;
-            color: #f0f0f0;
-            min-height: 100vh;
-            
-            /* စာသားများကို Drag ဆွဲပြီး Copy ကူးမရအောင် ကာကွယ်ခြင်း */
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+<style>
+:root {
+  --gold-light: #fff5c3;
+  --gold-main: #d4af37;
+  --gold-dark: #aa6c39;
+  --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+  --bg-dark: #030303;
+  --bg-glass-card: rgba(15, 15, 15, 0.75);
+  --glass-border: 1px solid rgba(212, 175, 55, 0.3);
+  --text-main: #ffffff;
+  --text-muted: #b3b3b3;
+  --font-main: 'Noto Sans Myanmar', sans-serif;
+  --font-title: 'Cinzel', serif;
+  --success: #00FF87;
+  --warning: #ff4d4d;
+}
 
-        .marquee-container { 
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 1.5px solid var(--deep-gold); 
-            backdrop-filter: blur(10px); 
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-        .marquee-content { 
-            color: var(--gold); 
-            font-size: 0.85rem; 
-            font-weight: bold;
-            white-space: nowrap;
-            animation: scrollText 25s linear infinite;
-        }
-        @keyframes scrollText { 
-            from { transform: translateX(100%); } 
-            to { transform: translateX(-100%); } 
-        }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #030303; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #aa6c39, #d4af37); border-radius: 10px; }
 
-        .header-glow { 
-            background: linear-gradient(180deg, #fff 10%, var(--gold) 60%, var(--deep-gold) 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 4px 10px rgba(184, 134, 11, 0.5));
-        }
+* { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { 
+  font-family: var(--font-main); 
+  background-color: var(--bg-dark); 
+  color: var(--text-main); 
+  min-height: 100vh; 
+  overflow-x: hidden; 
+  line-height: 1.6; 
+  display: flex; 
+  flex-direction: column; 
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
+}
 
-        .glass-card { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 207, 64, 0.2); 
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%), 
+              radial-gradient(circle at 80% 80%, rgba(139, 0, 0, 0.12) 0%, transparent 50%);
+  animation: pulseBg 8s ease-in-out infinite alternate;
+}
+@keyframes pulseBg {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
 
-        .form-input { 
-            background: rgba(15, 15, 15, 0.9); 
-            border: 1.5px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 14px; 
-            padding: 14px 18px; 
-            width: 100%; 
-            color: #fff;
-            outline: none;
-            transition: 0.3s;
-        }
-        .form-input:focus { border-color: var(--gold); background: #000; }
+a { text-decoration: none; color: inherit; }
 
-        .btn-primary { 
-            background: linear-gradient(135deg, #ffe69c, var(--gold), var(--deep-gold)); 
-            color: #1a1101; 
-            font-weight: 800; 
-            padding: 16px; 
-            border-radius: 14px; 
-            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.4);
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-        .btn-primary:active { transform: scale(0.98); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shineText {
+  to { background-position: 200% center; }
+}
+@keyframes btnShine {
+  0% { left: -100%; }
+  30% { left: 150%; }
+  100% { left: 150%; }
+}
 
-        .btn-action {
-            background: rgba(255, 207, 64, 0.05);
-            border: 1px solid rgba(255, 207, 64, 0.3);
-            color: var(--gold);
-            padding: 14px;
-            border-radius: 16px;
-            text-align: center;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .btn-action:active { transform: scale(0.97); background: rgba(255, 207, 64, 0.1); }
+.container { max-width: 800px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+.text-center { text-align: center; }
+.mb-4 { margin-bottom: 2rem; }
+section { padding: 45px 0; animation: fadeInUp 0.8s ease-out; }
 
-        .social-card { 
-            background: rgba(255,255,255,0.03); 
-            border: 1px solid rgba(255,255,255,0.08); 
-            border-radius: 18px; 
-            padding: 15px;
-            transition: all 0.2s;
-        }
-        .social-card:active { transform: scale(0.96); background: rgba(255,255,255,0.06); }
+/* Navigation */
+nav {
+  background: rgba(3, 3, 3, 0.85);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav .container { display: flex; justify-content: space-between; align-items: center; }
+.nav-logo {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: shineText 4s linear infinite;
+}
+.verified-badge {
+  color: var(--success);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 255, 135, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 135, 0.3);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
 
-        #sidebar { 
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); 
-            background: #1a0202;
-            backdrop-filter: blur(10px);
-        }
-        .nav-link { 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            padding: 15px; 
-            color: #ddd; 
-            border-radius: 12px;
-            transition: all 0.2s;
-        }
-        .nav-link:hover, .nav-link:active { background: rgba(255, 207, 64, 0.1); color: var(--gold); }
+/* Marquee */
+.marquee-container {
+  background: linear-gradient(90deg, #050505, #1f0808, #050505);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+.marquee-content {
+  display: inline-block;
+  animation: scrollText 28s linear infinite;
+  padding-left: 100%;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+}
+.marquee-content span { color: #FFD700; font-weight: 600; text-shadow: 0 0 8px rgba(255,215,0,0.3); }
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
 
-        @media (max-width: 480px) {
-            .glass-card { padding: 1rem; }
-            .header-glow { font-size: 2.8rem; }
-        }
+/* Header & Hero */
+header { text-align: center; padding: 45px 0 25px; }
+h1.gold-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
+  line-height: 1.2;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #bf953f 0%, #fcf6ba 25%, #d4af37 50%, #fcf6ba 75%, #bf953f 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(212,175,55,0.25));
+  animation: fadeInUp 0.8s ease-out, shineText 5s linear infinite;
+}
+.hero-subtitle {
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.hero-quote {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+.hero-img-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 35px;
+  animation: fadeInUp 0.8s ease-out;
+}
+.hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.15);
+  display: block;
+  transition: transform 0.5s ease;
+}
+.hero-img-wrapper:hover .hero-img {
+  transform: scale(1.02);
+}
 
-        .loader {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #fff;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: inline-block;
-            animation: rotation 0.8s linear infinite;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+/* Digital Clock Card */
+.clock-card {
+  background: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: var(--glass-border);
+  padding: 22px;
+  border-radius: 24px;
+  margin-bottom: 40px;
+  box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05), 0 10px 25px rgba(0,0,0,0.4);
+}
+.clock-time {
+  font-family: var(--font-title);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--gold-main);
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(212,175,55,0.3);
+}
+.clock-date {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  font-weight: 600;
+}
 
-        .offline-banner {
-            background: #dc2626;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-        .offline-banner.show { transform: translateY(0); }
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.btn {
+  border: none;
+  padding: 15px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-gold {
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  color: #110b01;
+  min-width: 170px;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+}
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+  transform: skewX(-30deg);
+  animation: btnShine 3.5s infinite ease-in-out;
+}
+.btn-secondary {
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: var(--gold-main);
+  min-width: 170px;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+}
+.btn-secondary:hover {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold-light);
+}
+.btn:active { transform: translateY(-1px) scale(0.98); }
 
-        #wishBoard::-webkit-scrollbar { width: 4px; }
-        #wishBoard::-webkit-scrollbar-track { background: rgba(255,255,255,0.01); }
-        #wishBoard::-webkit-scrollbar-thumb { background: rgba(255, 207, 64, 0.2); border-radius: 10px; }
-    </style>
+/* Section Titles */
+h2 {
+  text-align: center;
+  font-family: var(--font-main);
+  font-weight: 700;
+  color: var(--gold-main);
+  margin-bottom: 35px;
+  font-size: 1.25rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 12px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+}
+
+/* Glass Card */
+.glass-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--glass-border);
+  padding: 35px 25px;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.02);
+}
+
+/* Social Buttons Grid */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-radius: 16px;
+  color: white;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s ease;
+}
+.social-btn:hover {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: var(--gold-main);
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.social-content { display: flex; align-items: center; gap: 16px; font-size: 0.95rem; font-weight: 500; }
+.social-btn i { font-size: 1.4rem; width: 25px; text-align: center; }
+.fb i { color: #1877F2; text-shadow: 0 0 10px rgba(24,119,242,0.3); }
+.tk i { color: #FE2C55; text-shadow: 0 0 10px rgba(254,44,85,0.3); }
+.vb i { color: #7360f2; text-shadow: 0 0 10px rgba(115,96,242,0.3); }
+.tg i { color: #24A1DE; text-shadow: 0 0 10px rgba(36,161,222,0.3); }
+.copy-trigger { padding: 8px; color: var(--text-muted); cursor: pointer; transition: color 0.2s; }
+.copy-trigger:hover { color: var(--gold-main); }
+
+/* Input Group & Verification */
+.input-group { display: flex; gap: 12px; margin-top: 15px; }
+.form-input {
+  flex: 1;
+  padding: 15px 22px;
+  background: rgba(8, 8, 8, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+.form-input:focus { 
+  border-color: var(--gold-main); 
+  background: #000; 
+  box-shadow: 0 0 12px rgba(212,175,55,0.2), inset 0 2px 5px rgba(0,0,0,0.6);
+}
+select.form-input { border-radius: 16px; color: #bbb; padding-right: 40px; }
+select.form-input option { background: #141414; color: #fff; }
+
+#verifyResult { margin-top: 20px; }
+.result-box { padding: 16px; border-radius: 14px; display: flex; gap: 15px; align-items: center; font-size: 0.9rem; text-align: left; animation: fadeInUp 0.4s ease; }
+.result-success { color: var(--success); background: rgba(0, 255, 135, 0.06); border: 1px solid rgba(0, 255, 135, 0.4); }
+.result-warning { color: var(--warning); background: rgba(255, 77, 77, 0.06); border: 1px solid rgba(255, 77, 77, 0.4); }
+
+/* System Sync Loader */
+.loader-wrapper { text-align: center; padding: 30px 20px; }
+.loader {
+  width: 26px;
+  height: 26px;
+  border: 2.5px solid rgba(212, 175, 55, 0.2);
+  border-bottom-color: var(--gold-main);
+  border-radius: 50%;
+  display: inline-block;
+  animation: rotation 0.8s linear infinite;
+}
+@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Map & Location */
+.map-wrapper { width: 100%; border-radius: 18px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); margin-top: 28px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.map-wrapper img { width: 100%; display: block; transition: transform 0.5s ease; }
+.map-wrapper:hover img { transform: scale(1.03); }
+
+/* Offline Banner */
+.offline-banner {
+  background: #e11d48; color: white; text-align: center; padding: 12px; font-size: 14px; font-weight: 600;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 2000; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+}
+.offline-banner.show { transform: translateY(0); }
+
+/* Modal Floating Window */
+.modal {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+}
+.modal.is-active { display: flex; opacity: 1; }
+.modal-content {
+  background: #0d0d0d; border: 1px solid var(--gold-main); padding: 40px 28px;
+  border-radius: 28px; width: 92%; max-width: 450px; text-align: center; position: relative;
+  box-shadow: 0 25px 55px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.15); transform: scale(0.92); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal.is-active .modal-content { transform: scale(1); }
+.close-modal { position: absolute; top: 18px; right: 22px; color: #777; font-size: 30px; cursor: pointer; transition: color 0.2s; line-height: 1; }
+.close-modal:hover { color: #fff; }
+
+/* Footer */
+footer { text-align: center; padding: 45px 0; color: #555; font-size: 0.78rem; border-top: 1px solid #0f0f0f; background: #010101; margin-top: auto; letter-spacing: 0.5px; }
+footer p { margin-bottom: 4px; }
+
+@media(max-width: 480px) {
+  section { padding: 35px 0; }
+  .button-group { flex-direction: column; width: 100%; gap: 12px; }
+  .btn { width: 100%; padding: 14px 20px; }
+  .input-group { flex-direction: column; gap: 12px; }
+  .form-input { border-radius: 16px; width: 100%; }
+  #verifyBtn { border-radius: 16px; padding: 14px; }
+  .glass-card { padding: 25px 18px; border-radius: 20px; }
+  .modal-content { padding: 35px 20px; border-radius: 24px; }
+}
+</style>
 </head>
 <body>
 
-    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 p-6 z-[1001] transform -translate-x-full border-r border-amber-900/50">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-amber-500 font-bold tracking-widest">MENU</h2>
-            <button id="closeMenuBtn" class="text-amber-500"><i class="fa-solid fa-xmark text-2xl"></i></button>
-        </div>
-        <nav class="space-y-2">
-            <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="nav-link"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-            <a href="https://t.me/NaungHtakeTin777" target="_blank" class="nav-link"><i class="fa-brands fa-telegram"></i> Telegram</a>
-            <a href="viber://chat?number=+959666664580" class="nav-link"><i class="fa-brands fa-viber text-purple-400"></i> Viber</a>
-            <a href="tel:+959666664580" class="nav-link"><i class="fa-solid fa-phone text-green-400"></i> ဖုန်းဆက်ရန်</a>
-            <a href="http://t.me/naunghtaketin_helpbot/moneypay" target="_blank" class="nav-link"><i class="fa-solid fa-wallet text-gold"></i> Wave/Kpay</a>
-        </nav>
+<!-- Navigation Navbar -->
+<nav>
+  <div class="container">
+    <div class="nav-logo">NAUNG HTAKE TIN</div>
+    <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Official</div>
+  </div>
+</nav>
+
+<!-- Safety Announcement Alert Marquee -->
+<div class="marquee-container">
+  <div class="marquee-content">
+    <i class="fas fa-exclamation-triangle"></i> <span>အတုအယောင်များကို သတိပြုပါရန်</span> — ဆရာနောင်ထိပ်တင် ထံ တိုက်ရိုက်ဆက်သွယ်စုံစမ်းနိုင်ပါသည် — <i class="fas fa-shield-alt"></i> <span>Official Website Only</span>
+  </div>
+</div>
+
+<div class="container" style="max-width: 650px; margin: 0 auto;">
+  <!-- Main Header Branding Section -->
+  <header>
+    <p class="hero-subtitle">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင်</p>
+    <h1 class="gold-title">ဆရာနောင်ထိပ်တင်</h1>
+    <p class="hero-quote">“ စိတ်သည် လောကကို ဆောင်တတ်၏။ <br>ကိုယ်သာအရှင်ကိုယ်သာသခင် ”</p>
+    
+    <!-- Dynamic Gregorian Clock Sync Card -->
+    <div class="clock-card">
+      <div id="engClock" class="clock-time">00:00:00 AM</div>
+      <div id="engDate" class="clock-date">LOADING DATE...</div>
     </div>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            ⚠️ အတုအယောင်များကို သတိပြုပါ — ဆရာနောင်ထိပ်တင် ထံ တိုက်ရိုက်ဆက်သွယ်စုံစမ်းနိုင်ပါသည် — 🛡️ Official Channel Only 
-        </div>
+    <div class="hero-img-wrapper">
+      <img src="https://i.ibb.co/gLBwYDtR/Picsart-26-06-27-04-30-24-619.png" alt="ဆရာနောင်ထိပ်တင်" class="hero-img" />
     </div>
-
-    <div class="max-w-md mx-auto p-6 pb-20">
-        <button id="openMenuBtn" class="text-gold mb-4"><i class="fa-solid fa-bars-staggered text-2xl"></i></button>
-
-        <header class="text-center mb-10">
-            <p class="text-gold/60 tracking-[5px] text-[10px] font-black mb-2 uppercase">လျှို့ဝှက်ဂမ္ဘီရ မဟာဗေဒင်</p>
-            <h1 class="text-6xl font-black header-glow">နောင်ထိပ်တင်</h1>
-            <p class="text-[12px] text-white/40 italic px-8 mt-4 leading-relaxed">“ စိတ်သည် လောကကို ဆောင်တတ်၏။ <br>ကိုယ်သာအရှင်ကိုယ်သာသခင် ”</p>
-            
-            <div class="glass-card p-8 mt-8 text-center relative overflow-hidden">
-                <div id="engClock" class="text-4xl font-black text-gold mb-1 tracking-tighter">00:00:00 AM</div>
-                <div id="engDate" class="text-[10px] uppercase tracking-[3px] text-white/40 font-bold">LOADING DATE...</div>
-            </div>
-        </header>
-
-        <div class="grid grid-cols-1 gap-4 mb-8">
-            <a href="http://t.me/naunghtaketin_helpbot/moneypay" target="_blank" class="btn-action flex items-center justify-center gap-3">
-                <i class="fa-solid fa-wallet"></i> <span>WAVE / KPAY ပို့ရန်</span>
-            </a>
-            <a href="viber://chat?number=+959666664580" class="btn-action flex items-center justify-center gap-3">
-                <i class="fa-solid fa-gem"></i> <span>အဆောင်လက်ဖွဲ့မှာယူရန်</span>
-            </a>
-        </div>
-
-        <div id="status-checker" class="text-center py-6">
-            <div class="loader mx-auto mb-2"></div>
-            <p class="text-[10px] text-white/40">SYSTEM SYNCING...</p>
-        </div>
-
-        <main id="main-content" class="hidden space-y-8">
-            
-            <section class="glass-card p-8 border-amber-500/40 relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
-
-                <div class="text-center mb-6">
-                    <i class="fa-solid fa-cake-candles text-3xl text-gold mb-2 animate-bounce"></i>
-                    <h2 class="text-gold text-sm font-black uppercase tracking-[2px]">ဆရာနောင်ထိပ်တင် မွေးနေ့ဆုတောင်းလွှာ</h2>
-                    <p class="text-[10px] text-white/50 mt-1">ဇွန်လ (၂၂) ရက်နေ့တွင် ကျရောက်မည့် ဆရာ့မွေးနေ့အတွက် ဆုတောင်းစကားများ ပေးပို့နိုင်ပါသည်</p>
-                </div>
-
-                <form id="wishForm" class="space-y-4">
-                    <input type="text" id="wishName" class="form-input text-sm" placeholder="သင့်အမည် (သို့မဟုတ်) ကလောင်အမည်" required autocomplete="off">
-                    <textarea id="wishMessage" class="form-input text-sm h-24 resize-none" placeholder="ဆရာ့အတွက် မွေးနေ့ဆုတောင်းစကား ရိုက်ထည့်ပါ..." required></textarea>
-                    
-                    <button type="submit" id="wish-submit-btn" class="w-full btn-primary !py-3.5 text-xs">
-                        <span>ဆုတောင်းလွှာ ပေးပို့မည်</span>
-                        <i class="fa-solid fa-heart text-red-600 animate-pulse"></i>
-                    </button>
-                </form>
-
-                <div class="mt-8 border-t border-white/10 pt-5">
-                    <h3 class="text-center text-white/60 text-[10px] font-bold uppercase tracking-[2px] mb-4">
-                        <i class="fa-solid fa-wand-magic-sparkles text-gold mr-1"></i> တပည့်များ၏ ဆုတောင်းစကားများ
-                    </h3>
-                    
-                    <div id="wishBoard" class="grid grid-cols-1 gap-3 max-h-[300px] overflow-y-auto pr-1">
-                        <div class="text-center py-4 text-white/30 text-[11px]" id="wish-loader">
-                            <div class="loader !w-4 !h-4 border-amber-500 mb-2"></div>
-                            <p>ဆုတောင်းလွှာများ ရယူနေပါသည်...</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="enrollment-section" class="glass-card p-8">
-                <h2 class="text-center text-gold text-[11px] font-black uppercase tracking-[5px] mb-8">လူတွေ့စာရင်းပေးသွင်းရန်</h2>
-                <form id="mainForm" class="space-y-5">
-                    <input type="text" id="name" class="form-input" placeholder="အမည်ရိုက်ပါ" required autocomplete="name">
-                    <div class="grid grid-cols-2 gap-4">
-                        <select id="day_name" class="form-input">
-                            <option value="">နေ့နံ (မဖြစ်မနေမဟုတ်ပါ)</option>
-                            <option value="တနင်္ဂနွေ">တနင်္ဂနွေ</option>
-                            <option value="တနင်္လာ">တနင်္လာ</option>
-                            <option value="အင်္ဂါ">အင်္ဂါ</option>
-                            <option value="ဗုဒ္ဓဟူး">ဗုဒ္ဓဟူး</option>
-                            <option value="ရာဟု">ရာဟု</option>
-                            <option value="ကြာသပတေး">ကြာသပတေး</option>
-                            <option value="သောကြာ">သောကြာ</option>
-                            <option value="စနေ">စနေ</option>
-                        </select>
-                        <input type="tel" id="phone" class="form-input" placeholder="ဖုန်းနံပါတ် (မရှိလျှင်မထည့်ပါနှင့်)" autocomplete="tel">
-                    </div>
-                    <select id="topic" class="form-input" required>
-                        <option value="">အကြောင်းအရာ ရွေးချယ်ပါ</option>
-                        <option value="ပီယ">ပီယ</option>
-                        <option value="စီးပွား">စီးပွား</option>
-                        <option value="ပယောဂ">ပယောဂ</option>
-                        <option value="အဆောင်လက်ဖွဲ့">အဆောင်လက်ဖွဲ့</option>
-                        <option value="ဗေဒင်">ဗေဒင်</option>
-                        <option value="သတ်မှတ်ရက်ချိန်း">သတ်မှတ်ရက်ချိန်း</option>
-                    </select>
-                    <button type="submit" id="submit-btn" class="w-full btn-primary">
-                        <span>စာရင်းသွင်းမည်</span>
-                        <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>
-                    </button>
-                </form>
-            </section>
-
-            <section class="glass-card p-6">
-                <h2 class="text-gold text-[10px] font-black text-center mb-4 uppercase tracking-[3px]">အကောင့်အတုအစစ် စစ်ဆေးရန်</h2>
-                <div class="relative">
-                    <input type="text" id="verifyInput" class="form-input pr-12 text-sm" placeholder="Link သို့မဟုတ် ဖုန်းနံပါတ်">
-                    <button id="verifyBtn" class="absolute right-4 top-1/2 -translate-y-1/2 text-gold"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
-                <div id="verifyResult"></div>
-            </section>
-        </main>
-
-        <div class="grid grid-cols-2 gap-4 my-8">
-            <a href="https://www.tiktok.com/@naunghtaketin" target="_blank" class="social-card flex flex-col items-center gap-2"><i class="fa-brands fa-tiktok text-xl"></i> TIKTOK</a>
-            <a href="viber://chat?number=+959666664580" class="social-card flex flex-col items-center gap-2"><i class="fa-brands fa-viber text-xl text-purple-400"></i> VIBER</a>
-            <a href="https://t.me/NaungHtakeTin777" target="_blank" class="social-card flex flex-col items-center gap-2"><i class="fa-brands fa-telegram text-xl text-blue-400"></i> TELEGRAM</a>
-            <a href="tel:+959666664580" class="social-card flex flex-col items-center gap-2"><i class="fa-solid fa-phone text-xl text-green-400"></i> CALL</a>
-        </div>
-
-        <footer class="text-center opacity-30 pb-10">
-            <p class="text-[9px] tracking-[4px] font-black uppercase">Developed By Boss Baby</p>
-            <p class="text-[8px] mt-2">© 2026 NAUNG HTAKE TIN</p>
-        </footer>
+    
+    <!-- Token Conversion Custom Button Layout -->
+    <div class="button-group">
+      <button class="btn btn-gold" id="openBookingModalBtn">
+        <i class="fas fa-calendar-check"></i>စာရင်းသွင်းရန်
+      </button>
+      <a href="https://t.me/naunghtaketin_helpbot/moneypay" class="btn btn-secondary" target="_blank">
+        <i class="fas fa-hand-holding-usd"></i>Official Wave / Kpay လွှဲရန်
+      </a>
+      <button class="btn btn-secondary" id="verifyScrollBtn">
+        <i class="fas fa-search"></i> အကောင့်စစ်ဆေးရန်
+      </button>
     </div>
+  </header>
 
-    <div id="offlineBanner" class="offline-banner">
-        <i class="fa-solid fa-wifi mr-2"></i> အင်တာနက်ချိတ်ဆက်မှု ပြတ်တောက်နေပါသည်
-    </div>
+  <!-- System Loading Gateway Validation -->
+  <div id="status-checker" class="loader-wrapper">
+    <div class="loader"></div>
+    <p style="font-size: 11px; color: rgba(212,175,55,0.5); margin-top: 10px; letter-spacing: 1.5px; font-weight: 500;">SYSTEM SYNCING...</p>
+  </div>
 
-    <script>
-        // API Links များကို သီးသန့်စီ သတ်မှတ်ခြင်း
-        const ENROLL_API_URL = "https://script.google.com/macros/s/AKfycbw5GO2XE2tZQy2voBL2vMwdWEz7UVEgl3YwZTtxjYC1oPkPsmBi_PKW5QCAuIULRYqrtA/exec"; // စာရင်းသွင်းရန် API
-        const WISH_API_URL = "https://script.google.com/macros/s/AKfycbzofXCESE0zmPo7n0qZ5rfbRmA5v1IWM7brUAgLDedf5P8hi95A1hjQXRG4Bfw-Rp88dQ/exec";   // မွေးနေ့ဆုတောင်းရန် API
+  <!-- Central Dynamic Content Core -->
+  <main id="main-content" style="display: none;">
+    <!-- Enrolled Verification Fallback Hook Box -->
+    <div id="enrollment-status-hook"></div>
+
+    <!-- Official Channels Grid Component -->
+    <section id="social">
+      <h2>Official Channels</h2>
+      <div class="glass-card">
+        <div class="social-grid">
+          <a href="https://www.facebook.com/share/19xwFcbWY2/" class="social-btn fb" target="_blank">
+            <div class="social-content"><i class="fab fa-facebook-f"></i> <span>Official Facebook </span></div>
+            <div class="copy-trigger" data-link="https://www.facebook.com/share/19xwFcbWY2/"><i class="far fa-copy"></i></div>
+          </a>
+          <a href="https://www.tiktok.com/@naunghtaketin" class="social-btn tk" target="_blank">
+            <div class="social-content"><i class="fab fa-tiktok"></i> <span>Official TikTok</span></div>
+            <div class="copy-trigger" data-link="https://www.tiktok.com/@naunghtaketin"><i class="far fa-copy"></i></div>
+          </a>
+          <a href="https://t.me/NaungHtakeTin777" class="social-btn tg" target="_blank">
+            <div class="social-content"><i class="fab fa-telegram-plane"></i> <span>Official Telegram</span></div>
+            <div class="copy-trigger" data-link="https://t.me/NaungHtakeTin777"><i class="far fa-copy"></i></div>
+          </a>
+          <a href="viber://chat?number=+959666664580" class="social-btn vb">
+            <div class="social-content"><i class="fab fa-viber"></i> <span>Viber Chat</span></div>
+            <div class="copy-trigger" data-link="viber://chat?number=+959666664580"><i class="far fa-copy"></i></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Account Authenticator Scoped Scanner Section -->
+    <section id="verify">
+      <h2>သံသယအကောင့် စစ်ဆေးရန်</h2>
+      <div class="glass-card">
+        <div class="input-group">
+          <input type="text" id="verifyLink" class="form-input" placeholder="ဖုန်းနံပါတ် (သို့) Link ထည့်ပါ" />
+          <button class="btn btn-gold" id="verifyBtn" style="min-width:90px;">စစ်မည်။</button>
+        </div>
+        <div id="verifyResult"></div>
+      </div>
+    </section>
+
+    <!-- Geolocation Mapping Telemetry Infrastructure -->
+    <section id="contact">
+      <h2>ဓာတ်နန်းတည်နေရာ</h2>
+      <div class="glass-card text-center">
+        <address style="margin-bottom: 22px; color: #eee; font-style: normal; font-size: 0.95rem; line-height: 1.8;">
+          အမှတ် (၇၀/ဂ)၊ (၄၆)ရပ်ကွက်၊ ရွှေလီ (၁)လမ်း၊<br />
+          ဗထူးစျေးအနီး၊ မြောက်ဒဂုံမြို့နယ်၊ ရန်ကုန်မြို့။
+        </address>
+        <a href="https://maps.app.goo.gl/YourLinkHere" class="btn btn-secondary" style="background: #34A853; border: none; color: white; border-radius: 50px;">
+          <i class="fas fa-location-arrow"></i> Google Maps ဖွင့်ရန်
+        </a>
+        <div class="map-wrapper">
+          <img src="https://i.ibb.co/LXgHMzWp/FB-IMG-1765557450801.jpg" alt="Map Location" />
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Footer Attribution Panel -->
+<footer>
+  <div class="container">
+    <p>© 2026 NAUNG HTAKE TIN. All Rights Reserved.</p>
+    <p style="font-size: 0.7rem; color: #444; margin-top: 6px; letter-spacing: 2px; font-weight: 600;">DEVELOP BY AIO BABYBOSS</p>
+  </div>
+</footer>
+
+<!-- Schedule Booking Tokenized Dialog Window Overlay Modal -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeBookingModalBtn">×</span>
+    <h3 style="color: var(--gold-main); font-family: var(--font-main); font-size: 1.2rem; margin-bottom: 25px; font-weight: 700; letter-spacing: 0.5px;">
+      <i class="fas fa-edit" style="margin-right: 5px;"></i> လူတွေ့စာရင်းပေးသွင်းရန်
+    </h3>
+    
+    <form id="mainForm" style="display: flex; flex-direction: column; gap: 16px; text-align: left;">
+      <div>
+        <input type="text" id="name" class="form-input" style="border-radius: 14px; width: 100%;" placeholder="အမည်ရိုက်ပါ" required autocomplete="name">
+      </div>
+      
+      <div style="display: flex; gap: 12px;">
+        <select id="day_name" class="form-input" style="width: 50%;">
+          <option value="">နေ့နံ (မဖြစ်မနေမဟုတ်)</option>
+          <option value="တနင်္ဂနွေ">တနင်္ဂနွေ</option>
+          <option value="တနင်္လာ">တနင်္လာ</option>
+          <option value="အင်္ဂါ">အင်္ဂါ</option>
+          <option value="ဗုဒ္ဓဟူး">ဗုဒ္ဓဟူး</option>
+          <option value="ရာဟု">ရာဟု</option>
+          <option value="ကြာသပတေး">ကြာသပတေး</option>
+          <option value="သောကြာ">သောကြာ</option>
+          <option value="စနေ">စနေ</option>
+        </select>
+        <input type="tel" id="phone" class="form-input" style="border-radius: 14px; width: 50%;" placeholder="ဖုန်းနံပါတ် (လိုအပ်လျှင်)" autocomplete="tel">
+      </div>
+      
+      <div>
+        <select id="topic" class="form-input" style="border-radius: 14px; width: 100%;" required>
+          <option value="">အကြောင်းအရာ ရွေးချယ်ပါ</option>
+          <option value="ပီယ">ပီယ</option>
+          <option value="စီးပွား">စီးပွား</option>
+          <option value="ပယောဂ">ပယောဂ</option>
+          <option value="အဆောင်လက်ဖွဲ့">အဆောင်လက်ဖွဲ့</option>
+          <option value="ဗေဒင်">ဗေဒင်</option>
+          <option value="သတ်မှတ်ရက်ချိန်း">သတ်မှတ်ရက်ချိန်း</option>
+        </select>
+      </div>
+      
+      <button type="submit" id="submit-btn" class="btn btn-gold" style="width: 100%; border-radius: 14px; margin-top: 10px; padding: 16px;">
+        <span>စာရင်းသွင်းမည်</span>
+        <i class="fa-solid fa-dharmachakra fa-spin" style="margin-left: 6px; font-size: 1.1rem;"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Native Network Offline Banner Element -->
+<div id="offlineBanner" class="offline-banner">
+  <i class="fa-solid fa-wifi" style="margin-right: 6px;"></i> အင်တာနက်ချိတ်ဆက်မှု ပြတ်တောက်နေပါသည်
+</div>
+
+<!-- Controller Routing Architecture -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Web Deployment Target Core Database API Connection
+  const ENROLL_API_URL = "https://script.google.com/macros/s/AKfycbw5GO2XE2tZQy2voBL2vMwdWEz7UVEgl3YwZTtxjYC1oPkPsmBi_PKW5QCAuIULRYqrtA/exec";
+  
+  const officialData = [
+    "09666664580", "+959666664580", "viber://chat?number=+959666664580",
+    "facebook.com/share/19xwFcbWY2", "facebook.com/share/1FK2m5S2VF",
+    "tiktok.com/@naunghtaketin", "t.me/NaungHtakeTin777", "naunghtaketin"
+  ];
+
+  // Structural Cryptographic View Protection System
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  document.addEventListener('keydown', event => {
+    if (event.keyCode === 123) { event.preventDefault(); return false; }
+    if (event.ctrlKey && event.shiftKey && event.keyCode === 73) { event.preventDefault(); return false; }
+    if (event.ctrlKey && event.shiftKey && event.keyCode === 74) { event.preventDefault(); return false; }
+    if (event.ctrlKey && event.keyCode === 85) { event.preventDefault(); return false; }
+  });
+  document.addEventListener('dragstart', event => { if (event.target.nodeName === 'IMG') event.preventDefault(); });
+
+  // Token Modal Component Functional Interoperability
+  const modal = document.getElementById('bookingModal');
+  const openModalBtn = document.getElementById('openBookingModalBtn');
+  const closeModalBtn = document.getElementById('closeBookingModalBtn');
+
+  openModalBtn.onclick = () => modal.classList.add('is-active');
+  closeModalBtn.onclick = () => modal.classList.remove('is-active');
+  window.onclick = (e) => { if (e.target == modal) modal.classList.remove('is-active'); }
+
+  // Navigation Scrolling Target Action Hooks
+  document.getElementById('verifyScrollBtn').onclick = () => {
+    document.getElementById('verify').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Clipboard Pipeline Infrastructure Data Transport
+  document.querySelectorAll('.copy-trigger').forEach(trigger => {
+    trigger.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      navigator.clipboard.writeText(this.getAttribute('data-link'));
+      const icon = this.querySelector('i');
+      icon.className = 'fas fa-check';
+      icon.style.color = 'var(--success)';
+      setTimeout(() => {
+        icon.className = 'far fa-copy';
+        icon.style.color = '';
+      }, 2000);
+    };
+  });
+
+  // Astronomical Gregorian Live Sync Engine
+  function updateDateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { 
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
+    });
+    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString('en-US', dateOptions).toUpperCase();
+    document.getElementById('engClock').innerText = timeString;
+    document.getElementById('engDate').innerText = dateString;
+  }
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+
+  // Cloud Database Integration Handshake Check
+  async function checkStatus() {
+    const statusChecker = document.getElementById('status-checker');
+    const mainContent = document.getElementById('main-content');
+    const enrollmentHook = document.getElementById('enrollment-status-hook');
+    
+    try {
+      const res = await fetch(`${ENROLL_API_URL}?sheet=Sheet2`);
+      if (!res.ok) throw new Error('Network deployment response error');
+      const config = await res.json();
+      
+      statusChecker.style.display = 'none';
+      mainContent.style.display = 'block';
+      
+      if (config && config[0] && config[0].Switch !== "Open") {
+        // Deactivate Booking triggers if closed remotely via sheet configuration
+        openModalBtn.disabled = true;
+        openModalBtn.style.opacity = '0.5';
+        openModalBtn.onclick = () => {
+          Swal.fire({ title: 'သတိပေးချက်', text: 'စာရင်းလက်ခံမှု ခေတ္တပိတ်ထားပါသည်ခင်ဗျာ။', icon: 'info', background: '#0a0a0a', color: '#fff' });
+        };
         
-        const sidebar = document.getElementById('sidebar');
+        enrollmentHook.innerHTML = `
+          <div class="glass-card text-center" style="margin-bottom: 30px; border-color: rgba(255,107,107,0.3);">
+            <i class="fa-solid fa-shield-halved text-3xl text-red-500 mb-3" style="opacity: 0.6;"></i>
+            <h3 style="font-size: 1rem; font-weight: bold; color: var(--warning);">စာရင်းလက်ခံမှု ခေတ္တပိတ်ထားပါသည်</h3>
+            <p style="color: rgba(255,255,255,0.4); font-size: 0.75rem; mt-2;">ကျေးဇူးပြု၍ နောက်မှပြန်လာပါရန် တောင်းပန်အပ်ပါသည်။</p>
+          </div>`;
+      }
+    } catch (e) {
+      console.log('Status check lifecycle crash fallback execution:', e);
+      statusChecker.style.display = 'none';
+      mainContent.style.display = 'block';
+    }
+  }
+  checkStatus();
 
-        // Right-Click နှင့် Shortcut keys များ တားဆီးပိတ်ဆို့ခြင်း စနစ်
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', event => {
-            if (event.keyCode === 123) { event.preventDefault(); return false; }
-            if (event.ctrlKey && event.shiftKey && event.keyCode === 73) { event.preventDefault(); return false; }
-            if (event.ctrlKey && event.shiftKey && event.keyCode === 74) { event.preventDefault(); return false; }
-            if (event.ctrlKey && event.keyCode === 85) { event.preventDefault(); return false; }
+  // Security Account Authenticator Algorithm Engine
+  document.getElementById('verifyBtn').onclick = () => {
+    const input = document.getElementById('verifyLink').value.trim().toLowerCase();
+    const resultDiv = document.getElementById('verifyResult');
+    if (!input) {
+      resultDiv.innerHTML = '<div class="result-box result-warning"><i class="fas fa-info-circle"></i><div>ကျေးဇူးပြု၍ ဖုန်းနံပါတ် သို့မဟုတ် Link ထည့်သွင်းပေးပါ။</div></div>';
+      return;
+    }
+
+    const isMatch = officialData.some(d => input.includes(d.toLowerCase()));
+    if (isMatch) {
+      resultDiv.innerHTML = '<div class="result-box result-success"><i class="fas fa-check-circle"></i><div><strong>အတည်ပြုပြီး</strong><br>ဤအကောင့်သည် ဆရာနောင်ထိပ်တင်၏ အစစ်အမှန်ဖြစ်ပါသည်။</div></div>';
+    } else {
+      resultDiv.innerHTML = '<div class="result-box result-warning"><i class="fas fa-exclamation-triangle"></i><div><strong>သတိပြုရန်</strong><br>ဤအချက်အလက်ကို စာရင်းတွင် မတွေ့ပါ။ အတုအယောင် ဖြစ်ပါသည်။</div></div>';
+    }
+  };
+
+  // Transaction Registry Request Lifecycle Pipelines
+  document.getElementById('mainForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value.trim();
+    if (name.length < 2) {
+      Swal.fire({ title: 'သတိပေးချက်', text: 'ကျေးဇူးပြု၍ သင့်အမည်အား အနည်းဆုံး ၂ လုံးထည့်ပါ', icon: 'warning', background: '#0a0a0a', color: '#fff' });
+      return;
+    }
+    
+    const topic = document.getElementById('topic').value;
+    if (!topic) {
+      Swal.fire({ title: 'သတိပေးချက်', text: 'ကျေးဇူးပြု၍ အကြောင်းအရာတစ်ခုခုကို ရွေးချယ်ပါ', icon: 'warning', background: '#0a0a0a', color: '#fff' });
+      return;
+    }
+    
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = `<span>ပေးပို့နေပါသည်...</span> <i class="loader" style="width:14px; height:14px; border-width:1.5px;"></i>`;
+
+    const phoneVal = document.getElementById('phone').value.trim() || "မဖော်ပြထားပါ";
+    const dayVal = document.getElementById('day_name').value || "မဖော်ပြထားပါ";
+
+    try {
+      const res = await fetch(ENROLL_API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({"data": [{
+          "ID": Math.floor(Date.now()/1000),
+          "အမည်": name,
+          "ဖုန်း": phoneVal,
+          "နေ့နံ": dayVal,
+          "သိလိုသည်": topic,
+          "အချိန်": new Date().toLocaleString('en-US', { timeZone: 'Asia/Yangon' })
+        }]})
+      });
+      
+      if(res.ok) {
+        Swal.fire({ 
+          title: 'အောင်မြင်ပါသည်', 
+          text: 'စာရင်းပေးသွင်းမှု လက်ခံရရှိပါပြီ။ Adminမှ ပြန်လည်အကြောင်းကြားပါမည်။', 
+          icon: 'success', 
+          background: '#0a0a0a', 
+          color: '#fff',
+          confirmButtonColor: '#ffcf40'
         });
-        document.addEventListener('dragstart', event => { if (event.target.nodeName === 'IMG') event.preventDefault(); });
+        document.getElementById('mainForm').reset();
+        modal.classList.remove('is-active');
+      } else { throw new Error('Cloud Server pipeline error response'); }
+    } catch (err) { 
+      Swal.fire({ title: 'မအောင်မြင်ပါ', text: 'အင်တာနက်အခြေအနေ စစ်ဆေးပြီး နောက်မှထပ်ကြိုးစားပါ။', icon: 'error', background: '#0a0a0a', color: '#fff' }); 
+    } finally { 
+      btn.disabled = false; 
+      btn.innerHTML = originalContent; 
+    }
+  });
 
-        // Sidebar Navigation
-        function openMenu() { sidebar.classList.remove('-translate-x-full'); }
-        function closeMenu() { sidebar.classList.add('-translate-x-full'); }
+  // Hardware Telemetry Network Diagnostic Event Interfaces
+  function updateOnlineStatus() {
+    const banner = document.getElementById('offlineBanner');
+    if (!navigator.onLine) { banner.classList.add('show'); } 
+    else { banner.classList.remove('show'); }
+  }
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  updateOnlineStatus();
 
-        document.getElementById('openMenuBtn').addEventListener('click', openMenu);
-        document.getElementById('closeMenuBtn').addEventListener('click', closeMenu);
+  // PWA Service Worker Engine Registration Layer
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker scoped setup successful:', reg.scope))
+        .catch(err => console.log('Service Worker setup crash:', err));
+    });
+  }
+});
+</script>
 
-        document.addEventListener('click', function(e) {
-            const openBtn = document.getElementById('openMenuBtn');
-            if (!sidebar.classList.contains('-translate-x-full') && !sidebar.contains(e.target) && !openBtn.contains(e.target)) {
-                closeMenu();
-            }
-        });
-
-        // Update Date & Time
-        function updateDateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
-            });
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString('en-US', dateOptions).toUpperCase();
-            document.getElementById('engClock').innerText = timeString;
-            document.getElementById('engDate').innerText = dateString;
-        }
-
-        // Check System Status (Sheet2 က စာရင်းသွင်းတဲ့ API အောက်မှာရှိနေဆဲဖြစ်လို့ ENROLL_API_URL သုံးထားပါတယ်)
-        async function checkStatus() {
-            const statusChecker = document.getElementById('status-checker');
-            const mainContent = document.getElementById('main-content');
-            
-            try {
-                const res = await fetch(`${ENROLL_API_URL}?sheet=Sheet2`);
-                if (!res.ok) throw new Error('Network error');
-                const config = await res.json();
-                statusChecker.classList.add('hidden');
-                mainContent.classList.remove('hidden');
-                
-                if (config && config[0] && config[0].Switch !== "Open") {
-                    document.getElementById('enrollment-section').innerHTML = `
-                        <div class="text-center py-10">
-                            <i class="fa-solid fa-shield-halved text-4xl text-red-500 mb-4 opacity-30"></i>
-                            <h3 class="text-lg font-black text-red-500/80 uppercase">စာရင်းလက်ခံမှု ခေတ္တပိတ်ထားပါသည်</h3>
-                            <p class="text-white/40 text-xs mt-2">ကျေးဇူးပြု၍ နောက်မှပြန်လာပါ</p>
-                        </div>`;
-                }
-            } catch (e) {
-                console.log('Status check failed:', e);
-                statusChecker.classList.add('hidden');
-                mainContent.classList.remove('hidden');
-            }
-        }
-
-        // မွေးနေ့ဆုတောင်းစာများ ရယူပြီး Dynamic ဘုတ်ပေါ်တင်ပေးခြင်း
-        async function loadWishes() {
-            const wishBoard = document.getElementById('wishBoard');
-            try {
-                const res = await fetch(WISH_API_URL); // Wish API URL သီးသန့်မှ တိုက်ရိုက်ဆွဲခြင်း
-                if (!res.ok) throw new Error('Fetch failed');
-                const data = await res.json();
-                wishBoard.innerHTML = '';
-
-                if (!data || data.length === 0) {
-                    wishBoard.innerHTML = `<p class="text-center text-white/30 text-[11px] py-4">ပထမဆုံး ဆုတောင်းပေးသူ ဖြစ်လာပါဦး...</p>`;
-                    return;
-                }
-
-                data.reverse().forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = "p-3.5 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 shadow-md flex flex-col gap-1 transition-all duration-300 hover:border-amber-500/20";
-                    card.innerHTML = `
-                        <div class="flex justify-between items-center">
-                            <span class="text-gold text-[11px] font-bold"><i class="fa-solid fa-user-pen mr-1 opacity-50"></i> ${escapeHTML(item.Name || item.အမည် || "အမည်မသိ")}</span>
-                            <span class="text-[9px] text-white/20"><i class="fa-solid fa-star text-[7px]"></i></span>
-                        </div>
-                        <p class="text-xs text-white/80 leading-relaxed mt-1 italic font-light">" ${escapeHTML(item.Wish || item.ဆုတောင်း || "")} "</p>
-                    `;
-                    wishBoard.appendChild(card);
-                });
-            } catch (err) {
-                console.log('Error loading wishes:', err);
-                wishBoard.innerHTML = `<p class="text-center text-red-400/60 text-[11px] py-4">ဆုတောင်းလွှာများ တက်မလာနိုင်ပါသဖြင့် ခဏနေမှ ပြန်ကြည့်ပေးပါ။</p>`;
-            }
-        }
-
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
-        }
-
-        // ဆုတောင်းစာအသစ် ပို့လွှတ်ခြင်း ပုံစံ
-        document.getElementById('wishForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const nameInput = document.getElementById('wishName').value.trim();
-            const wishInput = document.getElementById('wishMessage').value.trim();
-            const submitBtn = document.getElementById('wish-submit-btn');
-
-            if (!nameInput || !wishInput) return;
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<div class="loader" style="border-color: #1a1101; border-bottom-color: transparent;"></div> ပေးပို့နေပါသည်...`;
-
-            try {
-                const res = await fetch(WISH_API_URL, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({"data": [{"Name": nameInput, "Wish": wishInput}]})
-                });
-
-                if (res.ok) {
-                    Swal.fire({
-                        title: 'ကျေးဇူးတင်ပါသည်',
-                        text: 'ဆရာနောင်ထိပ်တင်အတွက် မွေးနေ့ဆုတောင်းလွှာ ပေးပို့မှု အောင်မြင်ပါသည်ခင်ဗျာ။',
-                        icon: 'success',
-                        background: '#0a0a0a',
-                        color: '#fff',
-                        confirmButtonColor: '#ffcf40'
-                    });
-                    document.getElementById('wishForm').reset();
-                    loadWishes();
-                } else { throw new Error('Server error'); }
-            } catch (err) {
-                Swal.fire({ title: 'မအောင်မြင်ပါ', text: 'လိုင်းမကောင်းသဖြင့် နောက်မှ ပြန်ကြိုးစားကြည့်ပါ။', icon: 'error', background: '#0a0a0a', color: '#fff' });
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>ဆုတောင်းလွှာ ပေးပို့မည်</span> <i class="fa-solid fa-heart text-red-600 animate-pulse"></i>`;
-            }
-        });
-
-        // Verify Account
-        function verifyAccount() {
-            const input = document.getElementById('verifyInput').value.trim();
-            const resDiv = document.getElementById('verifyResult');
-            
-            if (!input) {
-                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-[10px] text-yellow-400 text-center font-bold">ကျေးဇူးပြု၍ ဖုန်းနံပါတ် သို့မဟုတ် Link ထည့်ပါ</div>`;
-                return;
-            }
-            
-            if(input.includes("09666664580") || input.includes("959666664580") || input.toLowerCase().includes("naunghtaketin")) {
-                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-[10px] text-green-400 text-center font-bold">
-                    <i class="fa-solid fa-circle-check mr-1"></i> တရားဝင် အကောင့်ဖြစ်ပါသည်
-                </div>`;
-            } else {
-                resDiv.innerHTML = `<div class="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] text-red-400 text-center font-bold">
-                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> စစ်ဆေး၍မရပါ (သို့မဟုတ်) အတုဖြစ်နိုင်သည်
-                </div>`;
-            }
-        }
-        document.getElementById('verifyBtn').addEventListener('click', verifyAccount);
-
-        // စာရင်းပေးသွင်းခြင်း ပုံစံ
-        document.getElementById('mainForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value.trim();
-            if (name.length < 2) {
-                Swal.fire({ title: 'သတိပေးချက်', text: 'ကျေးဇူးပြု၍ သင့်အမည်အား အနည်းဆုံး ၂ လုံးထည့်ပါ', icon: 'warning', background: '#0a0a0a', color: '#fff' });
-                return;
-            }
-            
-            const topic = document.getElementById('topic').value;
-            if (!topic) {
-                Swal.fire({ title: 'သတိပေးချက်', text: 'ကျေးဇူးပြု၍ အကြောင်းအရာတစ်ခုခုကို ရွေးချယ်ပါ', icon: 'warning', background: '#0a0a0a', color: '#fff' });
-                return;
-            }
-            
-            const btn = document.getElementById('submit-btn');
-            btn.disabled = true;
-            btn.innerHTML = `<div class="loader" style="border-color: #1a1101; border-bottom-color: transparent;"></div> ပေးပို့နေပါသည်...`;
-
-            const phoneVal = document.getElementById('phone').value.trim() || "မဖော်ပြထားပါ";
-            const dayVal = document.getElementById('day_name').value || "မဖော်ပြထားပါ";
-
-            try {
-                const res = await fetch(ENROLL_API_URL, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({"data": [{
-                        "ID": Math.floor(Date.now()/1000),
-                        "အမည်": name,
-                        "ဖုန်း": phoneVal,
-                        "နေ့နံ": dayVal,
-                        "သိလိုသည်": topic,
-                        "အချိန်": new Date().toLocaleString('en-US', { timeZone: 'Asia/Yangon' })
-                    }]})
-                });
-                
-                if(res.ok) {
-                    Swal.fire({ 
-                        title: 'အောင်မြင်ပါသည်', 
-                        text: 'စာရင်းပေးသွင်းမှု လက်ခံရရှိပါပြီ။ ဆရာနောင်ထိပ်တင်မှ ပြန်လည်အကြောင်းကြားပါမည်။', 
-                        icon: 'success', 
-                        background: '#0a0a0a', 
-                        color: '#fff',
-                        confirmButtonColor: '#ffcf40'
-                    });
-                    document.getElementById('mainForm').reset();
-                } else { throw new Error('Server error'); }
-            } catch (err) { 
-                Swal.fire({ title: 'မအောင်မြင်ပါ', text: 'အင်တာနက်အခြေအနေ စစ်ဆေးပြီး နောက်မှထပ်ကြိုးစားပါ။', icon: 'error', background: '#0a0a0a', color: '#fff' }); 
-            } finally { 
-                btn.disabled = false; 
-                btn.innerHTML = `<span>စာရင်းသွင်းမည်</span> <i class="fa-solid fa-dharmachakra fa-spin text-xl"></i>`; 
-            }
-        });
-
-        // Offline Detection
-        function updateOnlineStatus() {
-            const banner = document.getElementById('offlineBanner');
-            if (!navigator.onLine) { banner.classList.add('show'); } 
-            else { banner.classList.remove('show'); }
-        }
-        
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-        updateOnlineStatus();
-
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('Service Worker registered:', reg.scope))
-                    .catch(err => console.log('Service Worker registration failed:', err));
-            });
-        }
-
-        // Initialize
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
-        checkStatus();
-        loadWishes();
-    </script>
 </body>
 </html>
